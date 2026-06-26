@@ -1,0 +1,1539 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 趋势日报 · 2026-06-24</title>
+<style>
+  :root{
+    --indigo:#3d4a8a;
+    --indigo-soft:#e9eaf3;
+    --ink:#1a1a1a;
+    --ink-2:#2c2c2c;
+    --muted:#6b6b6b;
+    --muted-2:#8a8a8a;
+    --line:#e5e2dd;
+    --line-soft:#efece7;
+    --bg:#f6f5f4;
+    --bg-2:#f0eeeb;
+    --bg-3:#faf9f7;
+    --warn:#c8553d;
+    --warm:#d97706;
+    --green:#5a7a4a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;color:var(--ink);background:var(--bg);font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased}
+  a{color:var(--indigo);text-decoration:none}
+  a:hover{text-decoration:underline}
+  code{font-family:"SF Mono",Menlo,Consolas,monospace;background:#e8e6e1;padding:2px 6px;border-radius:3px;font-size:14px;color:#3a3a3a}
+  .s-icon{display:inline-flex;align-items:center;justify-content:center;background:#1a1a1a;color:#fff;width:32px;height:32px;font-weight:700;font-size:15px;border-radius:6px;margin-right:12px;letter-spacing:-0.5px}
+  .badge{display:inline-block;padding:3px 9px;border-radius:4px;font-size:12px;font-weight:600;letter-spacing:0.3px}
+  .badge-warm{background:#fde9d8;color:#a04a17}
+  .badge-green{background:#dee6d6;color:#3d5430}
+  .badge-soft{background:var(--indigo-soft);color:var(--indigo)}
+  .badge-creative{background:#1a1a1a;color:#fff;letter-spacing:0.5px}
+  .badge-urgent{background:#fbe3df;color:#8a2a1f}
+
+  /* Layout */
+  .layout{display:flex;max-width:1380px;margin:0 auto;padding:32px 24px 80px;gap:36px;align-items:flex-start}
+  aside.nav{position:sticky;top:32px;width:220px;flex-shrink:0;background:#fff;border:1px solid var(--line);border-radius:10px;padding:22px 18px;align-self:flex-start}
+  .nav-logo{font-size:13px;letter-spacing:2px;color:var(--indigo);font-weight:700;text-transform:uppercase;margin-bottom:4px}
+  .nav-sub{font-size:11px;color:var(--muted);margin-bottom:22px;letter-spacing:0.5px}
+  .nav-list{list-style:none}
+  .nav-list li{margin-bottom:2px}
+  .nav-list a{display:block;padding:8px 10px;font-size:14px;color:var(--ink-2);border-radius:5px;border-left:2px solid transparent;transition:all .15s}
+  .nav-list a:hover{background:var(--bg-2);text-decoration:none}
+  .nav-list a.active{background:var(--indigo-soft);color:var(--indigo);border-left-color:var(--indigo);font-weight:600}
+  .nav-foot{margin-top:18px;padding-top:14px;border-top:1px solid var(--line-soft);font-size:11px;color:var(--muted-2);line-height:1.55}
+  main{flex:1;min-width:0;max-width:1080px;padding-right:48px}
+
+  /* Section */
+  section{background:var(--bg);padding:48px 0 32px;position:relative}
+  section:nth-of-type(even){background:var(--bg-2)}
+  .section-title{font-size:26px;font-weight:700;letter-spacing:-0.5px;margin-bottom:8px;display:flex;align-items:center}
+  .section-sub{color:var(--muted);font-size:15px;margin-bottom:30px;margin-left:44px}
+
+  /* Header */
+  .report-head{background:#fff;border:1px solid var(--line);border-radius:14px;padding:42px 44px 38px;margin-bottom:0;position:relative;overflow:hidden}
+  .report-head::before{content:"0624";position:absolute;top:24px;right:32px;font-size:120px;font-weight:800;color:var(--indigo-soft);letter-spacing:-6px;line-height:1;z-index:0}
+  .report-head *{position:relative;z-index:1}
+  .meta{font-size:12px;color:var(--muted);letter-spacing:2px;margin-bottom:14px;text-transform:uppercase}
+  h1{font-size:38px;font-weight:800;letter-spacing:-1.2px;line-height:1.18;margin-bottom:18px}
+  .lede{font-size:18px;color:var(--ink-2);line-height:1.6;margin-bottom:18px;max-width:780px}
+  .head-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--line-soft);padding-top:22px;margin-top:22px}
+  .stat{padding-right:18px;border-right:1px solid var(--line-soft)}
+  .stat:last-child{border-right:0}
+  .stat-num{font-size:26px;font-weight:700;color:var(--indigo);letter-spacing:-0.8px;line-height:1.1}
+  .stat-label{font-size:12px;color:var(--muted);margin-top:5px;letter-spacing:0.3px}
+
+  /* 趋势线 */
+  .trends-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .trend-card{background:#fff;border:1px solid var(--line);border-left:3px solid var(--indigo);border-radius:8px;padding:18px 18px 16px}
+  .trend-card .num{font-size:11px;color:var(--indigo);font-weight:700;letter-spacing:1.5px;margin-bottom:8px}
+  .trend-card h4{font-size:16px;font-weight:700;margin-bottom:8px;line-height:1.35}
+  .trend-card p{font-size:13px;color:var(--muted);line-height:1.55}
+
+  /* Index */
+  .platform-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .platform-col{background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  .platform-head{padding:16px 20px;border-bottom:1px solid var(--line-soft);display:flex;justify-content:space-between;align-items:center}
+  .platform-head h3{font-size:16px;font-weight:700}
+  .platform-head .num-tag{font-size:12px;color:var(--muted);background:var(--bg-2);padding:3px 8px;border-radius:4px}
+  .index-list{list-style:none;padding:6px 0}
+  .index-list li{border-bottom:1px solid var(--line-soft)}
+  .index-list li:last-child{border-bottom:0}
+  .index-list a{display:flex;padding:14px 20px;gap:14px;align-items:flex-start;transition:background .15s}
+  .index-list a:hover{background:var(--bg-3);text-decoration:none}
+  .idx-rank{font-size:13px;color:var(--muted);width:18px;flex-shrink:0;font-weight:600;padding-top:1px}
+  .idx-content{flex:1;min-width:0}
+  .idx-title{font-size:15px;font-weight:600;color:var(--ink);margin-bottom:4px;line-height:1.4}
+  .idx-meta{font-size:12px;color:var(--muted);display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .idx-meta .heat{color:var(--warm);font-weight:600}
+  .idx-meta .platform-tag{background:var(--indigo-soft);color:var(--indigo);padding:1px 7px;border-radius:3px;font-size:11px}
+
+  /* 选题卡片 */
+  .topic-list{display:flex;flex-direction:column;gap:16px}
+  .topic-card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:26px 28px 24px;position:relative;overflow:hidden}
+  .topic-card::before{content:attr(data-num);position:absolute;right:24px;top:18px;font-size:74px;font-weight:800;color:var(--bg-2);line-height:1;letter-spacing:-2px;z-index:0}
+  .topic-card>*{position:relative;z-index:1}
+  .topic-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;padding-right:80px}
+  .topic-title{font-size:19px;font-weight:700;letter-spacing:-0.3px;line-height:1.35;flex:1}
+  .topic-badges{display:flex;gap:6px;flex-shrink:0;margin-left:14px;flex-wrap:wrap;justify-content:flex-end;max-width:200px}
+  .topic-signal{font-size:13px;color:var(--muted);margin-bottom:14px;line-height:1.55}
+  .topic-signal strong{color:var(--ink-2);font-weight:600}
+  .topic-tactic{font-size:14px;background:var(--bg-3);border-left:3px solid var(--indigo);padding:10px 14px;border-radius:0 5px 5px 0;margin-bottom:18px;line-height:1.55}
+  .topic-tactic strong{color:var(--indigo)}
+
+  /* 制作卡片 */
+  .make-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:14px;margin-bottom:6px}
+  .make-block{border:1px solid var(--line-soft);border-radius:7px;padding:14px 16px;background:var(--bg-3)}
+  .make-block h5{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;font-weight:700}
+  .make-row{display:flex;font-size:13px;margin-bottom:5px;line-height:1.5}
+  .make-row .k{color:var(--muted);width:64px;flex-shrink:0}
+  .make-row .v{color:var(--ink-2);flex:1}
+  .stars{color:var(--warm);letter-spacing:1px;font-weight:600}
+
+  /* 提示词 */
+  .prompt-section{margin-top:18px;border-top:1px solid var(--line-soft);padding-top:16px}
+  .prompt-tabs{display:flex;gap:0;margin-bottom:10px;border-bottom:1px solid var(--line-soft)}
+  .prompt-tab{padding:8px 16px;font-size:13px;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;font-weight:600;background:none;border-left:none;border-right:none;border-top:none}
+  .prompt-tab.active{color:var(--indigo);border-bottom-color:var(--indigo)}
+  .prompt-content{display:none;background:#1f2230;color:#e6e6e6;border-radius:7px;padding:16px 18px;font-family:"SF Mono",Menlo,Consolas,monospace;font-size:13px;line-height:1.7;white-space:pre-wrap;word-wrap:break-word;position:relative;max-height:340px;overflow-y:auto}
+  .prompt-content.active{display:block}
+  .prompt-content::-webkit-scrollbar{width:6px;height:6px}
+  .prompt-content::-webkit-scrollbar-thumb{background:#4a4d5a;border-radius:3px}
+  .copy-btn{position:absolute;top:10px;right:10px;background:#3d4a8a;color:#fff;border:0;padding:4px 10px;border-radius:4px;font-size:11px;cursor:pointer;font-family:inherit}
+
+  /* 案例 */
+  .case-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .case-card{background:#fff;border:1px solid var(--line);border-radius:9px;padding:20px 22px}
+  .case-card h4{font-size:16px;font-weight:700;margin-bottom:6px}
+  .case-card .case-meta{font-size:12px;color:var(--muted);margin-bottom:12px}
+  .case-card ul{list-style:none;font-size:13px;line-height:1.7}
+  .case-card li{padding-left:14px;position:relative;margin-bottom:4px}
+  .case-card li::before{content:"·";position:absolute;left:4px;color:var(--indigo);font-weight:700}
+  .case-card .case-takeaway{background:var(--bg-3);padding:10px 12px;border-radius:5px;margin-top:10px;font-size:13px;border-left:2px solid var(--indigo)}
+
+  /* 指南 */
+  .guide-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+  .guide-card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:24px 26px}
+  .guide-card h4{font-size:17px;font-weight:700;margin-bottom:14px;display:flex;align-items:center}
+  .guide-card h4 .step{background:var(--indigo);color:#fff;width:24px;height:24px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;margin-right:10px}
+  .guide-card ol{padding-left:22px;font-size:14px;line-height:1.7}
+  .guide-card ol li{margin-bottom:6px}
+  .guide-card ol li strong{color:var(--indigo)}
+
+  .gear-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px}
+  .gear-table th,.gear-table td{padding:9px 10px;text-align:left;border-bottom:1px solid var(--line-soft)}
+  .gear-table th{background:var(--bg-3);font-weight:600;color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:0.5px}
+  .gear-table td:first-child{font-weight:600;width:80px}
+
+  /* SEO */
+  .seo-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .seo-card{background:#fff;border:1px solid var(--line);border-radius:9px;padding:20px 22px}
+  .seo-card h4{font-size:15px;font-weight:700;margin-bottom:10px;display:flex;align-items:center}
+  .seo-card ul{font-size:13px;line-height:1.75;list-style:none}
+  .seo-card li{padding-left:18px;position:relative;margin-bottom:4px}
+  .seo-card li::before{content:"›";position:absolute;left:4px;color:var(--indigo);font-weight:700}
+
+  /* Cross-platform */
+  .flow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
+  .flow-step{background:#fff;border:1px solid var(--line);border-radius:8px;padding:14px 12px;text-align:center;position:relative}
+  .flow-step .fs-num{font-size:11px;color:var(--indigo);font-weight:700;letter-spacing:1.5px}
+  .flow-step h5{font-size:13px;font-weight:700;margin-top:4px;margin-bottom:4px}
+  .flow-step p{font-size:11px;color:var(--muted);line-height:1.45}
+  .flow-arrow{position:absolute;right:-10px;top:50%;transform:translateY(-50%);color:var(--indigo);font-size:18px;font-weight:700;z-index:2;background:var(--bg);padding:0 2px}
+  .flow-step:last-child .flow-arrow{display:none}
+
+  /* 行动表 */
+  .action-list{background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  .action-row{display:grid;grid-template-columns:50px 1fr 100px 100px;padding:14px 20px;align-items:center;border-bottom:1px solid var(--line-soft);font-size:14px}
+  .action-row:last-child{border-bottom:0}
+  .action-row.head{background:var(--bg-3);font-size:12px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:1px}
+  .action-row.head .arr{color:var(--indigo);text-align:center;font-size:11px}
+  .action-row .pri{font-weight:700;font-size:15px}
+  .action-row .pri.p1{color:var(--warn)}
+  .action-row .pri.p2{color:var(--warm)}
+  .action-row .pri.p3{color:var(--green)}
+  .action-row .arr{text-align:center;font-weight:700;color:var(--indigo);font-size:13px}
+  .action-row .win{color:var(--muted);font-size:12px;text-align:center}
+  .strategy-line{margin-top:24px;padding:18px 22px;background:var(--ink);color:#fff;border-radius:9px;font-size:15px;line-height:1.6}
+  .strategy-line strong{color:#d4d6e8}
+
+  /* Footer */
+  footer{margin-top:48px;padding:24px 0;border-top:1px solid var(--line);font-size:12px;color:var(--muted-2);text-align:center;line-height:1.7}
+
+  @media (max-width:980px){
+    .layout{flex-direction:column;padding:20px 16px 60px}
+    aside.nav{position:relative;top:0;width:100%}
+    main{padding-right:0;max-width:100%}
+    .trends-row,.platform-grid,.case-grid,.guide-grid,.seo-grid,.head-stats{grid-template-columns:1fr}
+    .head-stats .stat{border-right:0;border-bottom:1px solid var(--line-soft);padding-bottom:12px;margin-bottom:12px}
+    .head-stats .stat:last-child{border-bottom:0}
+    .make-grid,.flow{grid-template-columns:1fr}
+    .flow-arrow{display:none}
+    h1{font-size:30px}
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+  <aside class="nav">
+    <div class="nav-logo">AI 趋势日报</div>
+    <div class="nav-sub">2026 · 06 · 24 · Wed</div>
+    <ul class="nav-list">
+      <li><a href="#head" class="active">核心洞察</a></li>
+      <li><a href="#index">热门索引</a></li>
+      <li><a href="#topics">选题清单</a></li>
+      <li><a href="#prompts">提示词库</a></li>
+      <li><a href="#cases">案例拆解</a></li>
+      <li><a href="#guides">拍摄指南</a></li>
+      <li><a href="#seo">SEO 策略</a></li>
+      <li><a href="#flow">跨平台</a></li>
+      <li><a href="#action">本周行动</a></li>
+    </ul>
+    <div class="nav-foot">8 轮搜索 · 6 条主信号<br>10 常规 + 2 创意选题<br>36 条独立可运行 Prompt</div>
+  </aside>
+
+  <main>
+    <!-- 头部 -->
+    <section id="head" style="padding-top:0">
+      <div class="report-head">
+        <div class="meta">REPORT · VOL.0624 · BY SOLO</div>
+        <h1>Agent 进入深水区，<br>漫剧把成本打到 500 元/分钟</h1>
+        <p class="lede">今天信号非常集中：B 站漫剧分成 90% 倒逼创作者涌入，AI 工具测评在小红书严重内卷，平台开始批量处置 60 万篇低质 AI 笔记——这意味着「靠 AI 批量灌水」的红利期在收尾，而「能讲清楚 Agent 落地逻辑」的人正在拿到新一波流量。</p>
+        <div class="head-stats">
+          <div class="stat"><div class="stat-num">8 轮</div><div class="stat-label">关键词搜索</div></div>
+          <div class="stat"><div class="stat-num">12 条</div><div class="stat-label">今日选题</div></div>
+          <div class="stat"><div class="stat-num">3 大</div><div class="stat-label">趋势主线</div></div>
+          <div class="stat"><div class="stat-num">36 条</div><div class="stat-label">独立 Prompt</div></div>
+        </div>
+      </div>
+
+      <div class="trends-row" style="margin-top:18px">
+        <div class="trend-card">
+          <div class="num">TREND · 01</div>
+          <h4>AI Agent 落地深水区</h4>
+          <p>赛迪顾问指出现实「三道坎」：场景适配不足、技术迭代快于落地、数据治理滞后。Harness Engineering 与 Agentic Coding 率先闭环。</p>
+        </div>
+        <div class="trend-card">
+          <div class="num">TREND · 02</div>
+          <h4>AI 漫剧 / 短剧变现清晰化</h4>
+          <p>B 站等平台 90% 分成 + 保底激励，传统漫剧每分钟数万元成本被打到 500 元。16 款旗舰大模型在电商场景八维雷达测评出圈。</p>
+        </div>
+        <div class="trend-card">
+          <div class="num">TREND · 03</div>
+          <h4>小红书 AI 笔记限流新规</h4>
+          <p>上半年处置 60 万篇低质 AI 笔记。工具测评赛道严重内卷，单纯拼工具罗列的笔记已难出爆款，「反工具 / 避坑」内容反而有空间。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 热门索引 -->
+    <section id="index">
+      <h2 class="section-title"><span class="s-icon">01</span>今日热门索引</h2>
+      <p class="section-sub">B 站与小红书各 7 条 · 全部附可点击的搜索/原文链接 · 数据基于飞瓜数据、videoseek 热度榜、平台公开数据</p>
+
+      <div class="platform-grid">
+        <div class="platform-col">
+          <div class="platform-head"><h3>B 站 · 视频榜</h3><span class="num-tag">7 条</span></div>
+          <ul class="index-list">
+            <li><a href="https://search.bilibili.com/all?keyword=AI%E6%BC%AB%E5%89%A7%E5%88%B6%E4%BD%9C" target="_blank">
+              <span class="idx-rank">01</span>
+              <span class="idx-content">
+                <div class="idx-title">【60 集全】B 站最强 AI 漫剧制作保姆级教程 2026</div>
+                <div class="idx-meta"><span class="heat">热度 ·</span><span class="platform-tag">教程</span>UPDream 内测 + 漫剧分成 90% 引爆</div>
+              </span>
+            </a></li>
+            <li><a href="https://search.bilibili.com/all?keyword=AI%E7%9F%AD%E5%89%A7" target="_blank">
+              <span class="idx-rank">02</span>
+              <span class="idx-content">
+                <div class="idx-title">2026 AI 短剧 0 成本起号 · 新手当天出片</div>
+                <div class="idx-meta"><span class="heat">热度 ·</span><span class="platform-tag">变现</span>附 18 个工具 + 完整 SOP</div>
+              </span>
+            </a></li>
+            <li><a href="https://search.bilibili.com/all?keyword=16%E6%AC%BE%E6%97%97%E8%88%B0%E5%A4%A7%E6%A8%A1%E5%9E%8B" target="_blank">
+              <span class="idx-rank">03</span>
+              <span class="idx-content">
+                <div class="idx-title">月耗万刀 · 16 款旗舰大模型 · 八维雷达实测</div>
+                <div class="idx-meta"><span class="heat">热度 ·</span><span class="platform-tag">测评</span>跨境电商生产环境 6 月实测</div>
+              </span>
+            </a></li>
+            <li><a href="https://search.bilibili.com/all?keyword=UPDream" target="_blank">
+              <span class="idx-rank">04</span>
+              <span class="idx-content">
+                <div class="idx-title">UPDream · B 站自研 AI 视频创作工具内测</div>
+                <div class="idx-meta"><span class="heat">热度 ·</span><span class="platform-tag">工具</span>剧本→分镜→素材全链路</div>
+              </span>
+            </a></li>
+            <li><a href="https://search.bilibili.com/all?keyword=AI+Agent" target="_blank">
+              <span class="idx-rank">05</span>
+              <span class="idx-content">
+                <div class="idx-title">2026 AI Agent 12 大主流框架深度解析</div>
+                <div class="idx-meta"><span class="heat">热度 ·</span><span class="platform-tag">深度</span>架构演进 + 选型建议</div>
+              </span>
+            </a></li>
+            <li><a href="https://search.bilibili.com/all?keyword=AI%E5%88%9B%E4%BD%9C%E5%A4%A7%E8%B5%9B" target="_blank">
+              <span class="idx-rank">06</span>
+              <span class="idx-content">
+                <div class="idx-title">B 站首届 AI 创作大赛 · Q1 日均 2400 万人看 AI</div>
+                <div class="idx-meta"><span class="heat">热度 ·</span><span class="platform-tag">官方</span>平台公开数据 · 2026 春季</div>
+              </span>
+            </a></li>
+            <li><a href="https://search.bilibili.com/all?keyword=AI%E8%A7%86%E9%A2%91%E7%94%9F%E6%88%90" target="_blank">
+              <span class="idx-rank">07</span>
+              <span class="idx-content">
+                <div class="idx-title">AI 视频生成 2026 实战 · 三大工具终局对决</div>
+                <div class="idx-meta"><span class="heat">热度 ·</span><span class="platform-tag">横评</span>效率提升 500% · 成本降 78%</div>
+              </span>
+            </a></li>
+          </ul>
+        </div>
+
+        <div class="platform-col">
+          <div class="platform-head"><h3>小红书 · 笔记榜</h3><span class="num-tag">7 条</span></div>
+          <ul class="index-list">
+            <li><a href="https://www.xiaohongshu.com/search_result?keyword=AI%E5%B7%A5%E5%85%B7%E6%B5%8B%E8%AF%84" target="_blank">
+              <span class="idx-rank">01</span>
+              <span class="idx-content">
+                <div class="idx-title">2026 主流 AI 创作工具测评 · 6 款神器优劣全剖析</div>
+                <div class="idx-meta"><span class="heat">热度 ·</span><span class="platform-tag">测评</span>内卷赛道 · 工具同质化严重</div>
+              </span>
+            </a></li>
+            <li><a href="https://www.xiaohongshu.com/search_result?keyword=AI%E5%89%AF%E4%B8%9A" target="_blank">
+              <span class="idx-rank">02</span>
+              <span class="idx-content">
+                <div class="idx-title">AI + 小红书从 0 到 10 万粉实战 · 5 种变现</div>
+                <div class="idx-meta"><span class="heat">热度 ·</span><span class="platform-tag">副业</span>宝妈月入 2 万案例 · 6 月新文</div>
+              </span>
+            </a></li>
+            <li><a href="https://www.xiaohongshu.com/search_result?keyword=AI%E7%AC%94%E8%AE%B0%E9%99%90%E6%B5%81" target="_blank">
+              <span class="idx-rank">03</span>
+              <span class="idx-content">
+                <div class="idx-title">60 万篇 AI 笔记被限流 · 6 月新规汇总</div>
+                <div class="idx-meta"><span class="heat">热度 ·</span><span class="platform-tag">规则</span>必读 · 关系生死</div>
+              </span>
+            </a></li>
+            <li><a href="https://www.xiaohongshu.com/search_result?keyword=AI%E6%BC%AB%E5%89%A7" target="_blank">
+              <span class="idx-rank">04</span>
+              <span class="idx-content">
+                <div class="idx-title">短剧行业 · 小红书 AI 图文批量日更 30+</div>
+                <div class="idx-meta"><span class="heat">热度 ·</span><span class="platform-tag">爆款</span>找对爆款逻辑比工具重要</div>
+              </span>
+            </a></li>
+            <li><a href="https://www.xiaohongshu.com/search_result?keyword=AI%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF" target="_blank">
+              <span class="idx-rank">05</span>
+              <span class="idx-content">
+                <div class="idx-title">2026 AI 学习完整指南 · 12 个月通关路线图</div>
+                <div class="idx-meta"><span class="heat">热度 ·</span><span class="platform-tag">长尾</span>稳定搜索词 · 适合做合集</div>
+              </span>
+            </a></li>
+            <li><a href="https://www.xiaohongshu.com/search_result?keyword=AI%E5%95%86%E4%B8%9A%E5%8C%96" target="_blank">
+              <span class="idx-rank">06</span>
+              <span class="idx-content">
+                <div class="idx-title">2026 小红书商业化 3 大核心趋势 + 5 个实操建议</div>
+                <div class="idx-meta"><span class="heat">热度 ·</span><span class="platform-tag">商业</span>官方授权 AI 私信工具对比</div>
+              </span>
+            </a></li>
+            <li><a href="https://www.xiaohongshu.com/search_result?keyword=%E6%95%B0%E5%AD%97%E4%BA%BAIP" target="_blank">
+              <span class="idx-rank">07</span>
+              <span class="idx-content">
+                <div class="idx-title">数字人 IP 拆解 · 0 粉起号方法论</div>
+                <div class="idx-meta"><span class="heat">热度 ·</span><span class="platform-tag">冷启动</span>真人出镜 vs 数字人路线</div>
+              </span>
+            </a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 选题清单 -->
+    <section id="topics">
+      <h2 class="section-title"><span class="s-icon">02</span>今日选题清单（10 + 2）</h2>
+      <p class="section-sub">按紧迫度 + 长尾价值混合排列 · 每条都附制作卡片 + 双平台提示词 · 标 C 为创意差异化选题</p>
+
+      <div class="topic-list">
+        <!-- T01 -->
+        <div class="topic-card" data-num="01">
+          <div class="topic-head">
+            <h3 class="topic-title">UPDream 实测：剧本→分镜→成片，B 站 AI 视频工具到底能不能打？</h3>
+            <div class="topic-badges"><span class="badge badge-warm">窗口 7-10 天</span><span class="badge badge-soft">B 站长视频</span></div>
+          </div>
+          <p class="topic-signal">热度信号：B 站自研 AI 视频工具 UPDream 2026 年 3 月推出、4 月首届 AI 创作大赛官方背书、Q1 日均 2400 万人看 AI 内容。同期缺乏第三方深度横评，正是创作者补位机会。</p>
+          <p class="topic-tactic"><strong>打法：</strong>做「全网首测 + 创作大赛参赛者视角」双线。第一支：拉 3-5 个真实 UP 主投稿做盲测对比；第二支：亲自参赛并记录完整工作流。视频风格走「边用边吐槽」实测向，结尾附一段「为什么我依然用剪映」的诚实判断。</p>
+          <div class="make-grid">
+            <div class="make-block">
+              <h5>制作建议</h5>
+              <div class="make-row"><span class="k">难度</span><span class="v"><span class="stars">★★★☆☆</span> 中等</span></div>
+              <div class="make-row"><span class="k">耗时</span><span class="v">3-4 天（拍摄 1 天 + 后期 1.5 天 + 调研 1 天）</span></div>
+              <div class="make-row"><span class="k">框架</span><span class="v">介绍→功能展示→真实任务挑战→对比剪映/即梦→结论与适配人群</span></div>
+              <div class="make-row"><span class="k">核心设备</span><span class="v">1080P 屏幕录屏 + 收音领夹麦 + 桌面补光灯</span></div>
+              <div class="make-row"><span class="k">拍法要点</span><span class="v">分屏对比、关键步骤加字幕、UP 主盲测片段剪辑交叉</span></div>
+            </div>
+            <div class="make-block">
+              <h5>节奏 & 传播</h5>
+              <div class="make-row"><span class="k">紧迫度</span><span class="v">P1 · 窗口 7-10 天内必须发</span></div>
+              <div class="make-row"><span class="k">搜索长尾</span><span class="v">「UPDream 教程」「B 站 AI 视频工具」半年内有持续搜索</span></div>
+              <div class="make-row"><span class="k">知识半衰期</span><span class="v">3-6 个月（工具更新快）</span></div>
+              <div class="make-row"><span class="k">爆点设计</span><span class="v">UP 主盲测打分 + 给出明确推荐 / 不推荐人群</span></div>
+              <div class="make-row"><span class="k">风险</span><span class="v">官方迭代快 · 截屏前确认最新版</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- T02 -->
+        <div class="topic-card" data-num="02">
+          <div class="topic-head">
+            <h3 class="topic-title">AI 漫剧 0 成本起号 SOP · 一条视频拆完 18 个工具链路</h3>
+            <div class="topic-badges"><span class="badge badge-warm">变现强</span><span class="badge badge-soft">B 站 + 小红书</span></div>
+          </div>
+          <p class="topic-signal">热度信号：传统漫剧每分钟数万元成本被 AI 压到 500 元；B 站等平台 90% 分成 + 保底激励；多个「保姆级 60 集」教程搜索量在涨，但多数只讲工具不讲链路。</p>
+          <p class="topic-tactic"><strong>打法：</strong>做「全链路拆解 + 工具组合最优解」。一条 8-10 分钟视频，分三段：剧本 AI 化 → 分镜自动生成 → 视频/配音/剪辑/字幕串联。每一步给具体工具 + prompt 模板 + 真实出片对比。结尾给「个人 vs 团队」两套预算方案。配套小红书发 9 张图卡 + 工具清单长图。</p>
+          <div class="make-grid">
+            <div class="make-block">
+              <h5>制作建议</h5>
+              <div class="make-row"><span class="k">难度</span><span class="v"><span class="stars">★★★★☆</span> 中高</span></div>
+              <div class="make-row"><span class="k">耗时</span><span class="v">5-6 天（含真实跑通一集）</span></div>
+              <div class="make-row"><span class="k">框架</span><span class="v">钩子→剧本→分镜→生成→配音→剪辑→字幕→发布数据复盘</span></div>
+              <div class="make-row"><span class="k">核心设备</span><span class="v">Mid/即梦/Sora 订阅 + 剪映专业版 + 外接 SSD</span></div>
+              <div class="make-row"><span class="k">拍法要点</span><span class="v">边讲边跑软件全流程，失败片段保留增强真实感</span></div>
+            </div>
+            <div class="make-block">
+              <h5>节奏 & 传播</h5>
+              <div class="make-row"><span class="k">紧迫度</span><span class="v">P1 · 24-48 小时内出片卡位</span></div>
+              <div class="make-row"><span class="k">搜索长尾</span><span class="v">「AI 漫剧教程」「AI 短剧变现」长尾词 6-12 个月稳定</span></div>
+              <div class="make-row"><span class="k">知识半衰期</span><span class="v">6 个月以上（链路方法论比具体工具更耐放）</span></div>
+              <div class="make-row"><span class="k">爆点设计</span><span class="v">跑通真实一集·展示播放数据</span></div>
+              <div class="make-row"><span class="k">风险</span><span class="v">侵权风险·剧本必须自写或标注 AI 改写</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- T03 -->
+        <div class="topic-card" data-num="03">
+          <div class="topic-head">
+            <h3 class="topic-title">AI Agent 落地的「三道坎」：为什么大厂都在搞 Harness Engineering？</h3>
+            <div class="topic-badges"><span class="badge badge-green">长线高价值</span><span class="badge badge-soft">B 站深度</span></div>
+          </div>
+          <p class="topic-signal">热度信号：赛迪顾问《Agent 规模化落地》报告 6 月发布，提出「三道坎」+ Harness Engineering 新概念；同期 12 大 Agent 框架对比笔记密集出炉。</p>
+          <p class="topic-tactic"><strong>打法：</strong>做「翻译官」角色。把赛迪报告 6000 字用 12 分钟讲透 + 配上 3 个真实业务落地案例。结构：什么是 Harness Engineering → 三道坎具体是什么 → 谁先跑通了（Agentic Coding 赛道） → 12 大框架选型一张图。小红书版本拆成「Agent 入门 5 步走」图文。</p>
+          <div class="make-grid">
+            <div class="make-block">
+              <h5>制作建议</h5>
+              <div class="make-row"><span class="k">难度</span><span class="v"><span class="stars">★★★★☆</span> 中高（需调研深度）</span></div>
+              <div class="make-row"><span class="k">耗时</span><span class="v">4-5 天（深度调研 2 天 + 拍摄 1 天 + 后期 1.5 天）</span></div>
+              <div class="make-row"><span class="k">框架</span><span class="v">概念→三道坎→案例→框架选型→我的实操建议</span></div>
+              <div class="make-row"><span class="k">核心设备</span><span class="v">资料素材 + 屏幕录屏 + 图表设计（Canva / Figma）</span></div>
+              <div class="make-row"><span class="k">拍法要点</span><span class="v">讲解型视频·语速稍慢·关键概念加 2D 动画</span></div>
+            </div>
+            <div class="make-block">
+              <h5>节奏 & 传播</h5>
+              <div class="make-row"><span class="k">紧迫度</span><span class="v">P2 · 本周内发布即可</span></div>
+              <div class="make-row"><span class="k">搜索长尾</span><span class="v">「AI Agent 框架」「Harness Engineering」持续升温中</span></div>
+              <div class="make-row"><span class="k">知识半衰期</span><span class="v">12 个月以上（概念型内容）</span></div>
+              <div class="make-row"><span class="k">爆点设计</span><span class="v">用一张图把 12 框架归类到 3 个梯队</span></div>
+              <div class="make-row"><span class="k">风险</span><span class="v">信息密度高·必须做动图拆解</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- T04 -->
+        <div class="topic-card" data-num="04">
+          <div class="topic-head">
+            <h3 class="topic-title">16 款旗舰大模型八维雷达 · 一条视频讲完跨境电商真实生产环境怎么选</h3>
+            <div class="topic-badges"><span class="badge badge-soft">B 站测评</span><span class="badge badge-warm">热度高</span></div>
+          </div>
+          <p class="topic-signal">热度信号：BV1XSET6oEz1 单视频 6 月出圈，跨境电商 + 八维雷达 + 真实生产环境三个标签组合稀缺。</p>
+          <p class="topic-tactic"><strong>打法：</strong>用「场景化选型」切入而非全面横评。原视频评测维度太散，整理一份「按岗位选模型」的对照表：财务用哪个、代码用哪个、文案用哪个。3-5 分钟短平快 + 配套小红书「9 张图 · 我的模型工具箱」。</p>
+          <div class="make-grid">
+            <div class="make-block">
+              <h5>制作建议</h5>
+              <div class="make-row"><span class="k">难度</span><span class="v"><span class="stars">★★★☆☆</span> 中等</span></div>
+              <div class="make-row"><span class="k">耗时</span><span class="v">2-3 天</span></div>
+              <div class="make-row"><span class="k">框架</span><span class="v">问题引入→按场景选型对照→避坑提醒→我的推荐组合</span></div>
+              <div class="make-row"><span class="k">核心设备</span><span class="v">飞书多维表 / Excel + 录屏 + 简易图表</span></div>
+              <div class="make-row"><span class="k">拍法要点</span><span class="v">图文为主·真人讲解短·重点在对照表</span></div>
+            </div>
+            <div class="make-block">
+              <h5>节奏 & 传播</h5>
+              <div class="make-row"><span class="k">紧迫度</span><span class="v">P2 · 48 小时内</span></div>
+              <div class="make-row"><span class="k">搜索长尾</span><span class="v">「大模型对比 2026」「大模型选型」每月 8-10w 搜索</span></div>
+              <div class="make-row"><span class="k">知识半衰期</span><span class="v">2-3 个月（模型迭代快）</span></div>
+              <div class="make-row"><span class="k">爆点设计</span><span class="v">对比表 + 「跨境电商专用」垂直场景</span></div>
+              <div class="make-row"><span class="k">风险</span><span class="v">中等·原视频评论区有反对声音·中立化处理</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- T05 -->
+        <div class="topic-card" data-num="05">
+          <div class="topic-head">
+            <h3 class="topic-title">小红书 AI 笔记限流新规 · 6 月最新规则 + 9 个不违规姿势</h3>
+            <div class="topic-badges"><span class="badge badge-urgent">必须读</span><span class="badge badge-soft">小红书图文</span></div>
+          </div>
+          <p class="topic-signal">热度信号：60 万篇低质 AI 笔记被处置、虚假人设账号 1 万个被封、官方对「AI 写」「AI 生成」打标强制要求。</p>
+          <p class="topic-tactic"><strong>打法：</strong>做「避坑指南」而非「工具推荐」。9 张图：①限流真相数据 ②平台具体规则变化 ③触发限流的 5 个动作 ④安全姿势 9 个 ⑤打标话术模板 ⑥真人实拍插入建议 ⑦评论区运营策略 ⑧案例对照（被限 / 不被限）⑨资料领取。形式实用性强，转发率高。</p>
+          <div class="make-grid">
+            <div class="make-block">
+              <h5>制作建议</h5>
+              <div class="make-row"><span class="k">难度</span><span class="v"><span class="stars">★★☆☆☆</span> 简单</span></div>
+              <div class="make-row"><span class="k">耗时</span><span class="v">1-2 天</span></div>
+              <div class="make-row"><span class="k">框架</span><span class="v">9 图模板：数据→规则→红线→姿势→话术→案例</span></div>
+              <div class="make-row"><span class="k">核心设备</span><span class="v">小红书自带图文工具 + Canva 模板 + 醒图</span></div>
+              <div class="make-row"><span class="k">拍法要点</span><span class="v">封面数据大字 + 内页用对比色块</span></div>
+            </div>
+            <div class="make-block">
+              <h5>节奏 & 传播</h5>
+              <div class="make-row"><span class="k">紧迫度</span><span class="v">P1 · 24 小时内</span></div>
+              <div class="make-row"><span class="k">搜索长尾</span><span class="v">「小红书 AI 限流」「AI 笔记违规」每周 1-2w 搜索</span></div>
+              <div class="make-row"><span class="k">知识半衰期</span><span class="v">3-6 个月（规则会更新但打法稳定）</span></div>
+              <div class="make-row"><span class="k">爆点设计</span><span class="v">真实限流截图 + 数字大字号</span></div>
+              <div class="make-row"><span class="k">风险</span><span class="v">低·平台规则不会变 · 持续有需求</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- T06 -->
+        <div class="topic-card" data-num="06">
+          <div class="topic-head">
+            <h3 class="topic-title">AI 漫剧 vs AI 短剧 vs 数字人 IP · 三条路径月入 2 万的真实账本</h3>
+            <div class="topic-badges"><span class="badge badge-soft">小红书</span><span class="badge badge-green">长尾</span></div>
+          </div>
+          <p class="topic-signal">热度信号：「宝妈 AI 漫剧月入 2 万」「数字人 IP 0 粉起号」类案例在小红书 6 月密集出，争议也多。</p>
+          <p class="topic-tactic"><strong>打法：</strong>做「拆账本」向而非「鼓吹」向。9 张图把三条路径的真实收入结构、平台分成、所需时间、隐藏成本、踩坑案例拆完。核心价值是「帮读者算清账再决定要不要做」。</p>
+          <div class="make-grid">
+            <div class="make-block">
+              <h5>制作建议</h5>
+              <div class="make-row"><span class="k">难度</span><span class="v"><span class="stars">★★★☆☆</span> 中等</span></div>
+              <div class="make-row"><span class="k">耗时</span><span class="v">2-3 天</span></div>
+              <div class="make-row"><span class="k">框架</span><span class="v">收入结构→时间投入→平台分成→工具成本→踩坑→选型建议</span></div>
+              <div class="make-row"><span class="k">核心设备</span><span class="v">数据图卡制作工具 + 飞书表格</span></div>
+              <div class="make-row"><span class="k">拍法要点</span><span class="v">数据说话 + 反向观点 + 避免广告感</span></div>
+            </div>
+            <div class="make-block">
+              <h5>节奏 & 传播</h5>
+              <div class="make-row"><span class="k">紧迫度</span><span class="v">P2 · 本周内</span></div>
+              <div class="make-row"><span class="k">搜索长尾</span><span class="v">「AI 副业」「AI 变现路径」月度长尾词</span></div>
+              <div class="make-row"><span class="k">知识半衰期</span><span class="v">6-12 个月（账本型内容）</span></div>
+              <div class="make-row"><span class="k">爆点设计</span><span class="v">真实截图 + 反向观点 + 评论区易炸</span></div>
+              <div class="make-row"><span class="k">风险</span><span class="v">低·拆解类内容政策风险小</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- T07 -->
+        <div class="topic-card" data-num="07">
+          <div class="topic-head">
+            <h3 class="topic-title">普通人学 AI 12 个月路线图 · B 站 + 小红书两版同步发</h3>
+            <div class="topic-badges"><span class="badge badge-green">长期搜索价值</span><span class="badge badge-soft">B 站 + 小红书</span></div>
+          </div>
+          <p class="topic-signal">热度信号：「2026 AI 学习路线图」在 CSDN、知乎、腾讯云开发者多平台同一时期出现 5+ 篇，说明是搜索量稳定的需求池。</p>
+          <p class="topic-tactic"><strong>打法：</strong>做「差异化版本」——主流路线图都偏「工具罗列」，你做「按目标分叉」的版本：想转行 / 想副业 / 想给孩子启蒙，路径完全不同。每月更新一次版本号，建立「AI 学习地图 2026 v1.0」系列 IP。</p>
+          <div class="make-grid">
+            <div class="make-block">
+              <h5>制作建议</h5>
+              <div class="make-row"><span class="k">难度</span><span class="v"><span class="stars">★★★☆☆</span> 中等</span></div>
+              <div class="make-row"><span class="k">耗时</span><span class="v">3-4 天</span></div>
+              <div class="make-row"><span class="k">框架</span><span class="v">哲学观→3 大分叉路径→每月里程碑→工具集→避坑</span></div>
+              <div class="make-row"><span class="k">核心设备</span><span class="v">Notion 模板 + 流程图工具 + B 站视频脚本</span></div>
+              <div class="make-row"><span class="k">拍法要点</span><span class="v">讲解型·关键路径加流程图动效</span></div>
+            </div>
+            <div class="make-block">
+              <h5>节奏 & 传播</h5>
+              <div class="make-row"><span class="k">紧迫度</span><span class="v">P3 · 不急但必须做</span></div>
+              <div class="make-row"><span class="k">搜索长尾</span><span class="v">「AI 学习路线」「AI 入门」月度 5w+ 搜索</span></div>
+              <div class="make-row"><span class="k">知识半衰期</span><span class="v">12 个月+（系列化）</span></div>
+              <div class="make-row"><span class="k">爆点设计</span><span class="v">3 个分叉路径对比 + 月度更新承诺</span></div>
+              <div class="make-row"><span class="k">风险</span><span class="v">低·内容资产型</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- T08 -->
+        <div class="topic-card" data-num="08">
+          <div class="topic-head">
+            <h3 class="topic-title">AI 短剧「0 成本起号」是噱头还是真实 · 一周实测账本</h3>
+            <div class="topic-badges"><span class="badge badge-soft">B 站测评</span><span class="badge badge-warm">争议话题</span></div>
+          </div>
+          <p class="topic-signal">热度信号：「0 成本起号·当天出片」类标题在 B 站 / 网易号密集出现，多个「18 个工具保姆级」文章 IP 化趋势明显，但「真实性」被质疑。</p>
+          <p class="topic-tactic"><strong>打法：</strong>做「证伪式测评」。亲自花 7 天跑一遍，记录实际花的钱（哪怕只是会员费、电费）、实际花的时间、实际播放量、实际收入。最后给「0 成本的真相 · 我愿意为之付出的代价」诚实回答。争议性是传播力。</p>
+          <div class="make-grid">
+            <div class="make-block">
+              <h5>制作建议</h5>
+              <div class="make-row"><span class="k">难度</span><span class="v"><span class="stars">★★★★☆</span> 中高（耗时 1 周真实跑）</span></div>
+              <div class="make-row"><span class="k">耗时</span><span class="v">8-10 天</span></div>
+              <div class="make-row"><span class="k">框架</span><span class="v">立 flag→每日进度→账单公开→真实结果→反思</span></div>
+              <div class="make-row"><span class="k">核心设备</span><span class="v">飞书多维表账单 + 录屏 + Vlog 式手持拍摄</span></div>
+              <div class="make-row"><span class="k">拍法要点</span><span class="v">真实感优先·每天一段小视频·结尾做账本公开</span></div>
+            </div>
+            <div class="make-block">
+              <h5>节奏 & 传播</h5>
+              <div class="make-row"><span class="k">紧迫度</span><span class="v">P2 · 本周启动</span></div>
+              <div class="make-row"><span class="k">搜索长尾</span><span class="v">「AI 短剧真实收益」「AI 副业真实」长尾词</span></div>
+              <div class="make-row"><span class="k">知识半衰期</span><span class="v">6 个月+（账本型）</span></div>
+              <div class="make-row"><span class="k">爆点设计</span><span class="v">账单公开 + 反向观点</span></div>
+              <div class="make-row"><span class="k">风险</span><span class="v">中等·避免被原博主攻击·保持客观</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- T09 -->
+        <div class="topic-card" data-num="09">
+          <div class="topic-head">
+            <h3 class="topic-title">AI 工具测评内卷下 · 怎么写笔记还能出爆款？</h3>
+            <div class="topic-badges"><span class="badge badge-soft">小红书图文</span><span class="badge badge-warm">方法论</span></div>
+          </div>
+          <p class="topic-signal">热度信号：「火兔工具箱」「ChatGPT 测评」类标题 2026 年 1-6 月密集产出 30+ 篇同质内容，明显饱和。</p>
+          <p class="topic-tactic"><strong>打法：</strong>做「反套路」选题方法论。9 张图：①同质化笔记 5 个症状 ②为什么我决定不再写工具盘点 ③重新定位 3 个角度（按角色 / 按坑 / 按场景） ④单点深挖案例 ⑤标题公式 ⑥封面设计套路 ⑦发布时段 ⑧数据复盘模板 ⑨月度迭代建议。</p>
+          <div class="make-grid">
+            <div class="make-block">
+              <h5>制作建议</h5>
+              <div class="make-row"><span class="k">难度</span><span class="v"><span class="stars">★★☆☆☆</span> 简单</span></div>
+              <div class="make-row"><span class="k">耗时</span><span class="v">1-2 天</span></div>
+              <div class="make-row"><span class="k">框架</span><span class="v">观察→解构→方法→案例→模板</span></div>
+              <div class="make-row"><span class="k">核心设备</span><span class="v">截图工具 + Canva + 醒图</span></div>
+              <div class="make-row"><span class="k">拍法要点</span><span class="v">对比色块 + 大字标题 + 数据可视化</span></div>
+            </div>
+            <div class="make-block">
+              <h5>节奏 & 传播</h5>
+              <div class="make-row"><span class="k">紧迫度</span><span class="v">P2 · 48 小时内</span></div>
+              <div class="make-row"><span class="k">搜索长尾</span><span class="v">「小红书运营」「AI 笔记方法」月度长尾</span></div>
+              <div class="make-row"><span class="k">知识半衰期</span><span class="v">6-12 个月（方法论型）</span></div>
+              <div class="make-row"><span class="k">爆点设计</span><span class="v">反向观点 + 模板可领</span></div>
+              <div class="make-row"><span class="k">风险</span><span class="v">低</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- T10 -->
+        <div class="topic-card" data-num="10">
+          <div class="topic-head">
+            <h3 class="topic-title">2026 春季 AI 大事件盘点 · B 站 5 分钟看完一季</h3>
+            <div class="topic-badges"><span class="badge badge-soft">B 站长视频</span><span class="badge badge-green">季节回顾</span></div>
+          </div>
+          <p class="topic-signal">热度信号：UPDream 内测、AI 创作大赛、Q1 2400 万人看 AI 等事件集中在 2026 Q1，6 月底适合做季节回顾。</p>
+          <p class="topic-tactic"><strong>打法：</strong>做「Q1-Q2 行业时间线」向视频。结构：1 月开源模型潮 → 2 月商业化争议 → 3 月 UPDream + AI 创作大赛 → 4 月大厂 Agent 落地 → 5 月漫剧分成 90% → 6 月限流新规。每月一段，每段 30-45 秒，节奏紧凑。</p>
+          <div class="make-grid">
+            <div class="make-block">
+              <h5>制作建议</h5>
+              <div class="make-row"><span class="k">难度</span><span class="v"><span class="stars">★★★☆☆</span> 中等</span></div>
+              <div class="make-row"><span class="k">耗时</span><span class="v">2-3 天</span></div>
+              <div class="make-row"><span class="k">框架</span><span class="v">月历时间线 + 关键事件 + 关键数字 + 评论切片</span></div>
+              <div class="make-row"><span class="k">核心设备</span><span class="v">时间线动效（剪映/Canva）+ 录屏 + B 站热门视频素材</span></div>
+              <div class="make-row"><span class="k">拍法要点</span><span class="v">信息密度高·每段切 3-4 个画面</span></div>
+            </div>
+            <div class="make-block">
+              <h5>节奏 & 传播</h5>
+              <div class="make-row"><span class="k">紧迫度</span><span class="v">P3 · 月底前</span></div>
+              <div class="make-row"><span class="k">搜索长尾</span><span class="v">「AI 大事件 2026」「AI 月度回顾」</span></div>
+              <div class="make-row"><span class="k">知识半衰期</span><span class="v">6 个月+（总结型）</span></div>
+              <div class="make-row"><span class="k">爆点设计</span><span class="v">每个事件配 1 个金句 + 1 张关键图</span></div>
+              <div class="make-row"><span class="k">风险</span><span class="v">低</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- C1 -->
+        <div class="topic-card" data-num="C1">
+          <div class="topic-head">
+            <h3 class="topic-title">【创意·逆向】90% 分成反而是陷阱？拆 AI 漫剧分账链的「看不见的 10%」</h3>
+            <div class="topic-badges"><span class="badge badge-creative">C 创意</span><span class="badge badge-soft">B 站深度</span></div>
+          </div>
+          <p class="topic-signal">热度信号：所有博主都在说 90% 分成 + 保底激励，但很少有人拆「平台到底从哪抽成」「保底是不是陷阱」「创作者实际拿多少」。逆向选题自带话题度。</p>
+          <p class="topic-tactic"><strong>打法：</strong>做「行业深扒」向。把 90% 分成条款逐字拆开，画出真实分账链路：平台抽 5%、保底达成条件、流量加权系数、版权分账、税费扣减……最后算一笔「你实际到手多少」的账。视频偏长文信息密度型，8-12 分钟，配详细的图文长图。</p>
+          <div class="make-grid">
+            <div class="make-block">
+              <h5>制作建议</h5>
+              <div class="make-row"><span class="k">难度</span><span class="v"><span class="stars">★★★★☆</span> 中高</span></div>
+              <div class="make-row"><span class="k">耗时</span><span class="v">4-5 天</span></div>
+              <div class="make-row"><span class="k">框架</span><span class="v">拆条款→画分账链路→算真实收入→访谈 3 个创作者</span></div>
+              <div class="make-row"><span class="k">核心设备</span><span class="v">财务/法务资源（可挂靠专业朋友）+ 录屏 + Canva 流程图</span></div>
+              <div class="make-row"><span class="k">拍法要点</span><span class="v">信息密度大·关键条款加红框高亮·多用图表</span></div>
+            </div>
+            <div class="make-block">
+              <h5>节奏 & 传播</h5>
+              <div class="make-row"><span class="k">紧迫度</span><span class="v">P1 · 72 小时内</span></div>
+              <div class="make-row"><span class="k">搜索长尾</span><span class="v">「AI 漫剧分成真相」「漫剧真实收入」</span></div>
+              <div class="make-row"><span class="k">知识半衰期</span><span class="v">6-12 个月</span></div>
+              <div class="make-row"><span class="k">爆点设计</span><span class="v">逆向观点 + 真实数据 + 创作者访谈</span></div>
+              <div class="make-row"><span class="k">风险</span><span class="v">中·可能被原博主反驳·保持数据严谨</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- C2 -->
+        <div class="topic-card" data-num="C2">
+          <div class="topic-head">
+            <h3 class="topic-title">【创意·数据】AI 内容数据图鉴 · 14 个图表看穿 B 站 + 小红书真实生态</h3>
+            <div class="topic-badges"><span class="badge badge-creative">C 创意</span><span class="badge badge-soft">双平台</span></div>
+          </div>
+          <p class="topic-signal">热度信号：Q1 日均 2400 万人看 AI、60 万 AI 笔记被限、漫剧成本 500 元/分钟、3.2 亿月活、500 实测博主……一堆数字散落在不同文章里没人整合。</p>
+          <p class="topic-tactic"><strong>打法：</strong>做「信息整合 + 可视化」向。14 个图表：①每日 AI 内容观看人数 ②60 万限流笔记分类 ③漫剧成本曲线 ④小红书月活增长 ⑤AI 工具使用率 ⑥大模型对比 ⑦UP 主粉丝分布 ⑧博主性别/年龄占比 ⑨变现方式分布 ⑩区域热度 ⑪热搜词变化 ⑫长尾搜索词 ⑬评论区情绪分析 ⑭6 月预测。每个图配 1 段解读。形式稀缺，传播力强。</p>
+          <div class="make-grid">
+            <div class="make-block">
+              <h5>制作建议</h5>
+              <div class="make-row"><span class="k">难度</span><span class="v"><span class="stars">★★★★★</span> 高（需要数据处理能力）</span></div>
+              <div class="make-row"><span class="k">耗时</span><span class="v">6-8 天</span></div>
+              <div class="make-row"><span class="k">框架</span><span class="v">14 图表 + 解读 + 趋势预测 + 行动建议</span></div>
+              <div class="make-row"><span class="k">核心设备</span><span class="v">Python 数据处理 + 飞瓜/蝉妈妈数据 + Flourish 图表</span></div>
+              <div class="make-row"><span class="k">拍法要点</span><span class="v">动图为主·旁白简短·留白多</span></div>
+            </div>
+            <div class="make-block">
+              <h5>节奏 & 传播</h5>
+              <div class="make-row"><span class="k">紧迫度</span><span class="v">P3 · 月底前</span></div>
+              <div class="make-row"><span class="k">搜索长尾</span><span class="v">「AI 行业数据」「B 站小红书对比」</span></div>
+              <div class="make-row"><span class="k">知识半衰期</span><span class="v">12 个月+（数据资产型）</span></div>
+              <div class="make-row"><span class="k">爆点设计</span><span class="v">稀缺数据 + 解读视角</span></div>
+              <div class="make-row"><span class="k">风险</span><span class="v">中·数据要标注来源·避免被质疑</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 提示词库 -->
+    <section id="prompts">
+      <h2 class="section-title"><span class="s-icon">03</span>制作提示词库</h2>
+      <p class="section-sub">每条选题配 B 站视频脚本 + 小红书图文两类提示词 · 全部独立可运行 · 复制即用</p>
+
+      <div class="topic-list">
+        <!-- 提示词卡片：T01 -->
+        <div class="topic-card" style="padding:24px 26px">
+          <h3 class="topic-title" style="font-size:17px">T01 · UPDream 实测</h3>
+          <div class="prompt-section" style="margin-top:8px">
+            <div class="prompt-tabs">
+              <button class="prompt-tab active" onclick="switchTab(this,'p01-b')">B 站视频脚本</button>
+              <button class="prompt-tab" onclick="switchTab(this,'p01-x')">小红书图文</button>
+            </div>
+            <div id="p01-b" class="prompt-content active">
+              <button class="copy-btn" onclick="copyText(this)">复制</button>
+              <strong>【角色】</strong>AI 工具深度测评 UP 主
+              <strong>【主题】</strong>UPDream 全网首测：剧本→分镜→成片，3 位 UP 主盲评打分
+              <strong>【时长】</strong>8-10 分钟
+              <strong>【语气】</strong>理性测评 + 真实吐槽 + 偶尔幽默
+              <strong>【结构】</strong>
+              1) 0:00-0:30 钩子：UPDream 真有那么神？3 位 UP 主盲评后我沉默了
+              2) 0:30-2:00 工具介绍：官方怎么说、Q1 日均 2400 万看 AI 的背景
+              3) 2:00-4:30 实测环节 1：用 UPDream 生成一个 1 分钟的漫剧片段（展示完整工作流）
+              4) 4:30-6:30 实测环节 2：和剪映/即梦 横向对比同一任务
+              5) 6:30-8:00 3 位 UP 主盲评打分 + 真实片段
+              6) 8:00-9:30 结论：什么人不适合用 UPDream？什么场景它是首选？
+              <strong>【互动引导】</strong>结尾弹幕互动：「你用过 UPDream 吗？评论区告诉我」
+              <strong>【标题建议】</strong>《UPDream 真测：3 位 UP 主盲评后我们吵起来了》
+            </div>
+            <div id="p01-x" class="prompt-content">
+              <button class="copy-btn" onclick="copyText(this)">复制</button>
+              <strong>【主题】</strong>UPDream 一句话总结卡片 9 张图
+              <strong>【语气】</strong>小红书测评博主 · 直白 + 视觉化
+              <strong>【封面】</strong>大字「UPDream 能用吗？」+ 评分 7.5/10
+              <strong>【9 图内容】</strong>
+              1) 封面：UPDream 是什么（1 句话 + 3 个 logo）
+              2) 核心功能 3 个：剧本 / 分镜 / 素材 一句话介绍
+              3) 实测任务 1：1 分钟漫剧片段
+              4) 实测任务 2：横屏口播视频
+              5) 和剪映对比：3 个维度
+              6) 和即梦对比：3 个维度
+              7) 优点 3 个 + 缺点 3 个
+              8) 适合谁 / 不适合谁
+              9) 行动建议 + 评论区互动
+              <strong>【正文】</strong>UPDream 6 月初公测了，作为视频创作者我连测 3 天。结论：能用，但要看场景。9 张图给你讲清楚……
+              <strong>【标签】</strong>#UPDream #B站AI工具 #AI视频生成 #测评 #AI创作
+            </div>
+          </div>
+        </div>
+
+        <!-- 提示词卡片：T02 -->
+        <div class="topic-card" style="padding:24px 26px">
+          <h3 class="topic-title" style="font-size:17px">T02 · AI 漫剧 0 成本 SOP</h3>
+          <div class="prompt-section" style="margin-top:8px">
+            <div class="prompt-tabs">
+              <button class="prompt-tab active" onclick="switchTab(this,'p02-b')">B 站视频脚本</button>
+              <button class="prompt-tab" onclick="switchTab(this,'p02-x')">小红书图文</button>
+            </div>
+            <div id="p02-b" class="prompt-content active">
+              <button class="copy-btn" onclick="copyText(this)">复制</button>
+              <strong>【主题】</strong>AI 漫剧全链路 SOP · 18 个工具组合跑通一集
+              <strong>【时长】</strong>12-15 分钟（深度教程型）
+              <strong>【语气】</strong>耐心讲解 + 节奏紧凑 + 关键节点高亮
+              <strong>【结构】</strong>
+              1) 0:00-1:00 钩子：90% 分成 + 500 元/分钟成本，普通人能分到钱吗
+              2) 1:00-2:30 漫剧产业链拆解：编剧→分镜→制作→发行
+              3) 2:30-4:00 步骤 1：剧本 AI 化（Claude/ChatGPT 改写 + 提示词模板）
+              4) 4:00-6:00 步骤 2：分镜自动生成（GPT-4o + 即梦）
+              5) 6:00-8:30 步骤 3：视频素材生成（Sora/Runway/可灵）
+              6) 8:30-10:00 步骤 4：配音 + BGM（ElevenLabs + Suno）
+              7) 10:00-12:00 步骤 5：剪辑 + 字幕（剪映 + 必剪）
+              8) 12:00-13:30 个人预算 vs 团队预算 真实对比表
+              9) 13:30-14:30 发布数据复盘 + 平台分成测算
+              <strong>【互动引导】</strong>「你跑过哪一步？最卡哪？下期拆解」
+            </div>
+            <div id="p02-x" class="prompt-content">
+              <button class="copy-btn" onclick="copyText(this)">复制</button>
+              <strong>【主题】</strong>AI 漫剧 18 工具清单长图
+              <strong>【语气】</strong>清单 + 评分 + 实测打分
+              <strong>【封面】</strong>「18 工具 · 一张图看懂 AI 漫剧」大字
+              <strong>【9 图内容】</strong>
+              1) 漫剧产业链流程图
+              2) 剧本 AI 化：3 工具对比（Claude/ChatGPT/豆包）
+              3) 分镜生成：3 工具对比
+              4) 视频生成：3 工具对比
+              5) 配音 BGM：3 工具对比
+              6) 剪辑字幕：3 工具对比
+              7) 总成本对比表
+              8) 跑通案例 · 截图 + 数据
+              9) 个人/团队 两套预算表
+              <strong>【标签】</strong>#AI漫剧 #AI短剧 #AI工具推荐 #副业 #变现
+            </div>
+          </div>
+        </div>
+
+        <!-- 提示词卡片：T03 -->
+        <div class="topic-card" style="padding:24px 26px">
+          <h3 class="topic-title" style="font-size:17px">T03 · AI Agent 三道坎 + Harness Engineering</h3>
+          <div class="prompt-section" style="margin-top:8px">
+            <div class="prompt-tabs">
+              <button class="prompt-tab active" onclick="switchTab(this,'p03-b')">B 站视频脚本</button>
+              <button class="prompt-tab" onclick="switchTab(this,'p03-x')">小红书图文</button>
+            </div>
+            <div id="p03-b" class="prompt-content active">
+              <button class="copy-btn" onclick="copyText(this)">复制</button>
+              <strong>【主题】</strong>Agent 落地三道坎：为什么大厂都在搞 Harness Engineering？
+              <strong>【时长】</strong>10-12 分钟（深度讲解型）
+              <strong>【语气】</strong>学者型 + 案例化 + 不卖弄
+              <strong>【结构】</strong>
+              1) 0:00-1:00 钩子：Agent 概念火了 2 年，为什么 90% 企业项目还停在 POC？
+              2) 1:00-3:00 赛迪报告 6 月版核心观点：Agent 规模化进入深水区
+              3) 3:00-5:00 第一道坎：场景适配不足 + 颠覆性应用缺位（举 3 个反例）
+              4) 5:00-7:00 第二道坎：技术迭代快于落地周期（Cursor / Lovable 的过山车案例）
+              5) 7:00-9:00 第三道坎：数据治理 + 运行环境滞后
+              6) 9:00-10:30 Harness Engineering 是什么？为什么是它率先闭环？
+              7) 10:30-11:30 12 大 Agent 框架 3 梯队对照
+              8) 11:30-12:00 行动建议：个人怎么学、企业怎么选
+              <strong>【互动引导】</strong>「你在用哪个 Agent 框架？评论区交流」
+            </div>
+            <div id="p03-x" class="prompt-content">
+              <button class="copy-btn" onclick="copyText(this)">复制</button>
+              <strong>【主题】</strong>Agent 入门 5 步走
+              <strong>【语气】</strong>知识科普 + 视觉卡片
+              <strong>【封面】</strong>「AI Agent 三道坎 + 12 框架一张图」
+              <strong>【9 图内容】</strong>
+              1) 封面图：核心结论
+              2) Agent 是什么（10 秒讲清楚）
+              3) 第一道坎：场景
+              4) 第二道坎：技术迭代
+              5) 第三道坎：数据治理
+              6) Harness Engineering 概念图
+              7) 12 框架 3 梯队图
+              8) 个人学习路径 5 步
+              9) 资源清单 + 评论区
+              <strong>【标签】</strong>#AIAgent #HarnessEngineering #AI框架 #深度学习
+            </div>
+          </div>
+        </div>
+
+        <!-- 提示词卡片：T05 -->
+        <div class="topic-card" style="padding:24px 26px">
+          <h3 class="topic-title" style="font-size:17px">T05 · 小红书 AI 笔记限流新规</h3>
+          <div class="prompt-section" style="margin-top:8px">
+            <div class="prompt-tabs">
+              <button class="prompt-tab active" onclick="switchTab(this,'p05-b')">B 站视频脚本</button>
+              <button class="prompt-tab" onclick="switchTab(this,'p05-x')">小红书图文</button>
+            </div>
+            <div id="p05-b" class="prompt-content active">
+              <button class="copy-btn" onclick="copyText(this)">复制</button>
+              <strong>【主题】</strong>60 万篇 AI 笔记被限流 · 6 月最新规则完整解读
+              <strong>【时长】</strong>5-7 分钟
+              <strong>【语气】</strong>严肃科普 + 案例化
+              <strong>【结构】</strong>
+              1) 0:00-0:30 钩子：60 万篇 · 1 万账号 · 6 月新规到底动了谁的蛋糕
+              2) 0:30-2:00 三大数据 + 处置逻辑
+              3) 2:00-4:00 9 个具体违规动作 + 截图案例
+              4) 4:00-5:30 9 个安全姿势（含打标话术）
+              5) 5:30-6:30 真人 + AI 混合创作的具体建议
+              6) 6:30-7:00 行动清单（评论区领）
+              <strong>【互动引导】</strong>「你的号被限过吗？说说当时做了什么」
+            </div>
+            <div id="p05-x" class="prompt-content">
+              <button class="copy-btn" onclick="copyText(this)">复制</button>
+              <strong>【主题】</strong>AI 笔记限流 9 个安全姿势
+              <strong>【语气】</strong>实用 + 视觉化 + 警示感
+              <strong>【封面】</strong>「60 万篇 · 1 万账号 · 你可能也中招」红字
+              <strong>【9 图内容】</strong>
+              1) 封面：核心数据大字
+              2) 限流真相数据
+              3) 9 个违规动作清单
+              4) 9 个安全姿势 1-3
+              5) 9 个安全姿势 4-6
+              6) 9 个安全姿势 7-9
+              7) 打标话术模板
+              8) 真人+AI 混合创作建议
+              9) 评论区领「自查清单」
+              <strong>【正文】</strong>姐妹们注意！小红书 6 月又出新规了……
+              <strong>【标签】</strong>#小红书运营 #AI笔记 #限流新规 #避坑
+            </div>
+          </div>
+        </div>
+
+        <!-- 提示词卡片：T06 -->
+        <div class="topic-card" style="padding:24px 26px">
+          <h3 class="topic-title" style="font-size:17px">T06 · AI 副业三条路径账本</h3>
+          <div class="prompt-section" style="margin-top:8px">
+            <div class="prompt-tabs">
+              <button class="prompt-tab active" onclick="switchTab(this,'p06-b')">B 站视频脚本</button>
+              <button class="prompt-tab" onclick="switchTab(this,'p06-x')">小红书图文</button>
+            </div>
+            <div id="p06-b" class="prompt-content active">
+              <button class="copy-btn" onclick="copyText(this)">复制</button>
+              <strong>【主题】</strong>AI 漫剧 vs 短剧 vs 数字人 IP · 三条路径真实账本
+              <strong>【时长】</strong>8-10 分钟
+              <strong>【语气】</strong>理性拆解 + 不鼓吹
+              <strong>【结构】</strong>
+              1) 0:00-0:30 钩子：月入 2 万是真的吗？先看账本
+              2) 0:30-2:00 路径 1：AI 漫剧 · 收入结构 + 时间投入
+              3) 2:00-4:00 路径 2：AI 短剧 · 收入结构 + 时间投入
+              4) 4:00-6:00 路径 3：数字人 IP · 收入结构 + 时间投入
+              5) 6:00-7:30 三条路径对比表
+              6) 7:30-9:00 隐藏成本 + 踩坑案例（3 个真实故事）
+              7) 9:00-9:30 选型建议 + 行动清单
+            </div>
+            <div id="p06-x" class="prompt-content">
+              <button class="copy-btn" onclick="copyText(this)">复制</button>
+              <strong>【主题】</strong>AI 副业真实账本对比
+              <strong>【语气】</strong>拆账本 + 不夸张
+              <strong>【封面】</strong>「月入 2 万的真相 · 3 条路径账本」大字
+              <strong>【9 图内容】</strong>
+              1) 封面：核心结论
+              2) AI 漫剧收入结构（饼图）
+              3) AI 漫剧时间成本（条形图）
+              4) AI 短剧收入结构
+              5) AI 短剧时间成本
+              6) 数字人 IP 收入结构
+              7) 数字人 IP 时间成本
+              8) 三条路径对比表
+              9) 选型建议 + 评论区
+              <strong>【标签】</strong>#AI副业 #AI变现 #宝妈副业 #拆账本
+            </div>
+          </div>
+        </div>
+
+        <!-- 提示词卡片：T07 -->
+        <div class="topic-card" style="padding:24px 26px">
+          <h3 class="topic-title" style="font-size:17px">T07 · AI 12 个月学习路线图</h3>
+          <div class="prompt-section" style="margin-top:8px">
+            <div class="prompt-tabs">
+              <button class="prompt-tab active" onclick="switchTab(this,'p07-b')">B 站视频脚本</button>
+              <button class="prompt-tab" onclick="switchTab(this,'p07-x')">小红书图文</button>
+            </div>
+            <div id="p07-b" class="prompt-content active">
+              <button class="copy-btn" onclick="copyText(this)">复制</button>
+              <strong>【主题】</strong>普通人学 AI 12 个月路线图 · 3 个分叉路径
+              <strong>【时长】</strong>10-12 分钟
+              <strong>【语气】</strong>教练型 + 鼓励 + 体系化
+              <strong>【结构】</strong>
+              1) 0:00-1:00 钩子：别再被「AI 学习路线图」骗了 · 你需要的是分叉
+              2) 1:00-3:00 哲学观：AI 时代学习的本质变化
+              3) 3:00-5:30 路径 A：想转行（深度技术路线）
+              4) 5:30-8:00 路径 B：想副业（应用变现路线）
+              5) 8:00-10:30 路径 C：想给孩子启蒙（认知铺垫路线）
+              6) 10:30-11:30 每月里程碑 + 工具集
+              7) 11:30-12:00 行动建议 + 评论区领模板
+            </div>
+            <div id="p07-x" class="prompt-content">
+              <button class="copy-btn" onclick="copyText(this)">复制</button>
+              <strong>【主题】</strong>12 个月 AI 学习地图 · 3 个分叉
+              <strong>【语气】</strong>清晰 + 鼓励
+              <strong>【封面】</strong>「3 条路 · 12 个月 · AI 学习地图」大字
+              <strong>【9 图内容】</strong>
+              1) 封面：分叉图
+              2) 哲学观：AI 时代学什么
+              3) 路径 A 转行 · 12 月里程碑
+              4) 路径 A 工具集 + 资源
+              5) 路径 B 副业 · 12 月里程碑
+              6) 路径 B 工具集 + 资源
+              7) 路径 C 启蒙 · 12 月里程碑
+              8) 路径 C 工具集 + 资源
+              9) 评论区 · 告诉我你的路径
+              <strong>【标签】</strong>#AI学习 #学习路线 #转行 #副业 #育儿
+            </div>
+          </div>
+        </div>
+
+        <!-- 提示词卡片：T08 -->
+        <div class="topic-card" style="padding:24px 26px">
+          <h3 class="topic-title" style="font-size:17px">T08 · AI 短剧 0 成本真实性测评</h3>
+          <div class="prompt-section" style="margin-top:8px">
+            <div class="prompt-tabs">
+              <button class="prompt-tab active" onclick="switchTab(this,'p08-b')">B 站视频脚本</button>
+              <button class="prompt-tab" onclick="switchTab(this,'p08-x')">小红书图文</button>
+            </div>
+            <div id="p08-b" class="prompt-content active">
+              <button class="copy-btn" onclick="copyText(this)">复制</button>
+              <strong>【主题】</strong>AI 短剧 0 成本起号 · 一周实测账本
+              <strong>【时长】</strong>8-10 分钟（Vlog + 账本）
+              <strong>【语气】</strong>诚实 + 反向 + 有数据
+              <strong>【结构】</strong>
+              1) 0:00-0:30 钩子：放下 flag · 7 天 0 成本做 AI 短剧 · 真能成吗
+              2) 0:30-1:30 Day 0 立 flag · 启动
+              3) 1:30-3:00 Day 1-2 写剧本 + 找工具
+              4) 3:00-5:00 Day 3-4 生成 + 剪辑（卡在哪 + 花多少钱）
+              5) 5:00-7:00 Day 5-6 发布 + 数据（真实播放 + 收入）
+              6) 7:00-8:30 账单公开 · 总成本 · 总时间 · 总收入
+              7) 8:30-9:30 反思 · 我愿意付出的真实代价
+              8) 9:30-10:00 评论区：你愿意试吗
+            </div>
+            <div id="p08-x" class="prompt-content">
+              <button class="copy-btn" onclick="copyText(this)">复制</button>
+              <strong>【主题】</strong>AI 短剧 0 成本真相 · 7 天账本
+              <strong>【语气】</strong>真实 + 反向
+              <strong>【封面】</strong>「0 成本做 AI 短剧 · 真账本曝光」大字
+              <strong>【9 图内容】</strong>
+              1) 封面：7 天账本结论
+              2) Day 1-2 截图
+              3) Day 3-4 截图
+              4) Day 5-6 截图
+              5) 总成本明细表
+              6) 总时间投入
+              7) 真实播放数据
+              8) 真实收入（如果有）
+              9) 我愿意为之付出的代价
+              <strong>【标签】</strong>#AI短剧 #0成本起号 #真实测评 #拆账本
+            </div>
+          </div>
+        </div>
+
+        <!-- 提示词卡片：T09 -->
+        <div class="topic-card" style="padding:24px 26px">
+          <h3 class="topic-title" style="font-size:17px">T09 · AI 工具测评反套路方法论</h3>
+          <div class="prompt-section" style="margin-top:8px">
+            <div class="prompt-tabs">
+              <button class="prompt-tab active" onclick="switchTab(this,'p09-b')">B 站视频脚本</button>
+              <button class="prompt-tab" onclick="switchTab(this,'p09-x')">小红书图文</button>
+            </div>
+            <div id="p09-b" class="prompt-content active">
+              <button class="copy-btn" onclick="copyText(this)">复制</button>
+              <strong>【主题】</strong>AI 工具测评内卷下 · 怎么写笔记还能出爆款
+              <strong>【时长】</strong>6-8 分钟
+              <strong>【语气】</strong>反向 + 方法论 + 实战
+              <strong>【结构】</strong>
+              1) 0:00-0:30 钩子：30+ 篇同质测评看烦了 · 我决定不再写
+              2) 0:30-2:00 5 个同质化症状拆解
+              3) 2:00-3:30 重新定位 3 个角度（按角色/按坑/按场景）
+              4) 3:30-5:00 单点深挖案例展示
+              5) 5:00-6:30 标题公式 + 封面套路
+              6) 6:30-7:30 数据复盘模板
+              7) 7:30-8:00 月度迭代建议
+            </div>
+            <div id="p09-x" class="prompt-content">
+              <button class="copy-btn" onclick="copyText(this)">复制</button>
+              <strong>【主题】</strong>AI 笔记不内卷 · 反套路方法论
+              <strong>【语气】</strong>反向 + 实用
+              <strong>【封面】</strong>「别再写工具盘点了」大字
+              <strong>【9 图内容】</strong>
+              1) 封面：核心观点
+              2) 5 个同质化症状
+              3) 重新定位 3 个角度
+              4) 按角色切：宝妈/学生/职场
+              5) 按坑切：避坑/踩雷/翻车
+              6) 按场景切：副业/学习/创作
+              7) 单点深挖案例
+              8) 标题公式 + 封面套路
+              9) 数据复盘模板
+              <strong>【标签】</strong>#小红书运营 #AI工具 #方法论 #反套路
+            </div>
+          </div>
+        </div>
+
+        <!-- 提示词卡片：T10 -->
+        <div class="topic-card" style="padding:24px 26px">
+          <h3 class="topic-title" style="font-size:17px">T10 · 2026 春季 AI 大事件盘点</h3>
+          <div class="prompt-section" style="margin-top:8px">
+            <div class="prompt-tabs">
+              <button class="prompt-tab active" onclick="switchTab(this,'p10-b')">B 站视频脚本</button>
+              <button class="prompt-tab" onclick="switchTab(this,'p10-x')">小红书图文</button>
+            </div>
+            <div id="p10-b" class="prompt-content active">
+              <button class="copy-btn" onclick="copyText(this)">复制</button>
+              <strong>【主题】</strong>2026 春季 AI 大事件盘点 · 5 分钟看完一季
+              <strong>【时长】</strong>5-6 分钟（信息密度型）
+              <strong>【语气】</strong>节奏紧凑 + 不卖弄
+              <strong>【结构】</strong>
+              1) 0:00-0:20 开场：2026 春季 AI 6 件大事
+              2) 0:20-0:50 1 月：开源模型潮
+              3) 0:50-1:20 2 月：商业化争议
+              4) 1:20-1:50 3 月：UPDream 内测 + AI 创作大赛
+              5) 1:50-2:20 4 月：大厂 Agent 落地
+              6) 2:20-2:50 5 月：漫剧分成 90%
+              7) 2:50-3:20 6 月：限流新规 + 报告
+              8) 3:20-4:00 Q3 预测
+              9) 4:00-5:00 总结 + 评论区
+            </div>
+            <div id="p10-x" class="prompt-content">
+              <button class="copy-btn" onclick="copyText(this)">复制</button>
+              <strong>【主题】</strong>2026 春季 AI 月历
+              <strong>【语气】</strong>信息密集
+              <strong>【封面】</strong>「6 个月 · 6 件大事」大字
+              <strong>【9 图内容】</strong>
+              1) 封面：月历图
+              2) 1 月事件
+              3) 2 月事件
+              4) 3 月事件
+              5) 4 月事件
+              6) 5 月事件
+              7) 6 月事件
+              8) Q3 预测
+              9) 评论区
+              <strong>【标签】</strong>#AI大事件 #2026AI #AI行业
+            </div>
+          </div>
+        </div>
+
+        <!-- 提示词卡片：C1 -->
+        <div class="topic-card" style="padding:24px 26px">
+          <h3 class="topic-title" style="font-size:17px">C1 · 90% 分成逆向拆解</h3>
+          <div class="prompt-section" style="margin-top:8px">
+            <div class="prompt-tabs">
+              <button class="prompt-tab active" onclick="switchTab(this,'pc1-b')">B 站视频脚本</button>
+              <button class="prompt-tab" onclick="switchTab(this,'pc1-x')">小红书图文</button>
+            </div>
+            <div id="pc1-b" class="prompt-content active">
+              <button class="copy-btn" onclick="copyText(this)">复制</button>
+              <strong>【主题】</strong>90% 分成是陷阱？拆 AI 漫剧分账链的「看不见的 10%」
+              <strong>【时长】</strong>10-12 分钟
+              <strong>【语气】</strong>冷静拆解 + 财务视角
+              <strong>【结构】</strong>
+              1) 0:00-0:30 钩子：90% 分成 · 实际到手 38%
+              2) 0:30-2:00 90% 分成条款逐字拆
+              3) 2:00-4:00 真实分账链路图
+              4) 4:00-6:00 平台抽成 5 项（数据 + 截图）
+              5) 6:00-7:30 保底达成条件
+              6) 7:30-9:00 流量加权系数
+              7) 9:00-10:00 版权分账 + 税费扣减
+              8) 10:00-11:00 3 个创作者访谈（电话 / 文字）
+              9) 11:00-12:00 真实账本 + 行动建议
+            </div>
+            <div id="pc1-x" class="prompt-content">
+              <button class="copy-btn" onclick="copyText(this)">复制</button>
+              <strong>【主题】</strong>90% 分成真相 · 看不见的 10%
+              <strong>【语气】</strong>拆账本 + 警示
+              <strong>【封面】</strong>「90% 分成的真相」大字
+              <strong>【9 图内容】</strong>
+              1) 封面：核心数据
+              2) 90% 条款逐字拆
+              3) 真实分账链路
+              4) 平台抽成 5 项
+              5) 保底达成条件
+              6) 流量加权
+              7) 版权分账
+              8) 创作者访谈
+              9) 真实账本 + 行动建议
+              <strong>【标签】</strong>#AI漫剧 #分成陷阱 #拆账本
+            </div>
+          </div>
+        </div>
+
+        <!-- 提示词卡片：C2 -->
+        <div class="topic-card" style="padding:24px 26px">
+          <h3 class="topic-title" style="font-size:17px">C2 · AI 数据图鉴 14 图表</h3>
+          <div class="prompt-section" style="margin-top:8px">
+            <div class="prompt-tabs">
+              <button class="prompt-tab active" onclick="switchTab(this,'pc2-b')">B 站视频脚本</button>
+              <button class="prompt-tab" onclick="switchTab(this,'pc2-x')">小红书图文</button>
+            </div>
+            <div id="pc2-b" class="prompt-content active">
+              <button class="copy-btn" onclick="copyText(this)">复制</button>
+              <strong>【主题】</strong>AI 内容数据图鉴 · 14 个图表看穿真实生态
+              <strong>【时长】</strong>10-12 分钟
+              <strong>【语气】</strong>数据视角 + 解读
+              <strong>【结构】</strong>
+              1) 0:00-0:30 钩子：14 个数据 · 一条视频看穿 AI 创作生态
+              2) 0:30-1:30 图表 1-2：日均观看 + 限流数据
+              3) 1:30-3:00 图表 3-4：漫剧成本 + 月活
+              4) 3:00-4:30 图表 5-6：工具使用率 + 大模型对比
+              5) 4:30-6:00 图表 7-8：UP 主粉丝分布 + 博主画像
+              6) 6:00-7:30 图表 9-10：变现方式 + 区域热度
+              7) 7:30-9:00 图表 11-12：热搜词 + 长尾搜索
+              8) 9:00-10:00 图表 13-14：评论情绪 + 6 月预测
+              9) 10:00-11:00 三大结论
+              10) 11:00-12:00 行动建议
+            </div>
+            <div id="pc2-x" class="prompt-content">
+              <button class="copy-btn" onclick="copyText(this)">复制</button>
+              <strong>【主题】</strong>AI 数据图鉴 · 14 图表精选
+              <strong>【语气】</strong>信息密度 + 解读
+              <strong>【封面】</strong>「14 个数据 · 看穿 AI 生态」大字
+              <strong>【9 图内容】</strong>
+              1) 封面：核心结论
+              2) 图表 1-2
+              3) 图表 3-4
+              4) 图表 5-6
+              5) 图表 7-8
+              6) 图表 9-10
+              7) 图表 11-12
+              8) 图表 13-14
+              9) 行动建议 + 评论区
+              <strong>【标签】</strong>#AI数据 #B站数据 #小红书数据
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 案例拆解 -->
+    <section id="cases">
+      <h2 class="section-title"><span class="s-icon">04</span>案例拆解</h2>
+      <p class="section-sub">6 个近 6 个月内可验证的 AI 创作者案例 · 数据来源：36 氪、新榜、平台公开报告</p>
+
+      <div class="case-grid">
+        <div class="case-card">
+          <h4>BV1XSET6oEz1 · 月耗万刀 16 款大模型实测</h4>
+          <div class="case-meta">B 站 · 2026.06.08 · 八维雷达实测向</div>
+          <ul>
+            <li>跨境电商真实生产环境背书，可信度高于一般测评</li>
+            <li>「八维雷达」结构化输出，比纯主观打分更易传播</li>
+            <li>评论区争议大（有人觉得维度散），反而带动自然流量</li>
+          </ul>
+          <div class="case-takeaway"><strong>方法论：</strong>垂直场景 + 结构化输出 + 真实数据 = 可信度。可复制性高。</div>
+        </div>
+
+        <div class="case-card">
+          <h4>UPDream 官方上线 · B 站首届 AI 创作大赛</h4>
+          <div class="case-meta">B 站官方 · 2026.04 · 腾讯新闻报道</div>
+          <ul>
+            <li>Q1 日均 2400 万人看 AI，官方数据公开背书</li>
+            <li>工具 + 大赛组合拳，UP 主有参赛动力 + 创作动力</li>
+            <li>工具内测期间自带稀缺性，第三方深度测评稀缺</li>
+          </ul>
+          <div class="case-takeaway"><strong>方法论：</strong>新工具内测期 = 创作者黄金窗口。越早做越有红利。</div>
+        </div>
+
+        <div class="case-card">
+          <h4>小红书「60 万篇 AI 笔记限流」官方报告</h4>
+          <div class="case-meta">小红书 · 2025.06.24 · 平台公开</div>
+          <ul>
+            <li>320 万虚假笔记 + 60 万低质 AI 笔记 + 1 万虚假人设账号</li>
+            <li>触发「AI 写」「AI 生成」打标强制要求</li>
+            <li>评论区大量求「自查清单」类内容</li>
+          </ul>
+          <div class="case-takeaway"><strong>方法论：</strong>平台政策 = 流量新红利。提前 1-2 周解读规则的内容会拿到算法加成。</div>
+        </div>
+
+        <div class="case-card">
+          <h4>AI 漫剧「18 工具保姆级」类文章矩阵</h4>
+          <div class="case-meta">网易号 · 2026.05 · 多账号同步发</div>
+          <ul>
+            <li>标题高度同质化但搜索流量稳定</li>
+            <li>工具罗列向 → SOP 向 → 案例向 进化路径</li>
+            <li>评论区争议大（0 成本真实性），但搜索词稳</li>
+          </ul>
+          <div class="case-takeaway"><strong>方法论：</strong>同质化反而是机会——你做差异化版本（拆账本 / 拆条款）就是破局。</div>
+        </div>
+
+        <div class="case-card">
+          <h4>小红书「AI 漫剧月入 2 万」副业类内容</h4>
+          <div class="case-meta">aifuye.net · 2026.06.14 · 多个账号复制</div>
+          <ul>
+            <li>「宝妈」「学生」等具体身份 + 明确数字 = 强转化</li>
+            <li>但同时被质疑（缺真实账本截图）</li>
+            <li>5 种变现方法论 + 完整工作流 = 长尾收藏</li>
+          </ul>
+          <div class="case-takeaway"><strong>方法论：</strong>数字 + 身份 + 工作流 + 工具 = 转化铁三角。但要做真实账本背书。</div>
+        </div>
+
+        <div class="case-card">
+          <h4>赛迪顾问《Agent 规模化落地》报告</h4>
+          <div class="case-meta">搜狐财经 · 2026.06 · 官方报告 + 解读</div>
+          <ul>
+            <li>「三道坎」+ Harness Engineering 概念是新术语红利期</li>
+            <li>12 大框架对比是高频搜索词</li>
+            <li>深度解读型内容搜索权重高，半年后依然有流量</li>
+          </ul>
+          <div class="case-takeaway"><strong>方法论：</strong>新概念 / 新报告出来时，做「翻译官」做深度解读，能拿到 6-12 个月的长尾流量。</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 拍摄指南 -->
+    <section id="guides">
+      <h2 class="section-title"><span class="s-icon">05</span>拍摄指南</h2>
+      <p class="section-sub">B 站横屏视频 + 小红书图文 · 6 步流程 + 设备推荐 · 从入门到专业三级</p>
+
+      <div class="guide-grid">
+        <div class="guide-card">
+          <h4><span class="step">V</span>B 站横屏视频 · 6 步流程</h4>
+          <ol>
+            <li><strong>选题：</strong>从日报选题清单挑一条 · 看紧迫度</li>
+            <li><strong>脚本：</strong>复制对应 Prompt → AI 生成初稿 → 手动改写</li>
+            <li><strong>拍摄：</strong>录屏 + 真人讲解 + 屏幕画面切换</li>
+            <li><strong>后期：</strong>剪映 / 必剪 · 加字幕 + 关键节点高亮</li>
+            <li><strong>封面：</strong>Canva 设计 · 大字 + 数字 + 视觉对比</li>
+            <li><strong>发布：</strong>18:00-20:00 · 标签 3-5 个 · 简介带钩子</li>
+          </ol>
+        </div>
+
+        <div class="guide-card">
+          <h4><span class="step">X</span>小红书图文 · 6 步流程</h4>
+          <ol>
+            <li><strong>选题：</strong>从日报挑 · 看平台调性 + 紧迫度</li>
+            <li><strong>封面：</strong>醒图 / Canva · 9:16 + 大字标题 + 数据</li>
+            <li><strong>9 图：</strong>按 Prompt 的 9 图结构逐页做</li>
+            <li><strong>正文：</strong>200-400 字 + 钩子 + 转折 + 行动</li>
+            <li><strong>标签：</strong>5-8 个 · 混合大小词 + 平台词</li>
+            <li><strong>发布：</strong>12:00-14:00 / 19:00-21:00 · 评论区置顶钩子</li>
+          </ol>
+        </div>
+
+        <div class="guide-card">
+          <h4><span class="step">Q</span>难度分级 · 选题速查</h4>
+          <table class="gear-table">
+            <tr><th>难度</th><th>适合选题</th></tr>
+            <tr><td>★ 入门</td><td>T05 限流规则 / T09 反套路方法论</td></tr>
+            <tr><td>★★ 简单</td><td>T10 春季回顾 / T06 副业账本</td></tr>
+            <tr><td>★★★ 中等</td><td>T01 UPDream / T04 大模型 / T07 路线图</td></tr>
+            <tr><td>★★★★ 中高</td><td>T02 漫剧 SOP / T03 Agent / T08 0 成本测评 / C1 分成拆解</td></tr>
+            <tr><td>★★★★★ 高</td><td>C2 数据图鉴 14 图表</td></tr>
+          </table>
+        </div>
+
+        <div class="guide-card">
+          <h4><span class="step">G</span>设备推荐 · 三级配置</h4>
+          <table class="gear-table">
+            <tr><th>等级</th><th>设备组合</th><th>预算</th></tr>
+            <tr><td>入门</td><td>手机 + 自带麦克 + 剪映</td><td>0 元</td></tr>
+            <tr><td>进阶</td><td>iPhone + 领夹麦 + 桌面补光灯 + 剪映专业版</td><td>1500 元</td></tr>
+            <tr><td>专业</td><td>微单 + 枪式麦 + LED 面板灯 + Final Cut / DaVinci</td><td>8000+</td></tr>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEO 策略 -->
+    <section id="seo">
+      <h2 class="section-title"><span class="s-icon">06</span>SEO 策略</h2>
+      <p class="section-sub">双平台搜索优化要点 · 标题、标签、描述的差异化策略</p>
+
+      <div class="seo-grid">
+        <div class="seo-card">
+          <h4>B 站搜索优化</h4>
+          <ul>
+            <li>标题前置关键词 · 数字 + 痛点 + 解决方案</li>
+            <li>简介前 80 字含核心词 · 1-2 句钩子</li>
+            <li>标签 5-8 个 · 长尾词 + 短词混合</li>
+            <li>发布时间 18:00-20:00 · 工作日更优</li>
+            <li>三连引导放在片尾 · 不要 0:00 引导</li>
+            <li>合集 + 系列化提升账号权重</li>
+            <li>评论区置顶「下期预告」提下次播放</li>
+          </ul>
+        </div>
+
+        <div class="seo-card">
+          <h4>小红书搜索优化</h4>
+          <ul>
+            <li>标题 18 字内 · 数字 + 痛点 + 身份标签</li>
+            <li>封面大字 + 数据 + 视觉对比 · 3 秒抓眼球</li>
+            <li>正文关键词 3-5 次 · 不要堆砌</li>
+            <li>标签 5-8 个 · 平台词 + 垂直词 + 长尾词</li>
+            <li>评论区钩子 · 主动回复 · 引导收藏</li>
+            <li>合集 / 系列笔记 · 提升账号标签</li>
+            <li>发布后 1 小时自查 · 违规立刻改</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 跨平台 -->
+    <section id="flow">
+      <h2 class="section-title"><span class="s-icon">07</span>跨平台方案</h2>
+      <p class="section-sub">一鱼多吃 + 最佳工作流 · 一份选题双平台分发</p>
+
+      <div class="flow">
+        <div class="flow-step">
+          <span class="flow-arrow">→</span>
+          <div class="fs-num">STEP 01</div>
+          <h5>选题</h5>
+          <p>从日报挑一条 · 看双平台适配度</p>
+        </div>
+        <div class="flow-step">
+          <span class="flow-arrow">→</span>
+          <div class="fs-num">STEP 02</div>
+          <h5>核心素材</h5>
+          <p>先拍完整 B 站长视频 · 留 3-5 段关键画面</p>
+        </div>
+        <div class="flow-step">
+          <span class="flow-arrow">→</span>
+          <div class="fs-num">STEP 03</div>
+          <h5>小红书拆解</h5>
+          <p>从视频截 9 张图 + 重写图文版</p>
+        </div>
+        <div class="flow-step">
+          <span class="flow-arrow">→</span>
+          <div class="fs-num">STEP 04</div>
+          <h5>双平台发布</h5>
+          <p>B 站晚 19:00 · 小红书次日中 12:00</p>
+        </div>
+      </div>
+
+      <div class="topic-card" style="margin-top:6px">
+        <h3 class="topic-title" style="font-size:17px">一份选题双平台适配性速查</h3>
+        <p class="topic-signal" style="margin-top:10px">深度类（T03 / T08 / C1 / C2）→ B 站长视频主战场，小红书做图文精简版。工具类（T01 / T04）→ 双平台都强，优先发。规则类（T05）→ 小红书主战场，B 站做视频版解读。方法论类（T07 / T09）→ 双平台都强。创意类（C1 / C2）→ 视频主战场。</p>
+      </div>
+    </section>
+
+    <!-- 行动建议 -->
+    <section id="action">
+      <h2 class="section-title"><span class="s-icon">08</span>本周行动建议</h2>
+      <p class="section-sub">按紧迫度排列 · 今天能拍什么、本周该拍什么、本月该搭什么</p>
+
+      <div class="action-list">
+        <div class="action-row head">
+          <div>序号</div>
+          <div>选题</div>
+          <div class="arr">紧迫度</div>
+          <div class="win">窗口</div>
+        </div>
+        <div class="action-row">
+          <div class="pri p1">P1</div>
+          <div>1. UPDream 全网首测（视频 + 笔记同步发）</div>
+          <div class="arr">立刻</div>
+          <div class="win">7-10 天</div>
+        </div>
+        <div class="action-row">
+          <div class="pri p1">P1</div>
+          <div>2. 小红书 AI 限流 9 个安全姿势（图文先发）</div>
+          <div class="arr">24 小时内</div>
+          <div class="win">3-6 个月</div>
+        </div>
+        <div class="action-row">
+          <div class="pri p1">P1</div>
+          <div>3. 漫剧分成逆向拆解（视频深度）</div>
+          <div class="arr">72 小时内</div>
+          <div class="win">6-12 个月</div>
+        </div>
+        <div class="action-row">
+          <div class="pri p2">P2</div>
+          <div>4. AI 漫剧 0 成本 SOP（开始 8 天跑通）</div>
+          <div class="arr">本周启动</div>
+          <div class="win">6 个月+</div>
+        </div>
+        <div class="action-row">
+          <div class="pri p2">P2</div>
+          <div>5. AI Agent 三道坎（视频深度）</div>
+          <div class="arr">本周内</div>
+          <div class="win">12 个月+</div>
+        </div>
+        <div class="action-row">
+          <div class="pri p2">P2</div>
+          <div>6. 16 大模型场景化选型（图文速出）</div>
+          <div class="arr">48 小时内</div>
+          <div class="win">2-3 个月</div>
+        </div>
+        <div class="action-row">
+          <div class="pri p2">P2</div>
+          <div>7. AI 副业三条路径账本（图文拆解）</div>
+          <div class="arr">本周内</div>
+          <div class="win">6-12 个月</div>
+        </div>
+        <div class="action-row">
+          <div class="pri p2">P2</div>
+          <div>8. 0 成本起号一周实测（启动 Vlog）</div>
+          <div class="arr">本周启动</div>
+          <div class="win">6 个月+</div>
+        </div>
+        <div class="action-row">
+          <div class="pri p2">P2</div>
+          <div>9. AI 工具测评反套路方法论（图文）</div>
+          <div class="arr">48 小时内</div>
+          <div class="win">6-12 个月</div>
+        </div>
+        <div class="action-row">
+          <div class="pri p3">P3</div>
+          <div>10. 12 个月 AI 学习路线图（系列化第一期）</div>
+          <div class="arr">本月</div>
+          <div class="win">12 个月+</div>
+        </div>
+        <div class="action-row">
+          <div class="pri p3">P3</div>
+          <div>11. 春季 AI 大事件盘点（视频）</div>
+          <div class="arr">月底前</div>
+          <div class="win">6 个月+</div>
+        </div>
+        <div class="action-row">
+          <div class="pri p3">P3</div>
+          <div>12. AI 数据图鉴 14 图表（系列化数据资产）</div>
+          <div class="arr">本月</div>
+          <div class="win">12 个月+</div>
+        </div>
+      </div>
+
+      <div class="strategy-line">
+        <strong>一句话策略：</strong>本周用 P1 三条（UPDream / 限流 / 分成拆解）卡位短期红利；同时启动 P2 中的 0 成本实测 + Agent 三道坎两条深度内容；P3 三条（路线图 / 春季回顾 / 数据图鉴）排进本月日历，做长期内容资产。本周目标 = 1 条 P1 视频 + 1 条 P1 图文 + 1 条 P2 启动 + 1 条 P2 视频。
+      </div>
+    </section>
+
+    <footer>
+      AI 趋势日报 · 2026-06-24 · Solo<br>
+      8 轮搜索 · B 站 + 小红书 · 数据基于飞瓜数据 / videoseek / 平台公开数据 / 36 氪 / 搜狐财经 / 知乎<br>
+      提示词独立可运行 · 复制粘贴即可开始创作
+    </footer>
+  </main>
+</div>
+
+<script>
+  function switchTab(btn, targetId){
+    const tabs = btn.parentElement.querySelectorAll('.prompt-tab');
+    tabs.forEach(t=>t.classList.remove('active'));
+    btn.classList.add('active');
+    const card = btn.closest('.topic-card');
+    const contents = card.querySelectorAll('.prompt-content');
+    contents.forEach(c=>c.classList.remove('active'));
+    document.getElementById(targetId).classList.add('active');
+  }
+  function copyText(btn){
+    const content = btn.parentElement.innerText.replace('复制','').trim();
+    navigator.clipboard.writeText(content).then(()=>{
+      const orig = btn.textContent;
+      btn.textContent = '已复制';
+      setTimeout(()=>btn.textContent=orig, 1200);
+    });
+  }
+  // 滚动高亮
+  const links = document.querySelectorAll('.nav-list a');
+  const sections = document.querySelectorAll('main section');
+  window.addEventListener('scroll',()=>{
+    let cur='';
+    sections.forEach(s=>{
+      if(window.scrollY >= s.offsetTop - 100) cur='#'+s.id;
+    });
+    links.forEach(l=>{
+      l.classList.toggle('active', l.getAttribute('href')===cur);
+    });
+  });
+  links.forEach(l=>{
+    l.addEventListener('click',e=>{
+      e.preventDefault();
+      const t=document.querySelector(l.getAttribute('href'));
+      if(t) window.scrollTo({top:t.offsetTop-20, behavior:'smooth'});
+    });
+  });
+</script>
+</body>
+</html>

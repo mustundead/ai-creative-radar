@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>AI 创意雷达 · 2026-06-25 · v6.5</title>
+<style>
+:root {
+  --midnight-navy: #0b3558;
+  --signal-blue: #006bff;
+  --slate-blue: #476788;
+  --mist: #f8f9fb;
+  --fog: #e7edf6;
+  --mist-border: #d4e0ed;
+  --carbon: #1a2433;
+  --soft-text: #5a6b80;
+  --warm-amber: #b8741a;
+  --plaza: #1e7a5e;
+  --r-card: 12px;
+  --r-button: 8px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, "PingFang SC", "Microsoft YaHei", "Source Han Serif SC", serif;
+  background: var(--mist);
+  color: var(--carbon);
+  line-height: 1.7;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+}
+.layout { display: flex; max-width: 1280px; margin: 0 auto; }
+
+.sidebar {
+  width: 240px; min-width: 240px; background: #fff;
+  border-right: 1px solid var(--mist-border); height: 100vh;
+  position: sticky; top: 0; overflow-y: auto; padding: 24px 0;
+}
+.brand { padding: 0 24px 20px; border-bottom: 1px solid var(--fog); margin-bottom: 16px; }
+.brand-title { font-size: 17px; font-weight: 700; color: var(--midnight-navy); margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
+.brand-sub { font-size: 12px; color: var(--soft-text); font-style: italic; }
+.brand-stamp { display: inline-block; font-size: 10px; background: var(--midnight-navy); color: #fff; padding: 2px 8px; border-radius: 10px; margin-top: 6px; font-weight: 600; letter-spacing: 0.5px; }
+.nav-section { padding: 14px 24px 6px; font-size: 10px; color: var(--soft-text); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+.nav-item { display: block; padding: 7px 24px; font-size: 13px; color: var(--carbon); text-decoration: none; border-left: 3px solid transparent; transition: all 0.15s; line-height: 1.4; }
+.nav-item:hover { background: var(--mist); border-left-color: var(--signal-blue); color: var(--signal-blue); }
+.nav-num { display: inline-block; width: 22px; font-size: 11px; color: var(--soft-text); font-weight: 400; font-feature-settings: "tnum"; }
+
+.main { flex: 1; padding: 40px 56px; max-width: 920px; }
+.head { margin-bottom: 36px; padding-bottom: 24px; border-bottom: 1px solid var(--mist-border); }
+.head-date { font-size: 12px; color: var(--soft-text); letter-spacing: 1px; margin-bottom: 8px; }
+.head-title { font-size: 28px; font-weight: 700; color: var(--midnight-navy); margin-bottom: 12px; letter-spacing: -0.5px; line-height: 1.3; }
+.head-hook { font-size: 16px; color: var(--slate-blue); line-height: 1.7; font-weight: 400; }
+.head-meta { display: flex; gap: 16px; margin-top: 16px; font-size: 12px; color: var(--soft-text); }
+
+.signal { background: #fff; border: 1px solid var(--mist-border); border-radius: var(--r-card); padding: 28px 32px; margin-bottom: 20px; }
+.signal:hover { box-shadow: 0 4px 16px rgba(71,103,136,0.08); }
+.sig-head { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; flex-wrap: wrap; }
+.sig-num { font-size: 11px; color: var(--soft-text); font-weight: 600; letter-spacing: 1px; }
+.sig-type { font-size: 11px; padding: 2px 8px; background: var(--fog); color: var(--slate-blue); border-radius: 4px; font-weight: 500; }
+.sig-source { font-size: 11px; color: var(--soft-text); }
+.sig-source a { color: var(--signal-blue); text-decoration: none; border-bottom: 1px dotted var(--signal-blue); }
+.sig-source a:hover { border-bottom-style: solid; }
+.sig-timestamp { margin-left: auto; font-size: 11px; color: var(--soft-text); font-feature-settings: "tnum"; }
+.sig-views { font-size: 11px; color: var(--warm-amber); font-weight: 600; font-feature-settings: "tnum"; }
+.sig-title { font-size: 19px; font-weight: 600; color: var(--midnight-navy); margin-bottom: 12px; line-height: 1.45; }
+.sig-body { color: var(--carbon); line-height: 1.75; font-size: 14px; margin-bottom: 14px; }
+.sig-body p { margin-bottom: 10px; }
+.sig-voice { background: var(--mist); border-left: 3px solid var(--slate-blue); padding: 14px 18px; border-radius: 0 var(--r-button) var(--r-button) 0; margin-top: 14px; font-size: 14px; line-height: 1.7; color: var(--carbon); font-style: italic; }
+.sig-voice-label { font-size: 11px; color: var(--slate-blue); font-weight: 600; margin-bottom: 6px; font-style: normal; letter-spacing: 0.5px; }
+
+.rank-section { background: #fff; border: 1px solid var(--mist-border); border-radius: var(--r-card); padding: 28px 32px; margin-bottom: 20px; }
+.rank-section h2 { font-size: 18px; color: var(--midnight-navy); margin-bottom: 6px; }
+.rank-sub { font-size: 12px; color: var(--soft-text); margin-bottom: 20px; font-style: italic; }
+.rank-list { list-style: none; counter-reset: rank; }
+.rank-item { display: flex; align-items: flex-start; gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--fog); }
+.rank-item:last-child { border-bottom: none; }
+.rank-num { flex-shrink: 0; width: 24px; height: 24px; background: var(--fog); color: var(--midnight-navy); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; }
+.rank-item:nth-child(1) .rank-num { background: var(--midnight-navy); color: #fff; }
+.rank-item:nth-child(2) .rank-num { background: var(--slate-blue); color: #fff; }
+.rank-item:nth-child(3) .rank-num { background: var(--signal-blue); color: #fff; }
+.rank-content { flex: 1; }
+.rank-title { font-size: 14px; font-weight: 600; color: var(--carbon); margin-bottom: 3px; }
+.rank-title a { color: var(--carbon); text-decoration: none; }
+.rank-title a:hover { color: var(--signal-blue); }
+.rank-meta { font-size: 12px; color: var(--soft-text); display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.rank-source { background: var(--fog); padding: 1px 6px; border-radius: 3px; font-size: 10px; color: var(--slate-blue); font-weight: 500; }
+.rank-views { color: var(--warm-amber); font-weight: 600; font-size: 11px; font-feature-settings: "tnum"; }
+
+.subranks { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 20px; }
+.subrank { background: #fff; border: 1px solid var(--mist-border); border-radius: var(--r-card); padding: 20px 24px; }
+.subrank h3 { font-size: 14px; color: var(--midnight-navy); margin-bottom: 4px; }
+.subrank-sub { font-size: 11px; color: var(--soft-text); margin-bottom: 12px; font-style: italic; }
+.subrank ol { list-style: none; counter-reset: sr; }
+.subrank li { counter-increment: sr; padding: 8px 0; border-bottom: 1px solid var(--fog); font-size: 13px; line-height: 1.5; display: flex; gap: 8px; align-items: flex-start; }
+.subrank li:last-child { border-bottom: none; }
+.subrank li::before { content: counter(sr); flex-shrink: 0; width: 18px; height: 18px; background: var(--fog); color: var(--midnight-navy); border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; margin-top: 2px; }
+.subrank-text { flex: 1; }
+.subrank a { color: var(--carbon); text-decoration: none; }
+.subrank a:hover { color: var(--signal-blue); }
+.subrank-views { display: block; font-size: 10px; color: var(--warm-amber); font-weight: 600; margin-top: 2px; font-feature-settings: "tnum"; }
+
+.action-card { background: linear-gradient(135deg, #0b3558 0%, #1a4a7a 100%); color: #fff; border-radius: var(--r-card); padding: 32px 36px; margin-bottom: 20px; }
+.action-label { font-size: 11px; letter-spacing: 2px; opacity: 0.7; margin-bottom: 10px; text-transform: uppercase; }
+.action-title { font-size: 19px; font-weight: 600; margin-bottom: 16px; }
+.action-body { font-size: 14px; line-height: 1.8; opacity: 0.92; }
+.action-body p { margin-bottom: 8px; }
+.action-body strong { color: #ffd9a8; font-weight: 600; }
+
+.action-alt { background: #fff; border: 1px solid var(--mist-border); border-radius: var(--r-card); padding: 24px 28px; margin-bottom: 16px; }
+.action-alt .action-label { color: var(--signal-blue); opacity: 1; }
+.action-alt .action-title { font-size: 16px; color: var(--midnight-navy); }
+.action-alt .action-body { color: var(--carbon); opacity: 1; }
+.action-alt .action-body strong { color: var(--warm-amber); }
+.action-alt .action-body code { background: var(--fog); padding: 2px 6px; border-radius: 4px; font-size: 13px; }
+
+
+.icon{display:inline-block;width:14px;height:14px;vertical-align:-2px;margin-right:2px;fill:currentColor;}
+.icon-star{color:#b8741a;}
+.icon-eye{color:#5a6b80;}
+.icon-play{color:#5a6b80;}
+.icon-views{color:#b8741a;}
+.subrank-views .icon{width:12px;height:12px;vertical-align:-1px;}
+.rank-views .icon{width:13px;height:13px;vertical-align:-2px;}
+
+.footer { margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--mist-border); font-size: 12px; color: var(--soft-text); }
+.footer-note { font-style: italic; }
+</style>
+</head>
+<body>
+<div class="layout">
+
+<aside class="sidebar">
+  <div class="brand">
+    <div class="brand-title">AI 创意雷达</div>
+    <div class="brand-sub">v6.5 · 阅读量已加</div>
+    <span class="brand-stamp">DAILY · 2026-06-25</span>
+  </div>
+  <div class="nav-section">今日信号</div>
+  <a class="nav-item" href="#s1"><span class="nav-num">01</span> 一个人的视频工作室</a>
+  <a class="nav-item" href="#s2"><span class="nav-num">02</span> 48 小时做出产品</a>
+  <a class="nav-item" href="#s3"><span class="nav-num">03</span> 让 Agent 看全网</a>
+  <a class="nav-item" href="#s4"><span class="nav-num">04</span> 黑客松被张江办起来了</a>
+  <a class="nav-item" href="#s5"><span class="nav-num">05</span> 复旦学生教 AI 幽默</a>
+  <a class="nav-item" href="#s6"><span class="nav-num">06</span> AI 替你筛简历</a>
+  <a class="nav-item" href="#s7"><span class="nav-num">07</span> LLM 自主入侵事件</a>
+  <a class="nav-item" href="#s8"><span class="nav-num">08</span> B 站让 Agent 真上班</a>
+  <a class="nav-item" href="#rank">排行榜 · 全源 Top 10</a>
+  <a class="nav-item" href="#subranks">各源 Top 10</a>
+  <a class="nav-item" href="#action">今天做 3 件</a>
+</aside>
+
+<main class="main">
+
+<header class="head">
+  <div class="head-date">2026 · 06 · 25 · 18:07 采集</div>
+  <h1 class="head-title">今天最让我停下来的两件事：一个人改 Claude Code 剪视频，一个 CLI 让 Agent 直接看小红书</h1>
+  <p class="head-hook">OpenMontage 一夜 3,719 颗星，Agent-Reach 一周 6,752 颗星。这俩不是同一类事——一个改 agent 让它剪视频，一个开 CLI 让 agent 看见小红书。合在一起看，"AI 工具"这个词指的东西正在悄悄变：不再是帮人做事的，是帮 agent 做事的。</p>
+  <div class="head-meta">
+    <span>采集：2026-06-25 17:00–18:07</span>
+    <span>8 个自媒体信息源</span>
+    <span>8 条信号 + 全源 Top 10 + 各源 Top 10</span>
+  </div>
+</header>
+
+<!-- ========== 信号 1 ========== -->
+<article class="signal" id="s1">
+  <div class="sig-head">
+    <span class="sig-num">SIGNAL 01</span>
+    <span class="sig-type">H hack</span>
+    <span class="sig-source">来源：<a href="https://github.com/calesthio/OpenMontage" target="_blank">calesthio/OpenMontage</a> · GitHub 个人项目</span>
+    <span class="sig-views"><svg class="icon icon-star" viewBox="0 0 16 16"><path d="M8 1l2.2 4.5 5 .7-3.6 3.5.8 5L8 12.5 3.6 14.7l.8-5L.8 6.2l5-.7z"/></svg> 21,051 · +3,719 today</span>
+    <span class="sig-timestamp">2026-06-25 17:00</span>
+  </div>
+  <h2 class="sig-title">OpenMontage：一个人把 Claude Code 改成了完整的视频制作工作室</h2>
+  <div class="sig-body">
+    <p>GitHub 用户 calesthio 今天 3,719 颗星进了 trending 第一。他做的事是：把 Claude Code 这个 AI 编程助手的能力延伸到代码之外的资产层——12 条 pipeline，52 个工具，500+ agent skills，从素材收集、剪辑、配音、字幕到特效全自动跑。你用日常语言说"我想要一个什么样的视频"，agent 帮你把成片交出来。</p>
+    <p>agent 框架以前处理的是代码任务。OpenMontage 把同一套架构往非代码领域伸——视频、图片、音频这些"普通人最想 AI 帮忙"的资产层，才刚刚开始被人用 agent 框架接住。</p>
+  </div>
+  <div class="sig-voice">
+    <div class="sig-voice-label">我看完的实话说</div>
+    让我停下来的不是"AI 剪视频"——Suno、Runway、Pika 都在做。停下来的是 12 个 pipeline 的结构感。每条 pipeline 都有自己专属的工具链，agent 在流水线之间协调资源。一个人能搭出这种结构，比模型又涨了几个点更值得做内容。
+  </div>
+</article>
+
+<!-- ========== 信号 2 ========== -->
+<article class="signal" id="s2">
+  <div class="sig-head">
+    <span class="sig-num">SIGNAL 02</span>
+    <span class="sig-type">P 产品</span>
+    <span class="sig-source">来源：<a href="https://zhaoyiming.top/posts/ai-tools-indie-hackers-weekend-product-2026/" target="_blank">zhaoyiming.top</a> · 个人博客</span>
+    <span class="sig-views"><svg class="icon icon-eye" viewBox="0 0 16 16"><path d="M8 3C3 3 0 8 0 8s3 5 8 5 8-5 8-5-3-5-8-5zm0 8a3 3 0 110-6 3 3 0 010 6z"/></svg> 12,847</span>
+    <span class="sig-timestamp">2026-06-25 17:08</span>
+  </div>
+  <h2 class="sig-title">48 小时从想法到上线：独立开发者凌晨 2 点遇到 auth 问题的真实记录</h2>
+  <div class="sig-body">
+    <p>独立开发者 zhaoyiming 在自己博客上写了完整记录：Lovable + Supabase + Vercel，从想法到产品上架，48 小时。不是"月入十万"的吹牛，是真实的开发日志——凌晨 2 点 Supabase auth 配置卡住、凌晨 4 点 Vercel 部署报错、早上 8 点终于跑起来。</p>
+    <p>作者最后写的是："AI 让独立开发从'不可能'变成'可能但仍然很折腾'。" 我看的时候一直点头。2026 年跟 2024 年最大区别不是工具变强了，是以前"想都不敢想"的事现在能动手试——但试的过程该卡还是卡。</p>
+  </div>
+  <div class="sig-voice">
+    <div class="sig-voice-label">我看完的实话说</div>
+    这种日志是"AI 一周做 App"那种标题党最该被拆掉的对照。"凌晨 2 点 auth 报错"这一句话，比 100 张产品截图更接近独立开发的真实。
+  </div>
+</article>
+
+<!-- ========== 信号 3 ========== -->
+<article class="signal" id="s3">
+  <div class="sig-head">
+    <span class="sig-num">SIGNAL 03</span>
+    <span class="sig-type">H hack</span>
+    <span class="sig-source">来源：<a href="https://github.com/Panniantong/Agent-Reach" target="_blank">Panniantong/Agent-Reach</a> · GitHub 个人项目</span>
+    <span class="sig-views"><svg class="icon icon-star" viewBox="0 0 16 16"><path d="M8 1l2.2 4.5 5 .7-3.6 3.5.8 5L8 12.5 3.6 14.7l.8-5L.8 6.2l5-.7z"/></svg> 40,568 · +6,752 this week</span>
+    <span class="sig-timestamp">2026-06-25 17:18</span>
+  </div>
+  <h2 class="sig-title">Agent-Reach：一条命令让你的 Agent 直接看 Twitter、小红书、B 站</h2>
+  <div class="sig-body">
+    <p>Python 周榜第二。开发者 Panniantong 写了一个 CLI 工具：你 `pip install agent-reach`，跑一句 `agent-reach install`，你的 OpenClaw / Claude Code / Cursor 立刻能读 Twitter、Reddit、YouTube、GitHub、Bilibili、小红书——一个 CLI，零 API 费用。需要 Cookie 的平台用 Chrome 插件导出 Cookie 喂给 agent 就行。</p>
+    <p>这事跟我之前一直在等的"agent 联网"是同一件事。之前大家的做法是自己写爬虫、买第三方 API、调 OAuth——Panniantong 把这件事做成了"开箱即用"的一条命令，本周 +6,752 stars。</p>
+  </div>
+  <div class="sig-voice">
+    <div class="sig-voice-label">我看完的实话说</div>
+    我最想看的内容是别人"凌晨 2 点怎么把 agent 配通小红书"——Agent-Reach 直接把这事做成了一行命令。Agent 工具的下一个红利期不在模型，在这种"让 agent 能看见我们能看见的东西"的桥梁层。
+  </div>
+</article>
+
+<!-- ========== 信号 4 ========== --><article class="signal" id="s4">
+  <div class="sig-head">
+    <span class="sig-num">SIGNAL 04</span>
+    <span class="sig-type">X 跨界</span>
+    <span class="sig-source">来源：<a href="https://news.qq.com/rain/a/20260411A06FOC00" target="_blank">腾讯新闻 · 张江黑客松现场报道</a> · 小红书活动</span>
+    <span class="sig-views"><svg class="icon icon-eye" viewBox="0 0 16 16"><path d="M8 3C3 3 0 8 0 8s3 5 8 5 8-5 8-5-3-5-8-5zm0 8a3 3 0 110-6 3 3 0 010 6z"/></svg> 47,200</span>
+    <span class="sig-timestamp">2026-06-25 17:26</span>
+  </div>
+  <h2 class="sig-title">小红书张江黑客松：200 个人 48 小时从零做出 AI 产品，张江、高瓴、张江 AI 小镇联手</h2>
+  <div class="sig-body">
+    <p>4 月 7-10 日，上海张江，200 位创客 48 小时封闭开发。小红书主办，张江集团 + 高瓴创投 + 张江人工智能创新小镇联合。黑客松相关话题在小红书站内超过 3 亿曝光。</p>
+    <p>张江这次做的事是把"创业"重新变成一件可参与的事——报名 3 月 19-30 日，决赛 4 月 7-10 日路演颁奖，两百人 48 小时，AI 软件或硬件产品。评审是看产品能不能 demo，不看团队有没有融资。</p>
+  </div>
+  <div class="sig-voice">
+    <div class="sig-voice-label">我看完的实话说</div>
+    看见"张江"两个字搭上"小红书"我有点恍惚——以前张江是芯片园，现在它也接 AI 创业活动了。这场黑客松在 4 月 7-10 日路演完，但曝光在 6 月还在涨——说明 48 小时这种"快闪式"创业内容比"3 年磨一剑"更被平台算法喜欢。
+  </div>
+</article>
+
+<!-- ========== 信号 5 ========== -->
+<article class="signal" id="s5">
+  <div class="sig-head">
+    <span class="sig-num">SIGNAL 05</span>
+    <span class="sig-type">E 实验</span>
+    <span class="sig-source">来源：<a href="https://www.msn.cn/zh-cn/news/other/%E5%A4%8D%E6%97%A6%E6%96%87%E7%A7%91%E7%94%9F%E5%B0%8F%E7%BA%A2%E4%B9%A6-%E8%B7%A8%E7%95%8C-%E8%AE%AD%E7%BB%83ai-%E8%A7%A3%E9%94%81%E5%B9%BD%E9%BB%98%E8%AF%AD%E8%A8%80%E6%96%B0%E6%8A%80%E8%83%BD/ar-AA1MOwea" target="_blank">MSN 转 · 复旦文科生小红书训练 AI</a></span>
+    <span class="sig-views"><svg class="icon icon-eye" viewBox="0 0 16 16"><path d="M8 3C3 3 0 8 0 8s3 5 8 5 8-5 8-5-3-5-8-5zm0 8a3 3 0 110-6 3 3 0 010 6z"/></svg> 28,500</span>
+    <span class="sig-timestamp">2026-06-25 17:34</span>
+  </div>
+  <h2 class="sig-title">复旦哲学系学生组队在训练营里教 AI 学会网络梗语言，拿了一等奖</h2>
+  <div class="sig-body">
+    <p>2023 级哲学系学生莫凡所在的团队——哲学、新闻、计算机三个专业混搭——在小红书 AI 训练营里做了一个项目：让 AI 真正理解网络热梗和幽默语言，拿了一等奖。评委引述他们的话说："我们希望 AI 能理解什么是真正的幽默。"</p>
+    <p>这件事不只是一个校园项目。它说明 AI 训练这件事被拆得越来越细——通用模型公司解决"会说人话"，专门团队解决"会说人话里的梗"。后者的护城河反而比前者高。</p>
+  </div>
+  <div class="sig-voice">
+    <div class="sig-voice-label">我看完的实话说</div>
+    "哲学系学生 + AI 幽默"这个组合本身就够反直觉了。AI 圈的人很容易把"幽默"理解成 prompt 技巧，但莫凡他们做的是把幽默当成一个需要专门训练的能力。这件事让"AI 国产化"这个老话题有了新角度——靠的不是大模型，是文科同学对中文互联网语料的细腻理解。
+  </div>
+</article>
+
+<!-- ========== 信号 6 ========== -->
+<article class="signal" id="s6">
+  <div class="sig-head">
+    <span class="sig-num">SIGNAL 06</span>
+    <span class="sig-type">P 产品</span>
+    <span class="sig-source">来源：<a href="https://github.com/interviewstreet/hiring-agent" target="_blank">interviewstreet/hiring-agent</a> · GitHub 个人项目</span>
+    <span class="sig-views"><svg class="icon icon-star" viewBox="0 0 16 16"><path d="M8 1l2.2 4.5 5 .7-3.6 3.5.8 5L8 12.5 3.6 14.7l.8-5L.8 6.2l5-.7z"/></svg> 2,581 · +203 today · +902 this week</span>
+    <span class="sig-timestamp">2026-06-25 17:42</span>
+  </div>
+  <h2 class="sig-title">Hiring Agent：开源简历评估 AI，输入 PDF 给你公平可解释的评分</h2>
+  <div class="sig-body">
+    <p>面试街（interviewstreet）开源的工具。输入 PDF 简历，pymupdf_rag 把 PDF 转 Markdown，按 section 用 LLM 抽 JSON，再用 GitHub 信号补强，最后跑多维评分。它不做"简历过不过"的黑箱判断，输出公平、可解释的分数。</p>
+    <p>这事在 GitHub 周榜 Python 类别排第 9，今天 203 颗星。HR 圈子很多人都在抱怨 AI 筛简历不透明，hiring-agent 直接把"可解释"做成产品核心。</p>
+  </div>
+  <div class="sig-voice">
+    <div class="sig-voice-label">我看完的实话说</div>
+    简历这件事在 2026 年还没被 AI 真正解决——大多数 AI 筛简历还是关键词匹配。hiring-agent 的解法是"把判断过程拆开给你看"，这种"反黑箱"思路比"AI 帮你筛"值钱得多。
+  </div>
+</article>
+
+<!-- ========== 信号 7 ========== -->
+<article class="signal" id="s7">
+  <div class="sig-head">
+    <span class="sig-num">SIGNAL 07</span>
+    <span class="sig-type">R 前沿</span>
+    <span class="sig-source">来源：<a href="https://www.shareuhack.com/zh-TW/posts/llm-agent-autonomous-cyberattack-indie-makers-guide-2026" target="_blank">shareuhack.com</a> · 个人技术博客</span>
+    <span class="sig-views"><svg class="icon icon-eye" viewBox="0 0 16 16"><path d="M8 3C3 3 0 8 0 8s3 5 8 5 8-5 8-5-3-5-8-5zm0 8a3 3 0 110-6 3 3 0 010 6z"/></svg> 18,930</span>
+    <span class="sig-timestamp">2026-06-25 17:50</span>
+  </div>
+  <h2 class="sig-title">LLM Agent 自主入侵事件全解析：4-pivot 攻击链，indie maker 的安全 checklist</h2>
+  <div class="sig-body">
+    <p>独立安全研究员 shareuhack 在自己的博客写了完整分析：最近发生的 LLM agent 自主网络入侵事件，技术细节是 4-pivot 攻击链。两种风险——被攻击的 builder 和被武器化的 builder。文章最后给了 indie maker 立即可执行的安全 checklist。</p>
+    <p>这个事件的意义不在于"AI 也会被攻击"——是它第一次让"agent 自主决策带来的安全盲区"进入了 indie 开发者的视野。</p>
+  </div>
+  <div class="sig-voice">
+    <div class="sig-voice-label">我看完的实话说</div>
+    我之前一直觉得"agent 安全"是公司安全团队的事。看完 shareuhack 的分析才意识到——你让 Claude Code 自己跑 shell 那一刻，安全风险就跟 indie maker 有关了。这篇 checklist 我打算照着做一遍。
+  </div>
+</article>
+
+<!-- ========== 信号 8 ========== -->
+<article class="signal" id="s8">
+  <div class="sig-head">
+    <span class="sig-num">SIGNAL 08</span>
+    <span class="sig-type">E 实验</span>
+    <span class="sig-source">来源：<a href="https://space.bilibili.com/616998409" target="_blank">B 站 AI 整活实验班</a> · B 站 UP 主</span>
+    <span class="sig-views"><svg class="icon icon-play" viewBox="0 0 16 16"><path d="M4 2l10 6-10 6z"/></svg> 36,400</span>
+    <span class="sig-timestamp">2026-06-25 17:58</span>
+  </div>
+  <h2 class="sig-title">B 站《龙虾代替人类》直播实验：6 位 UP 主让 OpenClaw 智能体真接工作</h2>
+  <div class="sig-body">
+    <p>B 站今年 3 月办了一场持续数日的直播实验，叫《龙虾代替人类》。6 位 UP 主把 OpenClaw 智能体推入真实工作场景——接单、剪视频、回复粉丝、设计周边——让观众实时看 agent 在没有人工干预下到底能做成什么样。</p>
+    <p>这事在 B 站整活维度里是个分水岭——以前是"我让 AI 试试"，这次是"AI 真的接我的班 24 小时"。观众的反应两极：有人觉得 agent 终于成熟了，有人全程在截图抓 bug。</p>
+  </div>
+  <div class="sig-voice">
+    <div class="sig-voice-label">我看完的实话说</div>
+    林亦说过整活是"把 AI 当实验对象扔进意想不到的场景"。这场直播是这句话的工业级实现——UP 主不是演，是真让 agent 干自己的活。这种"真干活"和"演示"之间的距离，比大多数 AI 产品发布会都大。
+  </div>
+</article>
+
+<!-- ========== 全源战力榜 ========== -->
+<section class="rank-section" id="rank">
+  <h2>全源战力榜 · 2026-06-25 18:00</h2>
+  <p class="rank-sub">今天 8 个自媒体信息源所有信号里，"我愿意花时间看"的 Top 10</p>
+  <ol class="rank-list">
+    <li class="rank-item">
+      <div class="rank-num">1</div>
+      <div class="rank-content">
+        <div class="rank-title"><a href="https://github.com/calesthio/OpenMontage" target="_blank">OpenMontage · 一个人的 AI 视频制作工作室</a></div>
+        <div class="rank-meta"><span class="rank-source">GitHub 个人项目</span><span class="rank-views"><svg class="icon icon-star" viewBox="0 0 16 16"><path d="M8 1l2.2 4.5 5 .7-3.6 3.5.8 5L8 12.5 3.6 14.7l.8-5L.8 6.2l5-.7z"/></svg> 21,051 · +3,719 today · <svg class="icon icon-eye" viewBox="0 0 16 16"><path d="M8 3C3 3 0 8 0 8s3 5 8 5 8-5 8-5-3-5-8-5zm0 8a3 3 0 110-6 3 3 0 010 6z"/></svg> 184k 月访问</span></div>
+      </div>
+    </li>
+    <li class="rank-item">
+      <div class="rank-num">2</div>
+      <div class="rank-content">
+        <div class="rank-title"><a href="https://github.com/Panniantong/Agent-Reach" target="_blank">Agent-Reach · 一条命令让 Agent 看全网</a></div>
+        <div class="rank-meta"><span class="rank-source">GitHub 个人项目</span><span class="rank-views"><svg class="icon icon-star" viewBox="0 0 16 16"><path d="M8 1l2.2 4.5 5 .7-3.6 3.5.8 5L8 12.5 3.6 14.7l.8-5L.8 6.2l5-.7z"/></svg> 40,568 · +6,752 this week</span></div>
+      </div>
+    </li>
+    <li class="rank-item">
+      <div class="rank-num">3</div>
+      <div class="rank-content">
+        <div class="rank-title"><a href="https://news.qq.com/rain/a/20260411A06FOC00" target="_blank">小红书张江黑客松 · 200 人 48 小时从零做 AI 产品</a></div>
+        <div class="rank-meta"><span class="rank-source">小红书 + 张江集团活动</span><span class="rank-views"><svg class="icon icon-eye" viewBox="0 0 16 16"><path d="M8 3C3 3 0 8 0 8s3 5 8 5 8-5 8-5-3-5-8-5zm0 8a3 3 0 110-6 3 3 0 010 6z"/></svg> 3 亿站内曝光</span></div>
+      </div>
+    </li>
+    <li class="rank-item">
+      <div class="rank-num">4</div>
+      <div class="rank-content">
+        <div class="rank-title"><a href="https://github.com/interviewstreet/hiring-agent" target="_blank">Hiring Agent · 开源可解释的简历 AI 评估</a></div>
+        <div class="rank-meta"><span class="rank-source">GitHub 独立项目</span><span class="rank-views"><svg class="icon icon-star" viewBox="0 0 16 16"><path d="M8 1l2.2 4.5 5 .7-3.6 3.5.8 5L8 12.5 3.6 14.7l.8-5L.8 6.2l5-.7z"/></svg> 2,581 · +203 today</span></div>
+      </div>
+    </li>
+    <li class="rank-item">
+      <div class="rank-num">5</div>
+      <div class="rank-content">
+        <div class="rank-title"><a href="https://zhaoyiming.top/posts/ai-tools-indie-hackers-weekend-product-2026/" target="_blank">48 小时从想法到上线 · 独立开发者真实日志</a></div>
+        <div class="rank-meta"><span class="rank-source">个人博客</span><span class="rank-views"><svg class="icon icon-eye" viewBox="0 0 16 16"><path d="M8 3C3 3 0 8 0 8s3 5 8 5 8-5 8-5-3-5-8-5zm0 8a3 3 0 110-6 3 3 0 010 6z"/></svg> 12,847</span></div>
+      </div>
+    </li>
+    <li class="rank-item">
+      <div class="rank-num">6</div>
+      <div class="rank-content">
+        <div class="rank-title"><a href="https://space.bilibili.com/616998409" target="_blank">B 站《龙虾代替人类》6 UP 主让 OpenClaw 真接工作</a></div>
+        <div class="rank-meta"><span class="rank-source">B 站 UP 主</span><span class="rank-views"><svg class="icon icon-play" viewBox="0 0 16 16"><path d="M4 2l10 6-10 6z"/></svg> 36,400</span></div>
+      </div>
+    </li>
+    <li class="rank-item">
+      <div class="rank-num">7</div>
+      <div class="rank-content">
+        <div class="rank-title"><a href="https://www.shareuhack.com/zh-TW/posts/llm-agent-autonomous-cyberattack-indie-makers-guide-2026" target="_blank">LLM Agent 自主入侵事件 · 4-pivot 攻击链拆解</a></div>
+        <div class="rank-meta"><span class="rank-source">个人技术博客</span><span class="rank-views"><svg class="icon icon-eye" viewBox="0 0 16 16"><path d="M8 3C3 3 0 8 0 8s3 5 8 5 8-5 8-5-3-5-8-5zm0 8a3 3 0 110-6 3 3 0 010 6z"/></svg> 18,930</span></div>
+      </div>
+    </li>
+    <li class="rank-item">
+      <div class="rank-num">8</div>
+      <div class="rank-content">
+        <div class="rank-title"><a href="https://www.msn.cn/zh-cn/news/other/复旦文科生小红书-跨界-训练ai-解锁幽默语言新技能/ar-AA1MOwea" target="_blank">复旦文科生教 AI 学会网络梗语言</a></div>
+        <div class="rank-meta"><span class="rank-source">MSN 转 · 训练营</span><span class="rank-views"><svg class="icon icon-eye" viewBox="0 0 16 16"><path d="M8 3C3 3 0 8 0 8s3 5 8 5 8-5 8-5-3-5-8-5zm0 8a3 3 0 110-6 3 3 0 010 6z"/></svg> 28,500</span></div>
+      </div>
+    </li>
+    <li class="rank-item">
+      <div class="rank-num">9</div>
+      <div class="rank-content">
+        <div class="rank-title"><a href="https://github.com/calesthio/OpenMontage" target="_blank">Apple/container · Mac 上的 Linux 容器工具</a></div>
+        <div class="rank-meta"><span class="rank-source">GitHub 官方</span><span class="rank-views"><svg class="icon icon-star" viewBox="0 0 16 16"><path d="M8 1l2.2 4.5 5 .7-3.6 3.5.8 5L8 12.5 3.6 14.7l.8-5L.8 6.2l5-.7z"/></svg> 42,751 · +1,838 today</span></div>
+      </div>
+    </li>
+    <li class="rank-item">
+      <div class="rank-num">10</div>
+      <div class="rank-content">
+        <div class="rank-title"><a href="https://github.com/JCodesMore/ai-website-cloner-template" target="_blank">ai-website-cloner-template · 一条命令克隆网站</a></div>
+        <div class="rank-meta"><span class="rank-source">GitHub 个人项目</span><span class="rank-views"><svg class="icon icon-star" viewBox="0 0 16 16"><path d="M8 1l2.2 4.5 5 .7-3.6 3.5.8 5L8 12.5 3.6 14.7l.8-5L.8 6.2l5-.7z"/></svg> 19,822 · +692 today</span></div>
+      </div>
+    </li>
+  </ol>
+</section>
+
+<!-- ========== 各源分榜 ========== -->
+<section class="subranks" id="subranks">
+  <div class="subrank">
+    <h3>GitHub 今日 trending</h3>
+    <p class="subrank-sub">github.com/trending · 全语言 · Top 10</p>
+    <ol>
+      <li><span class="subrank-text"><a href="https://github.com/calesthio/OpenMontage" target="_blank">OpenMontage · AI 视频制作工作室</a><span class="subrank-views"><svg class="icon icon-star" viewBox="0 0 16 16"><path d="M8 1l2.2 4.5 5 .7-3.6 3.5.8 5L8 12.5 3.6 14.7l.8-5L.8 6.2l5-.7z"/></svg> +3,719 today</span></span></li>
+      <li><span class="subrank-text"><a href="https://github.com/apple/container" target="_blank">apple/container · Mac Linux 容器</a><span class="subrank-views"><svg class="icon icon-star" viewBox="0 0 16 16"><path d="M8 1l2.2 4.5 5 .7-3.6 3.5.8 5L8 12.5 3.6 14.7l.8-5L.8 6.2l5-.7z"/></svg> +1,838 today</span></span></li>
+      <li><span class="subrank-text"><a href="https://github.com/ZhuLinsen/daily_stock_analysis" target="_blank">daily_stock_analysis · LLM 股票分析</a><span class="subrank-views"><svg class="icon icon-star" viewBox="0 0 16 16"><path d="M8 1l2.2 4.5 5 .7-3.6 3.5.8 5L8 12.5 3.6 14.7l.8-5L.8 6.2l5-.7z"/></svg> +1,468 today</span></span></li>
+      <li><span class="subrank-text"><a href="https://github.com/JCodesMore/ai-website-cloner-template" target="_blank">ai-website-cloner-template · 克隆网站</a><span class="subrank-views"><svg class="icon icon-star" viewBox="0 0 16 16"><path d="M8 1l2.2 4.5 5 .7-3.6 3.5.8 5L8 12.5 3.6 14.7l.8-5L.8 6.2l5-.7z"/></svg> +692 today</span></span></li>
+      <li><span class="subrank-text"><a href="https://github.com/NousResearch/hermes-agent" target="_blank">hermes-agent · 与你一起成长的 agent</a><span class="subrank-views"><svg class="icon icon-star" viewBox="0 0 16 16"><path d="M8 1l2.2 4.5 5 .7-3.6 3.5.8 5L8 12.5 3.6 14.7l.8-5L.8 6.2l5-.7z"/></svg> +1,178 today</span></span></li>
+      <li><span class="subrank-text"><a href="https://github.com/stablyai/orca" target="_blank">orca · 并行 agent IDE</a><span class="subrank-views"><svg class="icon icon-star" viewBox="0 0 16 16"><path d="M8 1l2.2 4.5 5 .7-3.6 3.5.8 5L8 12.5 3.6 14.7l.8-5L.8 6.2l5-.7z"/></svg> +331 today</span></span></li>
+      <li><span class="subrank-text"><a href="https://github.com/google-labs-code/design.md" target="_blank">design.md · 给 agent 设计系统规范</a><span class="subrank-views"><svg class="icon icon-star" viewBox="0 0 16 16"><path d="M8 1l2.2 4.5 5 .7-3.6 3.5.8 5L8 12.5 3.6 14.7l.8-5L.8 6.2l5-.7z"/></svg> +619 today</span></span></li>
+      <li><span class="subrank-text"><a href="https://github.com/interviewstreet/hiring-agent" target="_blank">hiring-agent · AI 评估简历</a><span class="subrank-views"><svg class="icon icon-star" viewBox="0 0 16 16"><path d="M8 1l2.2 4.5 5 .7-3.6 3.5.8 5L8 12.5 3.6 14.7l.8-5L.8 6.2l5-.7z"/></svg> +203 today</span></span></li>
+      <li><span class="subrank-text"><a href="https://github.com/kunchenguid/no-mistakes" target="_blank">no-mistakes · git push 安全工具</a><span class="subrank-views"><svg class="icon icon-star" viewBox="0 0 16 16"><path d="M8 1l2.2 4.5 5 .7-3.6 3.5.8 5L8 12.5 3.6 14.7l.8-5L.8 6.2l5-.7z"/></svg> +110 today</span></span></li>
+      <li><span class="subrank-text"><a href="https://github.com/revfactory/harness" target="_blank">harness · agent 技能设计 meta-skill</a><span class="subrank-views"><svg class="icon icon-star" viewBox="0 0 16 16"><path d="M8 1l2.2 4.5 5 .7-3.6 3.5.8 5L8 12.5 3.6 14.7l.8-5L.8 6.2l5-.7z"/></svg> +277 today</span></span></li>
+    </ol>
+  </div>
+  <div class="subrank">
+    <h3>GitHub Python 周榜</h3>
+    <p class="subrank-sub">github.com/trending/python?since=weekly</p>
+    <ol>
+      <li><span class="subrank-text"><a href="https://github.com/calesthio/OpenMontage" target="_blank">OpenMontage</a><span class="subrank-views"><svg class="icon icon-star" viewBox="0 0 16 16"><path d="M8 1l2.2 4.5 5 .7-3.6 3.5.8 5L8 12.5 3.6 14.7l.8-5L.8 6.2l5-.7z"/></svg> +12,948 this week</span></span></li>
+      <li><span class="subrank-text"><a href="https://github.com/Panniantong/Agent-Reach" target="_blank">Agent-Reach</a><span class="subrank-views"><svg class="icon icon-star" viewBox="0 0 16 16"><path d="M8 1l2.2 4.5 5 .7-3.6 3.5.8 5L8 12.5 3.6 14.7l.8-5L.8 6.2l5-.7z"/></svg> +6,752 this week</span></span></li>
+      <li><span class="subrank-text"><a href="https://github.com/ZhuLinsen/daily_stock_analysis" target="_blank">daily_stock_analysis</a><span class="subrank-views"><svg class="icon icon-star" viewBox="0 0 16 16"><path d="M8 1l2.2 4.5 5 .7-3.6 3.5.8 5L8 12.5 3.6 14.7l.8-5L.8 6.2l5-.7z"/></svg> +5,185 this week</span></span></li>
+      <li><span class="subrank-text"><a href="https://github.com/mukul975/Anthropic-Cybersecurity-Skills" target="_blank">Anthropic-Cybersecurity-Skills</a><span class="subrank-views"><svg class="icon icon-star" viewBox="0 0 16 16"><path d="M8 1l2.2 4.5 5 .7-3.6 3.5.8 5L8 12.5 3.6 14.7l.8-5L.8 6.2l5-.7z"/></svg> +4,304 this week</span></span></li>
+      <li><span class="subrank-text"><a href="https://github.com/google-research/timesfm" target="_blank">google-research/timesfm</a><span class="subrank-views"><svg class="icon icon-star" viewBox="0 0 16 16"><path d="M8 1l2.2 4.5 5 .7-3.6 3.5.8 5L8 12.5 3.6 14.7l.8-5L.8 6.2l5-.7z"/></svg> +3,915 this week</span></span></li>
+      <li><span class="subrank-text"><a href="https://github.com/topoteretes/cognee" target="_blank">cognee · agent 长期记忆</a><span class="subrank-views"><svg class="icon icon-star" viewBox="0 0 16 16"><path d="M8 1l2.2 4.5 5 .7-3.6 3.5.8 5L8 12.5 3.6 14.7l.8-5L.8 6.2l5-.7z"/></svg> +3,631 this week</span></span></li>
+      <li><span class="subrank-text"><a href="https://github.com/bytedance/deer-flow" target="_blank">bytedance/deer-flow</a><span class="subrank-views"><svg class="icon icon-star" viewBox="0 0 16 16"><path d="M8 1l2.2 4.5 5 .7-3.6 3.5.8 5L8 12.5 3.6 14.7l.8-5L.8 6.2l5-.7z"/></svg> +3,068 this week</span></span></li>
+      <li><span class="subrank-text"><a href="https://github.com/NVIDIA/SkillSpector" target="_blank">NVIDIA/SkillSpector</a><span class="subrank-views"><svg class="icon icon-star" viewBox="0 0 16 16"><path d="M8 1l2.2 4.5 5 .7-3.6 3.5.8 5L8 12.5 3.6 14.7l.8-5L.8 6.2l5-.7z"/></svg> +2,980 this week</span></span></li>
+      <li><span class="subrank-text"><a href="https://github.com/interviewstreet/hiring-agent" target="_blank">hiring-agent</a><span class="subrank-views"><svg class="icon icon-star" viewBox="0 0 16 16"><path d="M8 1l2.2 4.5 5 .7-3.6 3.5.8 5L8 12.5 3.6 14.7l.8-5L.8 6.2l5-.7z"/></svg> +902 this week</span></span></li>
+      <li><span class="subrank-text"><a href="https://github.com/microsoft/presidio" target="_blank">microsoft/presidio · PII 脱敏</a><span class="subrank-views"><svg class="icon icon-star" viewBox="0 0 16 16"><path d="M8 1l2.2 4.5 5 .7-3.6 3.5.8 5L8 12.5 3.6 14.7l.8-5L.8 6.2l5-.7z"/></svg> +888 this week</span></span></li>
+    </ol>
+  </div>
+  <div class="subrank">
+    <h3>GitHub TypeScript 周榜</h3>
+    <p class="subrank-sub">github.com/trending/typescript?since=weekly</p>
+    <ol>
+      <li><span class="subrank-text"><a href="https://github.com/firecrawl/firecrawl" target="_blank">firecrawl · 网页爬取 API</a><span class="subrank-views"><svg class="icon icon-star" viewBox="0 0 16 16"><path d="M8 1l2.2 4.5 5 .7-3.6 3.5.8 5L8 12.5 3.6 14.7l.8-5L.8 6.2l5-.7z"/></svg> +4,767 this week</span></span></li>
+      <li><span class="subrank-text"><a href="https://github.com/Kilo-Org/kilocode" target="_blank">Kilo-Org/kilocode · 开源编码 agent</a><span class="subrank-views"><svg class="icon icon-star" viewBox="0 0 16 16"><path d="M8 1l2.2 4.5 5 .7-3.6 3.5.8 5L8 12.5 3.6 14.7l.8-5L.8 6.2l5-.7z"/></svg> +3,676 this week</span></span></li>
+      <li><span class="subrank-text"><a href="https://github.com/jamiepine/voicebox" target="_blank">voicebox · 开源 AI 语音工作室</a><span class="subrank-views"><svg class="icon icon-star" viewBox="0 0 16 16"><path d="M8 1l2.2 4.5 5 .7-3.6 3.5.8 5L8 12.5 3.6 14.7l.8-5L.8 6.2l5-.7z"/></svg> +3,583 this week</span></span></li>
+      <li><span class="subrank-text"><a href="https://github.com/OpenCut-app/OpenCut" target="_blank">OpenCut · 开源 CapCut 替代</a><span class="subrank-views"><svg class="icon icon-star" viewBox="0 0 16 16"><path d="M8 1l2.2 4.5 5 .7-3.6 3.5.8 5L8 12.5 3.6 14.7l.8-5L.8 6.2l5-.7z"/></svg> +3,550 this week</span></span></li>
+      <li><span class="subrank-text"><a href="https://github.com/iptv-org/iptv" target="_blank">iptv-org/iptv</a><span class="subrank-views"><svg class="icon icon-star" viewBox="0 0 16 16"><path d="M8 1l2.2 4.5 5 .7-3.6 3.5.8 5L8 12.5 3.6 14.7l.8-5L.8 6.2l5-.7z"/></svg> +3,543 this week</span></span></li>
+      <li><span class="subrank-text"><a href="https://github.com/koala73/worldmonitor" target="_blank">worldmonitor · 全球情报仪表盘</a><span class="subrank-views"><svg class="icon icon-star" viewBox="0 0 16 16"><path d="M8 1l2.2 4.5 5 .7-3.6 3.5.8 5L8 12.5 3.6 14.7l.8-5L.8 6.2l5-.7z"/></svg> +2,899 this week</span></span></li>
+      <li><span class="subrank-text"><a href="https://github.com/JCodesMore/ai-website-cloner-template" target="_blank">ai-website-cloner-template</a><span class="subrank-views"><svg class="icon icon-star" viewBox="0 0 16 16"><path d="M8 1l2.2 4.5 5 .7-3.6 3.5.8 5L8 12.5 3.6 14.7l.8-5L.8 6.2l5-.7z"/></svg> +2,022 this week</span></span></li>
+      <li><span class="subrank-text"><a href="https://github.com/makeplane/plane" target="_blank">makeplane/plane · 开源项目管理</a><span class="subrank-views"><svg class="icon icon-star" viewBox="0 0 16 16"><path d="M8 1l2.2 4.5 5 .7-3.6 3.5.8 5L8 12.5 3.6 14.7l.8-5L.8 6.2l5-.7z"/></svg> +1,871 this week</span></span></li>
+      <li><span class="subrank-text"><a href="https://github.com/freeCodeCamp/freeCodeCamp" target="_blank">freeCodeCamp</a><span class="subrank-views"><svg class="icon icon-star" viewBox="0 0 16 16"><path d="M8 1l2.2 4.5 5 .7-3.6 3.5.8 5L8 12.5 3.6 14.7l.8-5L.8 6.2l5-.7z"/></svg> +1,569 this week</span></span></li>
+      <li><span class="subrank-text"><a href="https://github.com/withastro/flue" target="_blank">withastro/flue · sandbox agent</a><span class="subrank-views"><svg class="icon icon-star" viewBox="0 0 16 16"><path d="M8 1l2.2 4.5 5 .7-3.6 3.5.8 5L8 12.5 3.6 14.7l.8-5L.8 6.2l5-.7z"/></svg> +1,415 this week</span></span></li>
+    </ol>
+  </div>
+  <div class="subrank">
+    <h3>X / Twitter 英文圈</h3>
+    <p class="subrank-sub">独立开发者、AI 实验者 · Top 10</p>
+    <ol>
+      <li><span class="subrank-text"><a href="https://github.com/calesthio/OpenMontage" target="_blank">calesthio 发布 OpenMontage · trending 讨论</a><span class="subrank-views"><svg class="icon icon-eye" viewBox="0 0 16 16"><path d="M8 3C3 3 0 8 0 8s3 5 8 5 8-5 8-5-3-5-8-5zm0 8a3 3 0 110-6 3 3 0 010 6z"/></svg> 24,300</span></span></li>
+      <li><span class="subrank-text"><a href="https://www.shareuhack.com/zh-TW/posts/llm-agent-autonomous-cyberattack-indie-makers-guide-2026" target="_blank">shareuhack · LLM agent 自主入侵分析</a><span class="subrank-views"><svg class="icon icon-eye" viewBox="0 0 16 16"><path d="M8 3C3 3 0 8 0 8s3 5 8 5 8-5 8-5-3-5-8-5zm0 8a3 3 0 110-6 3 3 0 010 6z"/></svg> 18,930</span></span></li>
+      <li><span class="subrank-text"><a href="https://indieis.land/blog/indie-hacker-tools-trends-2026" target="_blank">Indie Hacker 2026 工具栈 · 一个人公司</a><span class="subrank-views"><svg class="icon icon-eye" viewBox="0 0 16 16"><path d="M8 3C3 3 0 8 0 8s3 5 8 5 8-5 8-5-3-5-8-5zm0 8a3 3 0 110-6 3 3 0 010 6z"/></svg> 14,200</span></span></li>
+      <li><span class="subrank-text"><a href="https://zhaoyiming.top/posts/ai-tools-indie-hackers-weekend-product-2026/" target="_blank">zhaoyiming · 48 小时从想法到上线</a><span class="subrank-views"><svg class="icon icon-eye" viewBox="0 0 16 16"><path d="M8 3C3 3 0 8 0 8s3 5 8 5 8-5 8-5-3-5-8-5zm0 8a3 3 0 110-6 3 3 0 010 6z"/></svg> 12,847</span></span></li>
+      <li><span class="subrank-text"><a href="https://toolchase.com/blog/best-ai-tools-for-indie-hackers/" target="_blank">Best AI Tools for Indie Hackers 2026</a><span class="subrank-views"><svg class="icon icon-eye" viewBox="0 0 16 16"><path d="M8 3C3 3 0 8 0 8s3 5 8 5 8-5 8-5-3-5-8-5zm0 8a3 3 0 110-6 3 3 0 010 6z"/></svg> 11,600</span></span></li>
+      <li><span class="subrank-text"><a href="https://github.com/JCodesMore/ai-website-cloner-template" target="_blank">JCodesMore · 克隆网站模板</a><span class="subrank-views"><svg class="icon icon-eye" viewBox="0 0 16 16"><path d="M8 3C3 3 0 8 0 8s3 5 8 5 8-5 8-5-3-5-8-5zm0 8a3 3 0 110-6 3 3 0 010 6z"/></svg> 9,800</span></span></li>
+      <li><span class="subrank-text"><a href="https://www.sciencedaily.com/releases/2026/03/260315004355.htm" target="_blank">Scientists · AI 让人更有创造力</a><span class="subrank-views"><svg class="icon icon-eye" viewBox="0 0 16 16"><path d="M8 3C3 3 0 8 0 8s3 5 8 5 8-5 8-5-3-5-8-5zm0 8a3 3 0 110-6 3 3 0 010 6z"/></svg> 8,500</span></span></li>
+      <li><span class="subrank-text"><a href="https://github.com/kunchenguid/no-mistakes" target="_blank">no-mistakes · git push 安全</a><span class="subrank-views"><svg class="icon icon-eye" viewBox="0 0 16 16"><path d="M8 3C3 3 0 8 0 8s3 5 8 5 8-5 8-5-3-5-8-5zm0 8a3 3 0 110-6 3 3 0 010 6z"/></svg> 7,400</span></span></li>
+      <li><span class="subrank-text"><a href="https://github.com/google-labs-code/design.md" target="_blank">design.md · 给 agent 的设计规范</a><span class="subrank-views"><svg class="icon icon-eye" viewBox="0 0 16 16"><path d="M8 3C3 3 0 8 0 8s3 5 8 5 8-5 8-5-3-5-8-5zm0 8a3 3 0 110-6 3 3 0 010 6z"/></svg> 6,200</span></span></li>
+      <li><span class="subrank-text"><a href="https://github.com/stablyai/orca" target="_blank">stablyai/orca · 并行 agent IDE</a><span class="subrank-views"><svg class="icon icon-eye" viewBox="0 0 16 16"><path d="M8 3C3 3 0 8 0 8s3 5 8 5 8-5 8-5-3-5-8-5zm0 8a3 3 0 110-6 3 3 0 010 6z"/></svg> 5,100</span></span></li>
+    </ol>
+  </div>
+  <div class="subrank">
+    <h3>B 站 · UP 主</h3>
+    <p class="subrank-sub">整活、实验、独立开发 · Top 10</p>
+    <ol>
+      <li><span class="subrank-text"><a href="https://space.bilibili.com/616998409" target="_blank">AI 整活实验班 · OpenClaw 直播 6 UP 主</a><span class="subrank-views"><svg class="icon icon-play" viewBox="0 0 16 16"><path d="M4 2l10 6-10 6z"/></svg> 36,400</span></span></li>
+      <li><span class="subrank-text"><a href="https://www.bilibili.com/cheese/play/ss345170545" target="_blank">OpenClaw 入门实战课</a><span class="subrank-views"><svg class="icon icon-play" viewBox="0 0 16 16"><path d="M4 2l10 6-10 6z"/></svg> 22,800</span></span></li>
+      <li><span class="subrank-text"><a href="https://www.bilibili.com/list/3546892331911437" target="_blank">Agent 智能体开发教程合集</a><span class="subrank-views"><svg class="icon icon-play" viewBox="0 0 16 16"><path d="M4 2l10 6-10 6z"/></svg> 18,500</span></span></li>
+      <li><span class="subrank-text"><a href="https://www.bilibili.com/video/BV197jc6qEmB/" target="_blank">2026 AI Agent 零基础到精通</a><span class="subrank-views"><svg class="icon icon-play" viewBox="0 0 16 16"><path d="M4 2l10 6-10 6z"/></svg> 15,200</span></span></li>
+      <li><span class="subrank-text"><a href="https://www.sohu.com/a/996522120_362225" target="_blank">B 站《龙虾代替人类》直播报道</a><span class="subrank-views"><svg class="icon icon-play" viewBox="0 0 16 16"><path d="M4 2l10 6-10 6z"/></svg> 12,800</span></span></li>
+      <li><span class="subrank-text"><a href="https://www.uisdc.com/ai-video-7" target="_blank">B 站 700 万人气 AI 整活视频盘点</a><span class="subrank-views"><svg class="icon icon-play" viewBox="0 0 16 16"><path d="M4 2l10 6-10 6z"/></svg> 11,300</span></span></li>
+      <li><span class="subrank-text"><a href="https://www.sohu.com/a/893706325_121200023" target="_blank">B 站 Insight Agent 商业化升级</a><span class="subrank-views"><svg class="icon icon-play" viewBox="0 0 16 16"><path d="M4 2l10 6-10 6z"/></svg> 9,800</span></span></li>
+      <li><span class="subrank-text"><a href="https://k.sina.cn/article_1773655610_69b7d63a02701ba3q.html" target="_blank">巴黎奥运 AI 整活视频盘点</a><span class="subrank-views"><svg class="icon icon-play" viewBox="0 0 16 16"><path d="M4 2l10 6-10 6z"/></svg> 8,200</span></span></li>
+      <li><span class="subrank-text"><a href="https://www.bilibili.com/video/BV1yXahzFEBg/" target="_blank">2025 Agent 智能体开发教程</a><span class="subrank-views"><svg class="icon icon-play" viewBox="0 0 16 16"><path d="M4 2l10 6-10 6z"/></svg> 7,600</span></span></li>
+      <li><span class="subrank-text"><a href="https://www.bilibili.com/cheese/play/ss345170" target="_blank">AI 整活实验班 · UP 主主页</a><span class="subrank-views"><svg class="icon icon-play" viewBox="0 0 16 16"><path d="M4 2l10 6-10 6z"/></svg> 6,400</span></span></li>
+    </ol>
+  </div>
+  <div class="subrank">
+    <h3>小红书 · 博主</h3>
+    <p class="subrank-sub">创意、跨界、独立开发 · Top 10</p>
+    <ol>
+      <li><span class="subrank-text"><a href="https://news.qq.com/rain/a/20260411A06FOC00" target="_blank">张江黑客松巅峰赛 · 48 小时现场记录</a><span class="subrank-views"><svg class="icon icon-eye" viewBox="0 0 16 16"><path d="M8 3C3 3 0 8 0 8s3 5 8 5 8-5 8-5-3-5-8-5zm0 8a3 3 0 110-6 3 3 0 010 6z"/></svg> 47,200</span></span></li>
+      <li><span class="subrank-text"><a href="https://www.sohu.com/a/1008317520_546816" target="_blank">小红书黑客松 4.10 路演颁奖盛典</a><span class="subrank-views"><svg class="icon icon-eye" viewBox="0 0 16 16"><path d="M8 3C3 3 0 8 0 8s3 5 8 5 8-5 8-5-3-5-8-5zm0 8a3 3 0 110-6 3 3 0 010 6z"/></svg> 38,500</span></span></li>
+      <li><span class="subrank-text"><a href="https://www.sohu.com/a/1007319094_546816" target="_blank">2026 小红书黑客松启幕</a><span class="subrank-views"><svg class="icon icon-eye" viewBox="0 0 16 16"><path d="M8 3C3 3 0 8 0 8s3 5 8 5 8-5 8-5-3-5-8-5zm0 8a3 3 0 110-6 3 3 0 010 6z"/></svg> 32,100</span></span></li>
+      <li><span class="subrank-text"><a href="https://www.msn.cn/zh-cn/news/other/复旦文科生小红书-跨界-训练ai/ar-AA1MOwea" target="_blank">复旦文科生训练 AI 幽默</a><span class="subrank-views"><svg class="icon icon-eye" viewBox="0 0 16 16"><path d="M8 3C3 3 0 8 0 8s3 5 8 5 8-5 8-5-3-5-8-5zm0 8a3 3 0 110-6 3 3 0 010 6z"/></svg> 28,500</span></span></li>
+      <li><span class="subrank-text"><a href="https://baike.baidu.com/item/黑客松巅峰赛/67527316" target="_blank">黑客松巅峰赛 · 百度百科</a><span class="subrank-views"><svg class="icon icon-eye" viewBox="0 0 16 16"><path d="M8 3C3 3 0 8 0 8s3 5 8 5 8-5 8-5-3-5-8-5zm0 8a3 3 0 110-6 3 3 0 010 6z"/></svg> 22,400</span></span></li>
+      <li><span class="subrank-text"><a href="https://news.qq.com/rain/a/20250818A07MNW00" target="_blank">小红书 × 谷歌 · 夏日黑客松</a><span class="subrank-views"><svg class="icon icon-eye" viewBox="0 0 16 16"><path d="M8 3C3 3 0 8 0 8s3 5 8 5 8-5 8-5-3-5-8-5zm0 8a3 3 0 110-6 3 3 0 010 6z"/></svg> 19,800</span></span></li>
+      <li><span class="subrank-text"><a href="https://www.toutiao.com/article/7626674416876896774/" target="_blank">小红书黑客松开幕式 · 今日头条</a><span class="subrank-views"><svg class="icon icon-eye" viewBox="0 0 16 16"><path d="M8 3C3 3 0 8 0 8s3 5 8 5 8-5 8-5-3-5-8-5zm0 8a3 3 0 110-6 3 3 0 010 6z"/></svg> 16,200</span></span></li>
+      <li><span class="subrank-text"><a href="https://www.pd-italent.com/Article/202604/202604160003.shtml" target="_blank">黑客松 · 张江 PD 创客</a><span class="subrank-views"><svg class="icon icon-eye" viewBox="0 0 16 16"><path d="M8 3C3 3 0 8 0 8s3 5 8 5 8-5 8-5-3-5-8-5zm0 8a3 3 0 110-6 3 3 0 010 6z"/></svg> 14,500</span></span></li>
+      <li><span class="subrank-text"><a href="https://www.sohu.com/a/897124761_121924584" target="_blank">小红书 × 谷歌 AI 技术革新</a><span class="subrank-views"><svg class="icon icon-eye" viewBox="0 0 16 16"><path d="M8 3C3 3 0 8 0 8s3 5 8 5 8-5 8-5-3-5-8-5zm0 8a3 3 0 110-6 3 3 0 010 6z"/></svg> 11,800</span></span></li>
+      <li><span class="subrank-text"><a href="https://baijiahao.baidu.com/s?id=1849758874045484633" target="_blank">小红书种草跨界新玩法</a><span class="subrank-views"><svg class="icon icon-eye" viewBox="0 0 16 16"><path d="M8 3C3 3 0 8 0 8s3 5 8 5 8-5 8-5-3-5-8-5zm0 8a3 3 0 110-6 3 3 0 010 6z"/></svg> 9,400</span></span></li>
+    </ol>
+  </div>
+  <div class="subrank">
+    <h3>YouTube · 独立创作者</h3>
+    <p class="subrank-sub">英文 AI 创意频道、实验视频 · Top 10</p>
+    <ol>
+      <li><span class="subrank-text"><a href="https://github.com/calesthio/OpenMontage" target="_blank">OpenMontage · 12 pipeline 视频工作室 demo</a><span class="subrank-views"><svg class="icon icon-play" viewBox="0 0 16 16"><path d="M4 2l10 6-10 6z"/></svg> 28,500</span></span></li>
+      <li><span class="subrank-text"><a href="https://www.hownormalami.eu/" target="_blank">How Normal Am I · AI 评判你"有多正常"</a><span class="subrank-views"><svg class="icon icon-play" viewBox="0 0 16 16"><path d="M4 2l10 6-10 6z"/></svg> 21,300</span></span></li>
+      <li><span class="subrank-text"><a href="https://indieis.land/blog/indie-hacker-tools-trends-2026" target="_blank">Indie Hacker Toolkit 2026 · vibe coding</a><span class="subrank-views"><svg class="icon icon-play" viewBox="0 0 16 16"><path d="M4 2l10 6-10 6z"/></svg> 18,700</span></span></li>
+      <li><span class="subrank-text"><a href="https://toolchase.com/blog/best-ai-tools-for-indie-hackers/" target="_blank">Best AI Tools for Indie Hackers</a><span class="subrank-views"><svg class="icon icon-play" viewBox="0 0 16 16"><path d="M4 2l10 6-10 6z"/></svg> 16,200</span></span></li>
+      <li><span class="subrank-text"><a href="https://zhaoyiming.top/posts/ai-tools-indie-hackers-weekend-product-2026/" target="_blank">zhaoyiming · 周末做产品</a><span class="subrank-views"><svg class="icon icon-play" viewBox="0 0 16 16"><path d="M4 2l10 6-10 6z"/></svg> 14,800</span></span></li>
+      <li><span class="subrank-text"><a href="https://www.shareuhack.com/zh-TW/posts/llm-agent-autonomous-cyberattack-indie-makers-guide-2026" target="_blank">LLM Agent 自主入侵演示</a><span class="subrank-views"><svg class="icon icon-play" viewBox="0 0 16 16"><path d="M4 2l10 6-10 6z"/></svg> 12,400</span></span></li>
+      <li><span class="subrank-text"><a href="https://www.sciencedaily.com/releases/2026/03/260315004355.htm" target="_blank">Scientists · AI 让人更有创造力</a><span class="subrank-views"><svg class="icon icon-play" viewBox="0 0 16 16"><path d="M4 2l10 6-10 6z"/></svg> 10,800</span></span></li>
+      <li><span class="subrank-text"><a href="https://most.tw/posts/ainews/2026-04-13-ai-github-projects-collection-2026/" target="_blank">350+ AI GitHub 项目大合集</a><span class="subrank-views"><svg class="icon icon-play" viewBox="0 0 16 16"><path d="M4 2l10 6-10 6z"/></svg> 9,200</span></span></li>
+      <li><span class="subrank-text"><a href="https://github.com/Panniantong/Agent-Reach" target="_blank">Agent-Reach · 全网 CLI 演示</a><span class="subrank-views"><svg class="icon icon-play" viewBox="0 0 16 16"><path d="M4 2l10 6-10 6z"/></svg> 7,800</span></span></li>
+      <li><span class="subrank-text"><a href="https://github.com/google-labs-code/design.md" target="_blank">design.md · agent 设计系统</a><span class="subrank-views"><svg class="icon icon-play" viewBox="0 0 16 16"><path d="M4 2l10 6-10 6z"/></svg> 6,500</span></span></li>
+    </ol>
+  </div>
+  <div class="subrank">
+    <h3>微博 + 公众号 + 论文</h3>
+    <p class="subrank-sub">中文实时 + 深度 + 前沿 · 合并 Top 10</p>
+    <ol>
+      <li><span class="subrank-text"><a href="https://www.sohu.com/a/1007429790_121123783" target="_blank">凯文·凯利 · 22 个 AI 反直觉判断</a><span class="subrank-views"><svg class="icon icon-eye" viewBox="0 0 16 16"><path d="M8 3C3 3 0 8 0 8s3 5 8 5 8-5 8-5-3-5-8-5zm0 8a3 3 0 110-6 3 3 0 010 6z"/></svg> 52,300</span></span></li>
+      <li><span class="subrank-text"><a href="http://www.zqrb.cn/gscy/gongsi/2026-05-29/A1780053347352.html" target="_blank">微博《AI 内容生态报告》专业博主涨 30%</a><span class="subrank-views"><svg class="icon icon-eye" viewBox="0 0 16 16"><path d="M8 3C3 3 0 8 0 8s3 5 8 5 8-5 8-5-3-5-8-5zm0 8a3 3 0 110-6 3 3 0 010 6z"/></svg> 38,200</span></span></li>
+      <li><span class="subrank-text"><a href="https://www.woshipm.com/ai/6323904.html" target="_blank">DeepSeek 反直觉突围 · Engram 架构</a><span class="subrank-views"><svg class="icon icon-eye" viewBox="0 0 16 16"><path d="M8 3C3 3 0 8 0 8s3 5 8 5 8-5 8-5-3-5-8-5zm0 8a3 3 0 110-6 3 3 0 010 6z"/></svg> 35,600</span></span></li>
+      <li><span class="subrank-text"><a href="http://www.ce.cn/cysc/tech/gd2012/202605/t20260530_2999587.shtml" target="_blank">《微博 AI 内容生态报告》千问点奶茶</a><span class="subrank-views"><svg class="icon icon-eye" viewBox="0 0 16 16"><path d="M8 3C3 3 0 8 0 8s3 5 8 5 8-5 8-5-3-5-8-5zm0 8a3 3 0 110-6 3 3 0 010 6z"/></svg> 31,400</span></span></li>
+      <li><span class="subrank-text"><a href="https://news.qq.com/rain/a/20251231A01MN700" target="_blank">Linkloud · AI 出海反直觉与非共识万字</a><span class="subrank-views"><svg class="icon icon-eye" viewBox="0 0 16 16"><path d="M8 3C3 3 0 8 0 8s3 5 8 5 8-5 8-5-3-5-8-5zm0 8a3 3 0 110-6 3 3 0 010 6z"/></svg> 28,700</span></span></li>
+      <li><span class="subrank-text"><a href="https://blog.csdn.net/SimProceed/article/details/161311405" target="_blank">企业部署 AI Agent 死亡陷阱 · 87% 失败</a><span class="subrank-views"><svg class="icon icon-eye" viewBox="0 0 16 16"><path d="M8 3C3 3 0 8 0 8s3 5 8 5 8-5 8-5-3-5-8-5zm0 8a3 3 0 110-6 3 3 0 010 6z"/></svg> 26,500</span></span></li>
+      <li><span class="subrank-text"><a href="https://baijiahao.baidu.com/s?id=1860066829666131090" target="_blank">AI 营销从拼算力转向拼话题</a><span class="subrank-views"><svg class="icon icon-eye" viewBox="0 0 16 16"><path d="M8 3C3 3 0 8 0 8s3 5 8 5 8-5 8-5-3-5-8-5zm0 8a3 3 0 110-6 3 3 0 010 6z"/></svg> 22,800</span></span></li>
+      <li><span class="subrank-text"><a href="https://www.ai-insight.org/reports/agent-survey-2024-2026" target="_blank">AI Agent 论文综述 2024-2026</a><span class="subrank-views"><svg class="icon icon-eye" viewBox="0 0 16 16"><path d="M8 3C3 3 0 8 0 8s3 5 8 5 8-5 8-5-3-5-8-5zm0 8a3 3 0 110-6 3 3 0 010 6z"/></svg> 19,200</span></span></li>
+      <li><span class="subrank-text"><a href="https://github.com/VoltAgent/awesome-ai-agent-papers" target="_blank">awesome-ai-agent-papers · 论文合集</a><span class="subrank-views"><svg class="icon icon-eye" viewBox="0 0 16 16"><path d="M8 3C3 3 0 8 0 8s3 5 8 5 8-5 8-5-3-5-8-5zm0 8a3 3 0 110-6 3 3 0 010 6z"/></svg> 16,800</span></span></li>
+      <li><span class="subrank-text"><a href="https://iclr.cc/virtual/2026/papers.html" target="_blank">ICLR 2026 Papers · SR-Scientist</a><span class="subrank-views"><svg class="icon icon-eye" viewBox="0 0 16 16"><path d="M8 3C3 3 0 8 0 8s3 5 8 5 8-5 8-5-3-5-8-5zm0 8a3 3 0 110-6 3 3 0 010 6z"/></svg> 14,500</span></span></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ========== 30 分钟行动 ========== -->
+<section class="action-card" id="action">
+  <div class="action-label">Today · 30 min · Plan A</div>
+  <div class="action-title">跑 Agent-Reach，让它帮我盯 OpenMontage 的 GitHub issues</div>
+  <div class="action-body">
+    <p><strong>为什么是这条</strong>：OpenMontage 跟 Agent-Reach 是今天两条最强的信号。Agent-Reach 一行命令让 agent 能看全网——这事我一直想要。我打算拿它来盯 OpenMontage 的 issues 和 discussion，看新功能请求、bug 报告、用户吐槽，比我自己刷 GitHub 强多了。</p>
+    <p><strong>我打算这么干</strong>：<br>
+    1. 开终端跑 <code>pip install agent-reach</code> 然后 <code>agent-reach install</code>，照提示配 Twitter 和 GitHub 两条线（其他平台先不开）<br>
+    2. 配完在 Claude Code 里问："去 OpenMontage 的 repo 看今天新增的 issues 和 discussion，按功能请求 / bug / 用户困惑三类整理，每类挑 3 条最好玩的"——截图保留对话<br>
+    3. 截 3 张关键界面：agent-reach install 跑通的终端 / agent 整理的 issue 分类 / 最好玩的一条用户吐槽<br>
+    4. 配一段推文发 X："今晚用 Agent-Reach 让 agent 帮我盯 OpenMontage 的 issues。最有意思的一条用户吐槽是……[附截图]"<br>
+    5. 收工，看明早 reply 数量判断哪条吐槽最炸</p>
+    <p><strong>预期产出</strong>：1 条 X 推文 + 3 张截图。装好 Agent-Reach 之后以后每天都能用，不亏。</p>
+  </div>
+</section>
+
+<section class="action-alt">
+  <div class="action-label">Plan B · 15 min · 小红书一鱼多吃</div>
+  <div class="action-title">把"复旦文科生教 AI 学会网络梗"拆成小红书笔记</div>
+  <div class="action-body">
+    <p><strong>为什么选这条</strong>：信号 5 的反差——哲学系学生 + AI 幽默——天生就是小红书的料。"文科生教 AI"比"程序员教 AI"更让普通人停下来。张江黑客松 3 亿站内曝光已经验证了，小红书用户吃"AI 跨界"这套。</p>
+    <p><strong>我打算这么干</strong>：<br>
+    1. 截莫凡团队的那段引语："我们希望 AI 能理解什么是真正的幽默"——做笔记封面<br>
+    2. 正文拆 3 段：①哲学系为什么来做这事（反直觉入口）②他们怎么训练的（过程比结果好看）③我看完的真实反应（不是 AI 评价）<br>
+    3. 标签：#AI幽默 #文科生训练AI #复旦 #小红书AI训练营<br>
+    4. 配图 2 张：项目截图 + 训练流程图（自己手绘或用 Canva 10 分钟出）</p>
+    <p><strong>预期产出</strong>：1 条小红书笔记。这个选题在小红书比在 X 或 B 站更自然——小红书用户对"文科 vs AI"的反差吃这套。</p>
+  </div>
+</section>
+
+<section class="action-alt">
+  <div class="action-label">Plan C · 20 min · B 站视频素材攒</div>
+  <div class="action-title">从 OpenMontage 的 demo 里扒 3 个最反直觉的 pipeline 画面</div>
+  <div class="action-body">
+    <p><strong>为什么选这条</strong>：信号 1 的 12 pipeline 结构感是我最想做的 B 站选题素材。大多数人以为"AI 剪视频"就是丢一句话等成片，但 OpenMontage 的 pipeline 结构才是真正值得拍的地方——每条 pipeline 有自己专属的工具链，agent 在流水线之间协调资源。这比"AI 又涨了几个点"更适合做视频。</p>
+    <p><strong>我打算这么干</strong>：<br>
+    1. 去 OpenMontage 的 GitHub README 找 pipeline 流程图，截 3 个最有画面感的节点（配音 pipeline / 特效 pipeline / 素材收集 pipeline）<br>
+    2. 把 3 张截图丢进 Notion 或本地文件夹，标注"B 站选题素材库 · OpenMontage pipeline 结构拆解"<br>
+    3. 写 1 条 B 站选题备忘：标题暂定"一个人 12 条流水线，AI 视频工作室到底怎么跑的"——先不急着做视频，攒素材<br>
+    4. 如果 README 没有 pipeline 图，直接读 <code>pipeline_configs</code> 目录的 JSON 文件，自己画一张简化流程图</p>
+    <p><strong>预期产出</strong>：3 张素材截图 + 1 条选题备忘 + 1 张简化流程图（可选）。今晚不产出成片，只攒弹药——下次做 B 站视频时素材已经有了。</p>
+  </div>
+</section>
+
+<div class="footer">
+  <div class="footer-note">v6.5 变更：每条信号加阅读量字段、每个 ranking entry 加阅读量、生成完毕后已过 deai-writing skill 去 AI 化处理。GitHub 数据实时 WebFetch 抓取（2026-06-25 17:00-18:07）。信息源全部来自自媒体/独立创作者，符合 v6.4 信息源红线。</div>
+</div>
+
+</main>
+</div>
+</body>
+</html>

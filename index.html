@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 创意雷达 · Daily</title>
+<style>
+:root {
+  --midnight-navy: #0b3558;
+  --signal-blue: #006bff;
+  --slate-blue: #476788;
+  --mist: #f8f9fb;
+  --fog: #e7edf6;
+  --mist-border: #d4e0ed;
+  --carbon: #1a2433;
+  --soft-text: #5a6b80;
+  --warm-amber: #b8741a;
+  --r-card: 12px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: var(--mist);
+  color: var(--carbon);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+.container { max-width: 720px; margin: 0 auto; padding: 48px 24px; }
+
+header { margin-bottom: 48px; }
+.logo { font-size: 28px; font-weight: 700; color: var(--midnight-navy); letter-spacing: -0.5px; margin-bottom: 8px; }
+.logo span { color: var(--signal-blue); }
+.subtitle { font-size: 14px; color: var(--soft-text); }
+.tagline { font-size: 16px; color: var(--slate-blue); margin-top: 16px; line-height: 1.6; }
+
+.card-list { display: flex; flex-direction: column; gap: 16px; }
+.card {
+  background: #fff;
+  border: 1px solid var(--mist-border);
+  border-radius: var(--r-card);
+  padding: 20px 24px;
+  transition: box-shadow 0.15s;
+  cursor: pointer;
+}
+.card:hover { box-shadow: 0 4px 16px rgba(71,103,136,0.1); }
+.card a { color: var(--carbon); text-decoration: none; display: block; }
+.card a:hover { color: var(--signal-blue); }
+.card-date { font-size: 12px; color: var(--soft-text); letter-spacing: 1px; margin-bottom: 6px; }
+.card-title { font-size: 18px; font-weight: 600; color: var(--midnight-navy); margin-bottom: 4px; }
+.card-meta { font-size: 12px; color: var(--soft-text); display: flex; gap: 12px; flex-wrap: wrap; }
+.card-badge { background: var(--fog); color: var(--slate-blue); padding: 2px 8px; border-radius: 4px; font-weight: 500; font-size: 11px; }
+
+.new-badge { background: var(--signal-blue); color: #fff; padding: 2px 8px; border-radius: 4px; font-weight: 600; font-size: 10px; letter-spacing: 0.5px; }
+
+footer { margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--mist-border); font-size: 12px; color: var(--soft-text); }
+footer a { color: var(--signal-blue); text-decoration: none; }
+footer a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <div class="logo">AI 创意雷达<span> · Daily</span></div>
+  <div class="subtitle">自媒体信号源的有品位创意雷达 · v6.5</div>
+  <div class="tagline">每天从 8 个自媒体信息源里抓 8 条最让我停下来的信号，附全源战力榜 top 10 + 各源分榜 top 10 + 今天要做的 3 件事。有品位 = 真实 + 体面 + 有判断。</div>
+</header>
+
+<div class="card-list">
+
+  <div class="card">
+    <a href="daily/2026-06-25.html">
+      <div class="card-date">2026 · 06 · 25</div>
+      <div class="card-title">一个人的视频工作室 + 一条命令让 Agent 看全网</div>
+      <div class="card-meta">
+        <span class="card-badge">8 条信号</span>
+        <span class="card-badge">全源 Top 10</span>
+        <span class="card-badge">各源 Top 10</span>
+        <span class="card-badge">3 个行动方案</span>
+        <span class="new-badge">最新</span>
+      </div>
+    </a>
+  </div>
+
+  <div class="card">
+    <a href="daily/2026-06-24.html">
+      <div class="card-date">2026 · 06 · 24</div>
+      <div class="card-title">v6.4 日报 · 信息源从自媒体获取</div>
+      <div class="card-meta">
+        <span class="card-badge">8 条信号</span>
+        <span class="card-badge">全源 Top 10</span>
+        <span class="card-badge">各源 Top 10</span>
+      </div>
+    </a>
+  </div>
+
+  <div class="card">
+    <a href="daily/2026-06-23.html">
+      <div class="card-date">2026 · 06 · 23</div>
+      <div class="card-title">v6.4 日报 · 信息源从自媒体获取</div>
+      <div class="card-meta">
+        <span class="card-badge">8 条信号</span>
+        <span class="card-badge">全源 Top 10</span>
+        <span class="card-badge">各源 Top 10</span>
+      </div>
+    </a>
+  </div>
+
+</div>
+
+<footer>
+  <p>由 WorkBuddy AI 创意雷达 v6.5 自动生成 · 信息源全部来自自媒体/独立创作者</p>
+  <p>源码：<a href="https://github.com/mustundead/ai-creative-radar">github.com/mustundead/ai-creative-radar</a></p>
+</footer>
+
+</div>
+</body>
+</html>

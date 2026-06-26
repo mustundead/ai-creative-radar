@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 趋势日报 - 2026年6月23日</title>
+<style>
+  :root {
+    --indigo: #4f46e5;
+    --indigo-light: #6366f1;
+    --indigo-dark: #3730a3;
+    --warm1: #f6f5f4;
+    --warm2: #f0eeeb;
+    --card-bg: #ffffff;
+    --text: #1c1917;
+    --text-secondary: #57534e;
+    --text-muted: #78716c;
+    --border: #e7e5e4;
+    --accent-red: #dc2626;
+    --accent-amber: #d97706;
+    --accent-green: #16a34a;
+    --badge-indigo: #eef2ff;
+    --badge-indigo-text: #4338ca;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    font-size: 17px; line-height: 1.65; color: var(--text); background: var(--warm1);
+    display: flex; min-height: 100vh;
+  }
+
+  /* ---- Sidebar ---- */
+  .sidebar {
+    width: 220px; min-width: 220px; background: #fff; border-right: 1px solid var(--border);
+    position: fixed; top: 0; left: 0; bottom: 0; z-index: 100;
+    display: flex; flex-direction: column; padding: 32px 0 24px;
+    overflow-y: auto;
+  }
+  .sidebar-logo {
+    display: flex; align-items: center; gap: 10px; padding: 0 24px 28px;
+    border-bottom: 1px solid var(--border); margin-bottom: 16px;
+  }
+  .sidebar-logo .logo-icon {
+    width: 36px; height: 36px; background: var(--indigo); border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-weight: 700; font-size: 18px;
+  }
+  .sidebar-logo span { font-size: 17px; font-weight: 700; color: var(--indigo-dark); }
+  .sidebar-nav { list-style: none; padding: 0 12px; }
+  .sidebar-nav li { margin-bottom: 2px; }
+  .sidebar-nav a {
+    display: block; padding: 10px 14px; border-radius: 6px;
+    color: var(--text-secondary); text-decoration: none; font-size: 14px;
+    transition: all 0.15s;
+  }
+  .sidebar-nav a:hover { background: #f5f3ff; color: var(--indigo); }
+  .sidebar-nav a.active { background: #eef2ff; color: var(--indigo); font-weight: 600; }
+
+  /* ---- Main ---- */
+  .main {
+    margin-left: 220px; flex: 1; max-width: 1080px; padding: 40px 48px 80px;
+  }
+  .header { margin-bottom: 48px; }
+  .header .date { font-size: 14px; color: var(--text-muted); margin-bottom: 8px; letter-spacing: 0.5px; }
+  .header h1 { font-size: 38px; font-weight: 800; line-height: 1.25; color: var(--text); margin-bottom: 12px; }
+  .header .insight {
+    font-size: 19px; color: var(--indigo); line-height: 1.55;
+    padding-left: 16px; border-left: 3px solid var(--indigo);
+  }
+
+  /* ---- Section ---- */
+  .section { margin-bottom: 60px; }
+  .section:nth-child(odd) .section-bg { background: var(--warm1); }
+  .section:nth-child(even) .section-bg { background: var(--warm2); }
+  .section-bg { padding: 40px 36px; border-radius: 12px; }
+  .section-header { display: flex; align-items: center; gap: 14px; margin-bottom: 28px; }
+  .s-icon {
+    width: 36px; height: 36px;  background: #1c1917; color: #fff; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 16px;
+    flex-shrink: 0;
+  }
+  .section-title { font-size: 26px; font-weight: 700; color: var(--text); }
+
+  /* ---- Cards ---- */
+  .card-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+  .card {
+    background: var(--card-bg); border-radius: 10px; padding: 20px 24px;
+    border: 1px solid var(--border); position: relative; overflow: hidden;
+    transition: box-shadow 0.15s;
+  }
+  .card:hover { box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .card .card-watermark {
+    position: absolute; right: 16px; top: 12px; font-size: 48px; font-weight: 800;
+    color: #f5f3f2; z-index: 0; line-height: 1;
+  }
+  .card .card-inner { position: relative; z-index: 1; }
+  .card-title { font-size: 19px; font-weight: 700; margin-bottom: 6px; color: var(--text); }
+  .card-meta { font-size: 13px; color: var(--text-muted); margin-bottom: 8px; }
+  .card-desc { font-size: 15px; color: var(--text-secondary); line-height: 1.6; }
+
+  .card-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 12px; }
+  .tag {
+    display: inline-block; padding: 3px 10px; border-radius: 4px; font-size: 12px;
+    font-weight: 600; letter-spacing: 0.3px;
+  }
+  .tag-hot { background: #fef2f2; color: #dc2626; }
+  .tag-trend { background: #fffbeb; color: #d97706; }
+  .tag-stable { background: #f0fdf4; color: #16a34a; }
+  .tag-indigo { background: var(--badge-indigo); color: var(--badge-indigo-text); }
+
+  /* ---- Hot Index ---- */
+  .platform-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .platform-col h3 { font-size: 16px; font-weight: 700; color: var(--indigo-dark); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+  .hot-list { list-style: none; }
+  .hot-list li { padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 14px; line-height: 1.55; }
+  .hot-list li:last-child { border-bottom: none; }
+  .hot-list .rank { font-weight: 700; color: var(--indigo); margin-right: 8px; }
+  .hot-list a { color: var(--text); text-decoration: none; }
+  .hot-list a:hover { color: var(--indigo); text-decoration: underline; }
+  .hot-list .source { display: block; font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+
+  /* ---- Topic Card ---- */
+  .topic-card { margin-bottom: 24px; }
+  .topic-header { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 16px; }
+  .topic-num {
+    width: 32px; height: 32px; background: var(--indigo); color: #fff; border-radius: 6px;
+    display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px;
+    flex-shrink: 0;
+  }
+  .topic-num.creative { background: var(--indigo-dark); }
+  .topic-info { flex: 1; }
+  .topic-info h4 { font-size: 19px; font-weight: 700; margin-bottom: 4px; }
+  .topic-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
+  .topic-signal { font-size: 14px; color: var(--text-secondary); margin-bottom: 6px; }
+  .topic-strategy { font-size: 14px; color: var(--indigo-dark); padding: 8px 12px; background: #f5f3ff; border-radius: 6px; margin-bottom: 12px; }
+
+  .prod-card {
+    background: #fafaf9; border: 1px solid var(--border); border-radius: 8px; padding: 16px;
+    margin-top: 12px;
+  }
+  .prod-row { display: flex; gap: 20px; flex-wrap: wrap; font-size: 13px; color: var(--text-secondary); }
+  .prod-row span { display: flex; align-items: center; gap: 4px; }
+  .prod-row .label { font-weight: 600; color: var(--text); }
+  .prod-framework { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+
+  /* ---- Evidence ---- */
+  .evidence {
+    padding: 10px 14px; border-left: 3px solid var(--indigo); background: #f8f7ff;
+    border-radius: 0 6px 6px 0; font-size: 13px; color: var(--text-secondary); margin: 8px 0;
+  }
+  .evidence a { color: var(--indigo); }
+
+  /* ---- Prompt ---- */
+  .prompt-block {
+    background: #1e1b2e; color: #e0dce8; border-radius: 8px; padding: 20px 24px;
+    margin-top: 12px; font-size: 13px; line-height: 1.6; overflow-x: auto;
+    font-family: "SF Mono", "Fira Code", "Menlo", monospace;
+    white-space: pre-wrap; word-break: break-word;
+  }
+  .prompt-label {
+    font-size: 12px; font-weight: 700; color: #a78bfa; margin-bottom: 8px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .copy-btn {
+    float: right; background: #3730a3; color: #fff; border: none; padding: 4px 12px;
+    border-radius: 4px; font-size: 12px; cursor: pointer;
+  }
+  .copy-btn:hover { background: #4f46e5; }
+
+  /* ---- Guide ---- */
+  .guide-steps { list-style: none; counter-reset: step; }
+  .guide-steps li {
+    counter-increment: step; padding: 12px 0 12px 40px; position: relative;
+    border-bottom: 1px solid var(--border); font-size: 14px; line-height: 1.6;
+  }
+  .guide-steps li::before {
+    content: counter(step); position: absolute; left: 0; top: 10px;
+    width: 24px; height: 24px; background: var(--indigo); color: #fff; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700;
+  }
+
+  /* ---- Diff Badge ---- */
+  .diff-easy { color: #16a34a; }
+  .diff-medium { color: #d97706; }
+  .diff-hard { color: #dc2626; }
+
+  /* ---- Priority Table ---- */
+  .priority-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .priority-table th {
+    text-align: left; padding: 10px 12px; background: #1c1917; color: #fff;
+    font-weight: 600; font-size: 13px;
+  }
+  .priority-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+  .priority-table tr:nth-child(even) td { background: #fafaf9; }
+
+  /* ---- Responsive ---- */
+  @media (max-width: 860px) {
+    .sidebar { display: none; }
+    .main { margin-left: 0; padding: 24px 20px 60px; }
+    .platform-grid { grid-template-columns: 1fr; }
+    .header h1 { font-size: 28px; }
+    .section-title { font-size: 22px; }
+    .section-bg { padding: 24px 20px; }
+  }
+
+  /* ---- Case Card ---- */
+  .case-card { margin-bottom: 20px; }
+  .case-card h4 { font-size: 17px; font-weight: 700; margin-bottom: 6px; }
+  .case-meta { font-size: 13px; color: var(--text-muted); margin-bottom: 8px; }
+  .case-takeaway { font-size: 14px; color: var(--text-secondary); padding: 10px 14px; background: #fefce8; border-radius: 6px; border-left: 3px solid var(--accent-amber); }
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<nav class="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-icon">T</div>
+    <span>趋势日报</span>
+  </div>
+  <ul class="sidebar-nav" id="nav">
+    <li><a href="#hot" class="active">热门索引</a></li>
+    <li><a href="#topics">选题列表</a></li>
+    <li><a href="#prompts">提示词库</a></li>
+    <li><a href="#cases">案例拆解</a></li>
+    <li><a href="#guide">拍摄指南</a></li>
+    <li><a href="#seo">SEO 策略</a></li>
+    <li><a href="#cross">跨平台方案</a></li>
+    <li><a href="#plan">本周行动</a></li>
+  </ul>
+</nav>
+
+<!-- MAIN CONTENT -->
+<main class="main">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="date">2026年6月23日 星期二</div>
+  <h1>AI 趋势日报</h1>
+  <p class="insight">B站创作者社区正在经历一场"工具平权"——UPDream 内测引发的效能焦虑与 AI 漫剧品类的崛起同时发生；小红书侧则以"AI+运营效率"为主线，工具测评类内容竞争白热化。两条赛道共同的信号：内容创作工具链的 AI 化已从尝鲜期进入标配期，纯手工创作正在被结构性边缘化。</p>
+</div>
+
+<!-- ====== 1. HOT INDEX ====== -->
+<div class="section" id="hot">
+<div class="section-bg">
+<div class="section-header"><div class="s-icon">1</div><h2 class="section-title">热门索引</h2></div>
+
+<div class="platform-grid">
+<div class="platform-col">
+  <h3>B站 当前热门</h3>
+  <ol class="hot-list">
+    <li>
+      <span class="rank">01</span>
+      <a href="https://search.bilibili.com/all?keyword=UPDream%20%E5%86%85%E6%B5%8B%20AI%E8%A7%86%E9%A2%91%E5%88%9B%E4%BD%9C" target="_blank">UPDream 内测：B站自研 AI 视频创作工具 | UP 主圈层热议</a>
+      <span class="source">3月31日启动内测 · 6月持续扩展 · 多个科技UP主跟进测评</span>
+    </li>
+    <li>
+      <span class="rank">02</span>
+      <a href="https://search.bilibili.com/all?keyword=%E6%99%BA%E8%B0%B1%20GLM-5.2" target="_blank">智谱 GLM-5.2 发布 | 深度推理能力引热议</a>
+      <span class="source">6月中旬 · AI日报/BV1Sejq6aErU · 与 Claude 对标讨论</span>
+    </li>
+    <li>
+      <span class="rank">03</span>
+      <a href="https://search.bilibili.com/all?keyword=AI%E6%BC%AB%E5%89%A7%20%E6%95%99%E7%A8%8B%202026" target="_blank">AI 漫剧制作教程 | "吊打付费"系列持续走红</a>
+      <span class="source">全50集保姆级教程 · 多个播放量破百万 · AI短剧赛道</span>
+    </li>
+    <li>
+      <span class="rank">04</span>
+      <a href="https://search.bilibili.com/all?keyword=B%E7%AB%99%20AI%E5%88%9B%E4%BD%9C%E5%A4%A7%E8%B5%9B" target="_blank">B站首届 AI 创作大赛 | 8300部作品 播放量破7亿</a>
+      <span class="source">3月31日收官 · 官方背书 AI 创作生态</span>
+    </li>
+    <li>
+      <span class="rank">05</span>
+      <a href="https://search.bilibili.com/all?keyword=MIT%20AI%2012%E7%A7%8D%E7%BB%93%E5%B1%80" target="_blank">MIT 深度解析：AI 发展的 12 种潜在结局</a>
+      <span class="source">6月16日发布 · BV1htjG68E7z · 深度内容代表</span>
+    </li>
+    <li>
+      <span class="rank">06</span>
+      <a href="https://search.bilibili.com/all?keyword=AI%E5%8D%9A%E4%B8%BB%E8%B0%83%E7%A0%942026" target="_blank">AI 博主调研 2025-2026 | 六大平台 120 位头部博主分析</a>
+      <span class="source">4月29日 · 内容风格到变现模式全景拆解</span>
+    </li>
+    <li>
+      <span class="rank">07</span>
+      <a href="https://search.bilibili.com/all?keyword=B%E7%AB%99%20AI%E7%AE%97%E6%B3%95%20%E5%86%85%E5%AE%B9%E5%88%86%E5%8F%91" target="_blank">B站下线猜你喜欢算法，重构 AI 内容分发</a>
+      <span class="source">4月5日报道 · 算法透明度与AI分发策略调整</span>
+    </li>
+  </ol>
+</div>
+
+<div class="platform-col">
+  <h3>小红书 当前热门</h3>
+  <ol class="hot-list">
+    <li>
+      <span class="rank">01</span>
+      <a href="https://www.xiaohongshu.com/search_result?keyword=AI%E5%88%9B%E4%BD%9C%E5%B7%A5%E5%85%B7%20%E6%8E%A8%E8%8D%90%202026" target="_blank">2026 小红书 AI 创作工具汇总 | 火兔工具箱等 10 款工具横评</a>
+      <span class="source">多个测评笔记持续热推 · 博主圈层高度关注</span>
+    </li>
+    <li>
+      <span class="rank">02</span>
+      <a href="https://www.xiaohongshu.com/search_result?keyword=AI%E5%B7%A5%E5%85%B7%E9%93%BE%20%E6%97%A5%E6%9B%B410%E7%AF%87" target="_blank">AI 工具链实现日更 10 篇爆款笔记 | 内容生产流水线</a>
+      <span class="source">3月 · cnblogs 深度文章 · 创作者圈广泛传播</span>
+    </li>
+    <li>
+      <span class="rank">03</span>
+      <a href="https://www.xiaohongshu.com/search_result?keyword=%E5%B0%8F%E7%BA%A2%E4%B9%A6%20AI%20%E8%BF%90%E8%90%A5%200%E5%88%B01%E4%B8%87%E7%B2%89" target="_blank">AI 小红书运营指南：从 0 到 1 万粉</a>
+      <span class="source">6月10日 FlowPix · AI生成+人工微调方法论</span>
+    </li>
+    <li>
+      <span class="rank">04</span>
+      <a href="https://www.xiaohongshu.com/search_result?keyword=AI%E6%B2%BB%E7%90%86%20%E9%87%8D%E5%88%92%E8%B5%9B%E9%81%93" target="_blank">AI 治理本质："不是禁用，而是重划赛道"</a>
+      <span class="source">4月28日 人人都是产品经理 · 小红书AI内容政策深度解析</span>
+    </li>
+    <li>
+      <span class="rank">05</span>
+      <a href="https://www.xiaohongshu.com/search_result?keyword=%E5%B0%8F%E7%BA%A2%E4%B9%A6%20%E7%82%B9%E7%82%B9%20AI%E6%90%9C%E7%B4%A2" target="_blank">小红书"点点"AI 搜索深度思考模式上线</a>
+      <span class="source">平台自研大模型驱动 · 3秒内生成解决方案</span>
+    </li>
+    <li>
+      <span class="rank">06</span>
+      <a href="https://www.xiaohongshu.com/search_result?keyword=AI%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86%20%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF" target="_blank">AI 产品经理学习路线 2026 | 零基础转行指南</a>
+      <span class="source">3月26日 CSDN · 技术基础+AI核心+产品管理</span>
+    </li>
+    <li>
+      <span class="rank">07</span>
+      <a href="https://www.xiaohongshu.com/search_result?keyword=AI%E5%89%AF%E4%B8%9A%20%E5%B0%8F%E7%BA%A2%E4%B9%A6%20%E5%8F%98%E7%8E%B0" target="_blank">AI 副业变现 | 从内容创作到电商带货的全链路</a>
+      <span class="source">持续高热 · DeepSeek 赋能电商案例广泛传播</span>
+    </li>
+  </ol>
+</div>
+</div>
+</div>
+</div>
+
+<!-- ====== 2. TOPIC SELECTION ====== -->
+<div class="section" id="topics">
+<div class="section-bg">
+<div class="section-header"><div class="s-icon">2</div><h2 class="section-title">选题列表</h2></div>
+
+<!-- Topic 1 -->
+<div class="topic-card card">
+<div class="card-inner">
+  <div class="topic-header">
+    <div class="topic-num">1</div>
+    <div class="topic-info">
+      <h4>UPDream 深度测评：B站自研 AI 工具到底能不能用？</h4>
+      <div class="topic-tags">
+        <span class="tag tag-hot">窗口期 3-5天</span>
+        <span class="tag tag-indigo">B站首选</span>
+      </div>
+    </div>
+  </div>
+  <div class="topic-signal">热度信号：B站多个科技 UP 主已在跟进，但深度实操型测评不多。UPDream 2026年3月启动内测，6月持续扩展邀请，当前是信息差最大的窗口期。</div>
+  <div class="topic-strategy">打法建议：不做功能罗列，做"我用 UPDream 从零做了一条视频"全流程实录。聚焦实际产出质量和翻车点，对比剪映/CapCut。</div>
+  <div class="prod-card">
+    <div class="prod-row">
+      <span><span class="label">难度</span> 3/5 <span class="diff-medium">中等</span></span>
+      <span><span class="label">耗时</span> 4-6小时</span>
+      <span><span class="label">平台</span> B站</span>
+    </div>
+    <div class="prod-framework">拍摄框架：1. 工具介绍(2min) → 2. 注册&界面(3min) → 3. 剧本生成实测(4min) → 4. 分镜&素材(4min) → 5. 成品展示(2min) → 6. 优缺点总结(3min)。核心设备：电脑+录屏软件。</div>
+  </div>
+</div>
+</div>
+
+<!-- Topic 2 -->
+<div class="topic-card card">
+<div class="card-inner">
+  <div class="topic-header">
+    <div class="topic-num">2</div>
+    <div class="topic-info">
+      <h4>AI 创作工具 2026 年中大盘点：B站 vs 小红书怎么选？</h4>
+      <div class="topic-tags"><span class="tag tag-trend">持续升温</span><span class="tag tag-indigo">双平台</span></div>
+    </div>
+  </div>
+  <div class="topic-signal">热度信号：小红书"AI创作工具汇总"系列多篇爆文，B站 UPDream+听脑AI 等新工具密集出现。两大平台AI工具生态差异明显——B站偏视频生成，小红书偏图文效率。</div>
+  <div class="topic-strategy">打法建议：做一期双平台工具矩阵对比图。B站深度讲视频工具链，小红书版本精简为9图卡片。</div>
+  <div class="prod-card">
+    <div class="prod-row">
+      <span><span class="label">难度</span> 2/5 <span class="diff-easy">简单</span></span>
+      <span><span class="label">耗时</span> 3-4小时</span>
+      <span><span class="label">平台</span> B站+小红书</span>
+    </div>
+    <div class="prod-framework">B站框架：总览图(1min)→视频工具4款(4min)→图文工具3款(3min)→效率工具3款(2min)→选择建议(2min)。小红书：9图对比卡片，每款工具一图。</div>
+  </div>
+</div>
+</div>
+
+<!-- Topic 3 -->
+<div class="topic-card card">
+<div class="card-inner">
+  <div class="topic-header">
+    <div class="topic-num">3</div>
+    <div class="topic-info">
+      <h4>AI 漫剧从零到发布：全流程实操（含踩坑实录）</h4>
+      <div class="topic-tags"><span class="tag tag-hot">需求旺盛</span><span class="tag tag-indigo">B站首选</span></div>
+    </div>
+  </div>
+  <div class="topic-signal">热度信号：B站"AI漫剧保姆级教程"系列多个破百万播放，但多数是工具教学而非完整项目案例。"AI漫剧"搜索量在2026年Q2持续上升，长尾价值极高。</div>
+  <div class="topic-strategy">打法建议：不讲工具参数，讲一个完整的短剧项目——从选题、剧本、角色设计、生成、剪辑到发布的全过程。必须包含至少3个真实翻车案例。</div>
+  <div class="prod-card">
+    <div class="prod-row">
+      <span><span class="label">难度</span> 4/5 <span class="diff-hard">较高</span></span>
+      <span><span class="label">耗时</span> 1-2天</span>
+      <span><span class="label">平台</span> B站</span>
+    </div>
+    <div class="prod-framework">拍摄框架：1. 选题&剧本(3min)→2. 角色设计(3min)→3. 逐帧生成(5min)→4. 配音&音效(3min)→5. 剪辑&调色(3min)→6. 成品展示(2min)→7. 经验复盘(3min)。核心设备：Stable Diffusion/AI绘画工具+剪映+配音工具。</div>
+  </div>
+</div>
+</div>
+
+<!-- Topic 4 -->
+<div class="topic-card card">
+<div class="card-inner">
+  <div class="topic-header">
+    <div class="topic-num">4</div>
+    <div class="topic-info">
+      <h4>GLM-5.2 vs Claude vs DeepSeek：国产大模型推理能力实测</h4>
+      <div class="topic-tags"><span class="tag tag-hot">时效性强</span><span class="tag tag-indigo">B站</span></div>
+    </div>
+  </div>
+  <div class="topic-signal">热度信号：智谱GLM-5.2 6月中旬发布，被AI日报称为"核弹"。但全网缺乏系统性的横向对比测评，尤其是中文场景的推理能力对比。</div>
+  <div class="topic-strategy">打法建议：选5个相同的中文推理题（数学、逻辑、代码、创意写作、争议判断），让三个模型同时作答并对比分析。窗口期约5-7天。</div>
+  <div class="prod-card">
+    <div class="prod-row">
+      <span><span class="label">难度</span> 3/5 <span class="diff-medium">中等</span></span>
+      <span><span class="label">耗时</span> 4-5小时</span>
+      <span><span class="label">平台</span> B站</span>
+    </div>
+    <div class="prod-framework">拍摄框架：1. 模型介绍(2min)→2. 数学推理对比(3min)→3. 代码能力对比(3min)→4. 创意写作(3min)→5. 逻辑陷阱题(3min)→6. 综合评分(2min)。核心设备：电脑+录屏+三模型API/token。</div>
+  </div>
+</div>
+</div>
+
+<!-- Topic 5 -->
+<div class="topic-card card">
+<div class="card-inner">
+  <div class="topic-header">
+    <div class="topic-num">5</div>
+    <div class="topic-info">
+      <h4>用 AI 做小红书：从选题到发布的全流程 SOP</h4>
+      <div class="topic-tags"><span class="tag tag-trend">稳定需求</span><span class="tag tag-indigo">小红书首选</span></div>
+    </div>
+  </div>
+  <div class="topic-signal">热度信号：小红书"AI运营"相关搜索持续走高，"AI+人工微调"方法论成为共识。FlowPix 6月发布的运营指南引发新一轮讨论，但缺少实操SOP类内容。</div>
+  <div class="topic-strategy">打法建议：做一份可复制的SOP流程图，覆盖选题→初稿→配图→标题→发布→数据分析6个环节，每个环节标注AI工具和人工判断点。</div>
+  <div class="prod-card">
+    <div class="prod-row">
+      <span><span class="label">难度</span> 2/5 <span class="diff-easy">简单</span></span>
+      <span><span class="label">耗时</span> 3-4小时</span>
+      <span><span class="label">平台</span> 小红书</span>
+    </div>
+    <div class="prod-framework">内容框架(9图)：1. 封面(SOP总览) → 2. 选题环节 → 3. AI写初稿 → 4. 人工微调 → 5. AI配图/封面 → 6. 标题优化 → 7. 发布时间策略 → 8. 数据复盘 → 9. 工具清单。核心设备：AI写作工具+Canva/醒图。</div>
+  </div>
+</div>
+</div>
+
+<!-- Topic 6 -->
+<div class="topic-card card">
+<div class="card-inner">
+  <div class="topic-header">
+    <div class="topic-num">6</div>
+    <div class="topic-info">
+      <h4>小红书"点点"AI 搜索实测：深度思考模式到底深度在哪？</h4>
+      <div class="topic-tags"><span class="tag tag-hot">平台新功能</span><span class="tag tag-indigo">小红书</span></div>
+    </div>
+  </div>
+  <div class="topic-signal">热度信号：小红书"点点"AI搜索深度思考模式上线，自研大模型驱动。生活类问题优先展示平台内高质量内容，与通用AI搜索差异化明显。</div>
+  <div class="topic-strategy">打法建议：用同一组生活类问题分别问"点点"、DeepSeek、百度AI搜索，对比回答质量和实用性。"点点"的优势在于调用小红书内真实用户内容。</div>
+  <div class="prod-card">
+    <div class="prod-row">
+      <span><span class="label">难度</span> 2/5 <span class="diff-easy">简单</span></span>
+      <span><span class="label">耗时</span> 3-4小时</span>
+      <span><span class="label">平台</span> 小红书</span>
+    </div>
+    <div class="prod-framework">内容框架(9图)：1. 封面(对比悬念) → 2-4. 旅游/美食/穿搭三场景实测 → 5. 全网信息整合能力 → 6. 局限性发现 → 7. 与通用AI对比 → 8. 使用场景建议 → 9. 总结。核心设备：手机截图。</div>
+  </div>
+</div>
+</div>
+
+<!-- Topic 7 -->
+<div class="topic-card card">
+<div class="card-inner">
+  <div class="topic-header">
+    <div class="topic-num">7</div>
+    <div class="topic-info">
+      <h4>2026 年 AI 入门学习路线：别再被"7天学会"割韭菜了</h4>
+      <div class="topic-tags"><span class="tag tag-stable">长尾搜索词</span><span class="tag tag-indigo">双平台</span></div>
+    </div>
+  </div>
+  <div class="topic-signal">热度信号："AI入门教程""AI学习路线"在B站和小红书均为持续搜索词。但目前内容质量分化严重——大量"7天速成"类低质内容泛滥，系统性学习路线稀缺。</div>
+  <div class="topic-strategy">打法建议：做一份真诚的、分阶段的学习路线图。核心卖点是"不贩卖焦虑，说我真实的学习路径"。6个月后依然有人搜到并觉得有用。</div>
+  <div class="prod-card">
+    <div class="prod-row">
+      <span><span class="label">难度</span> 2/5 <span class="diff-easy">简单</span></span>
+      <span><span class="label">耗时</span> 4-5小时</span>
+      <span><span class="label">平台</span> 双平台</span>
+    </div>
+    <div class="prod-framework">B站框架：1. 为什么不要信"7天速成"(2min)→2. 第一阶段:理解AI(3min)→3. 第二阶段:使用AI工具(4min)→4. 第三阶段:深入方向(4min)→5. 资源推荐(2min)→6. 真实时间线(2min)。小红书：9图路线图卡片。核心设备：电脑+思维导图工具。</div>
+  </div>
+</div>
+</div>
+
+<!-- Topic 8 -->
+<div class="topic-card card">
+<div class="card-inner">
+  <div class="topic-header">
+    <div class="topic-num">8</div>
+    <div class="topic-info">
+      <h4>小红书 AI 治理政策解读：AI 内容还能发吗？</h4>
+      <div class="topic-tags"><span class="tag tag-trend">持续关注</span><span class="tag tag-indigo">小红书</span></div>
+    </div>
+  </div>
+  <div class="topic-signal">热度信号：4月底"人人都是产品经理"发布《AI治理本质：不是禁用，而是重划赛道》引发广泛讨论。创作者普遍焦虑：用AI写的内容会不会被限流？</div>
+  <div class="topic-strategy">打法建议：解读平台政策+实测案例。核心回答一个问题：AI内容在什么条件下是安全的？附小红书官方AI内容标识规范。</div>
+  <div class="prod-card">
+    <div class="prod-row">
+      <span><span class="label">难度</span> 2/5 <span class="diff-easy">简单</span></span>
+      <span><span class="label">耗时</span> 3-4小时</span>
+      <span><span class="label">平台</span> 小红书</span>
+    </div>
+    <div class="prod-framework">内容框架(9图)：1. 封面(核心观点) → 2. 平台政策原文 → 3. 政策解读 → 4. AI内容被限流的真实案例 → 5. 安全使用AI的方法 → 6. AI内容标识规范 → 7. 优质AI内容案例 → 8. 红线清单 → 9. 总结建议。核心设备：手机截图+政策原文链接。</div>
+  </div>
+</div>
+</div>
+
+<!-- Topic 9 -->
+<div class="topic-card card">
+<div class="card-inner">
+  <div class="topic-header">
+    <div class="topic-num">9</div>
+    <div class="topic-info">
+      <h4>MIT 预言 AI 十二种结局：普通人应该关心哪一个？</h4>
+      <div class="topic-tags"><span class="tag tag-trend">深度内容</span><span class="tag tag-indigo">B站</span></div>
+    </div>
+  </div>
+  <div class="topic-signal">热度信号：B站 MIT AI 12种结局视频 6月16日发布后播放量可观。深度内容在B站始终有稳定受众，但多数内容偏学术，缺少"对普通人意味着什么"的解读。</div>
+  <div class="topic-strategy">打法建议：不是简单复述MIT研究，而是从中提取3-5个与普通人最相关的场景，用具体的生活案例解读。降低理解门槛，但保持思想深度。</div>
+  <div class="prod-card">
+    <div class="prod-row">
+      <span><span class="label">难度</span> 3/5 <span class="diff-medium">中等</span></span>
+      <span><span class="label">耗时</span> 5-6小时</span>
+      <span><span class="label">平台</span> B站</span>
+    </div>
+    <div class="prod-framework">拍摄框架：1. 引出问题(2min)→2. MIT研究概述(3min)→3. 场景A:工作被替代(4min)→4. 场景B:超级智能(4min)→5. 场景C:AI对齐(3min)→6. 普通人应对策略(3min)。核心设备：资料整理+录屏+简单动画。</div>
+  </div>
+</div>
+</div>
+
+<!-- Topic 10 -->
+<div class="topic-card card">
+<div class="card-inner">
+  <div class="topic-header">
+    <div class="topic-num">10</div>
+    <div class="topic-info">
+      <h4>B站 AI 创作大赛复盘：8300部作品教会我们什么？</h4>
+      <div class="topic-tags"><span class="tag tag-trend">案例价值</span><span class="tag tag-indigo">B站</span></div>
+    </div>
+  </div>
+  <div class="topic-signal">热度信号：B站首届AI创作大赛 3月底收官，8300部作品、7亿播放。但赛后缺乏系统复盘——哪些类型的AI内容跑出来了？官方评选标准是什么？</div>
+  <div class="topic-strategy">打法建议：拆解获奖作品的内容形式、AI技术运用、选题方向。做一份"AI内容创作避坑指南"——分析低分作品的共性问题。</div>
+  <div class="prod-card">
+    <div class="prod-row">
+      <span><span class="label">难度</span> 3/5 <span class="diff-medium">中等</span></span>
+      <span><span class="label">耗时</span> 5-6小时</span>
+      <span><span class="label">平台</span> B站</span>
+    </div>
+    <div class="prod-framework">拍摄框架：1. 大赛背景(1min)→2. 获奖作品类型分析(3min)→3. 爆款公式拆解(4min)→4. 低分作品共性问题(3min)→5. 创作建议(3min)→6. 第二届前瞻(1min)。核心设备：B站网页+数据分析+剪辑。</div>
+  </div>
+</div>
+</div>
+
+<!-- Creative Topic C1 -->
+<div class="topic-card card">
+<div class="card-inner">
+  <div class="topic-header">
+    <div class="topic-num creative">C1</div>
+    <div class="topic-info">
+      <h4>逆向选题：在 AI 时代，不用 AI 做内容的创作者活得好吗？</h4>
+      <div class="topic-tags"><span class="tag tag-indigo">创意选题</span><span class="tag tag-trend">差异化</span></div>
+    </div>
+  </div>
+  <div class="topic-signal">热度信号：AI创作工具全面渗透，但"反AI创作"的声音也在增长。小红书上有博主专门标注"本文无AI参与"来作为差异化卖点。</div>
+  <div class="topic-strategy">打法建议：采访3-5位坚持纯手工创作的博主/UP主，了解他们的创作节奏、内容质量和受众反馈。不做价值判断，呈现真实状态。</div>
+  <div class="prod-card">
+    <div class="prod-row">
+      <span><span class="label">难度</span> 4/5 <span class="diff-hard">较高</span></span>
+      <span><span class="label">耗时</span> 2-3天</span>
+      <span><span class="label">平台</span> 双平台</span>
+    </div>
+    <div class="prod-framework">B站框架：1. 现象引入(2min)→2. 创作者A(3min)→3. 创作者B(3min)→4. 创作者C(3min)→5. 数据对比(2min)→6. 观点碰撞(2min)。小红书：9图人物卡片+金句摘录。核心设备：采访设备+剪辑。</div>
+  </div>
+</div>
+</div>
+
+<!-- Creative Topic C2 -->
+<div class="topic-card card">
+<div class="card-inner">
+  <div class="topic-header">
+    <div class="topic-num creative">C2</div>
+    <div class="topic-info">
+      <h4>用 AI 复原一座消失的城市：沈阳 1990-2026</h4>
+      <div class="topic-tags"><span class="tag tag-indigo">创意选题</span><span class="tag tag-hot">情感传播</span></div>
+    </div>
+  </div>
+  <div class="topic-signal">热度信号：AI老照片修复、历史场景重建类内容在双平台均有较强情感传播力。"AI复原"相关搜索词在2026年持续走高。</div>
+  <div class="topic-strategy">打法建议：选一个有情感共鸣的主题（如家乡变迁），用AI工具将老照片转化为动态视频，配合叙事讲述城市变化。选题自带传播基因。</div>
+  <div class="prod-card">
+    <div class="prod-row">
+      <span><span class="label">难度</span> 4/5 <span class="diff-hard">较高</span></span>
+      <span><span class="label">耗时</span> 2-3天</span>
+      <span><span class="label">平台</span> 双平台</span>
+    </div>
+    <div class="prod-framework">B站框架：1. 情感引入(2min)→2. 老照片征集(2min)→3. AI修复过程(4min)→4. 动态化处理(3min)→5. 对比展示(3min)→6. 情感收尾(2min)。核心设备：AI图片修复工具+视频生成工具+剪辑。</div>
+  </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<!-- ====== 3. PROMPT LIBRARY ====== -->
+<div class="section" id="prompts">
+<div class="section-bg">
+<div class="section-header"><div class="s-icon">3</div><h2 class="section-title">制作提示词库</h2></div>
+
+<!-- Prompt 1: UPDream测评 - B站视频 -->
+<div class="topic-card card">
+<div class="card-inner">
+  <h4 style="margin-bottom:8px;">选题 1: UPDream 深度测评 -- B站视频脚本</h4>
+<div class="prompt-block">
+<div class="prompt-label">视频脚本 Prompt（复制即用）</div>
+你是一个B站科技区UP主，风格硬核、直接、不废话。请为一条"UPDream AI视频创作工具深度测评"撰写视频脚本。
+
+标题建议：《UPDream内测实测：B站的AI视频工具到底能不能打？》或《我用了10小时UPDream，告诉你值不值得等》
+
+语气要求：像朋友聊天一样自然，有锐度但不刻薄，适当加入自嘲和真实反应。不要说"大家好我是某某"，直接进入正题。
+
+内容结构（按时间节点）：
+[00:00-02:00] 开场：我为什么要测UPDream？B站AI创作大赛刚结束，官方就推了这个工具，是什么信号？
+[02:00-05:00] 上手体验：注册流程、界面第一印象、与剪映的区别
+[05:00-09:00] 核心功能实测：剧本生成（给一个真实选题让它写）、分镜设计、素材生成 -- 每步展示实际产出
+[09:00-12:00] 成品展示：用UPDream全流程做一条1分钟短视频，展示最终效果
+[12:00-15:00] 翻车实录：至少3个真实遇到的问题和限制
+[15:00-17:00] 谁适合用？现阶段值得投入时间学吗？与同类工具的横向定位
+[17:00-18:00] 总结+互动引导
+
+互动引导：在结尾抛出一个有讨论价值的问题，引导弹幕和评论区。例如："你觉得AI工具会让创作更卷还是更公平？弹幕给我你的看法。"
+</div>
+</div>
+</div>
+
+<!-- Prompt 1: UPDream测评 - 小红书 -->
+<div class="topic-card card">
+<div class="card-inner">
+  <h4 style="margin-bottom:8px;">选题 1: UPDream 深度测评 -- 小红书图文</h4>
+<div class="prompt-block">
+<div class="prompt-label">小红书内容 Prompt（复制即用）</div>
+你是一个小红书科技博主，风格实用主义、信息密度高、排版清爽。请为一篇"UPDream AI视频工具测评"撰写9图内容。
+
+标题公式（3选1）：
+1. B站新出的AI视频工具，我替你们试了，翻车3次
+2. UPDream内测真实体验 | 这3个功能让我直呼离谱
+3. 2026年最值得关注的AI创作工具 | UPDream全流程测评
+
+正文结构：
+【开头】一句话点出UPDream是什么 + 你的体验时长
+【中间】分4个板块：亮点、翻车、适合谁、不值得谁用
+【结尾】一个引导性提问 + 3个相关标签
+
+9图内容规划：
+图1: 封面 -- 工具界面截图+大字标题
+图2: UPDream是什么？一句话解释+关键信息卡片
+图3: 剧本生成实测 -- 输入vs输出对比
+图4: 分镜设计实测 -- 生成的画面展示
+图5: 素材生成实测 -- 素材库资源截图
+图6: 最终成品展示 -- 视频截图/链接
+图7: 翻车点汇总 -- 3个具体问题的图文说明
+图8: 谁适合用？-- 3类人群判断
+图9: 总结+互动引导
+
+语气：亲切但有信息量，像给朋友分享一次真实体验，不端着也不粗糙。
+标签：#AI创作工具 #UPDream测评 #B站UP主 #AI视频制作 #2026科技趋势 #效率工具 #内容创作
+</div>
+</div>
+</div>
+
+<!-- Prompt 2: AI创作工具大盘点 - 双平台 -->
+<div class="topic-card card">
+<div class="card-inner">
+  <h4 style="margin-bottom:8px;">选题 2: AI 创作工具 2026 年中大盘点 -- 双平台提示词</h4>
+<div class="prompt-block">
+<div class="prompt-label">B站视频脚本 Prompt</div>
+标题建议：《2026年中AI创作工具盘点：B站和小红书的工具箱完全不同》或《10款AI创作工具横评：哪个是你的年度最佳？》
+
+语气要求：数据导向、有对比、有态度。适合横屏深度观看。每一款工具给一个"一句话评价"。
+
+内容结构：
+[00:00-01:00] 开场：2026年上半年AI工具爆发式增长，创作者面临选择困难
+[01:00-04:00] 视频工具组：UPDream、剪映AI、CapCut、Runway -- 各自定位和优势
+[04:00-07:00] 图文工具组：火兔工具箱、Canva AI、醒图AI -- 小红书博主必看
+[07:00-09:00] 效率工具组：ChatGPT、Claude、DeepSeek -- 创作辅助核心
+[09:00-11:00] B站 vs 小红书工具选用策略 -- 平台差异决定工具选择
+[11:00-12:00] 总结：我的推荐组合 + 互动引导
+互动引导："你日常用得最多的AI创作工具是哪款？评论区建设一个工具推荐墙。"
+
+---
+<div class="prompt-label" style="margin-top:16px;">小红书内容 Prompt</div>
+标题公式：
+1. 2026年我用过的10款AI创作工具，这3款是真爱
+2. 小红书博主AI工具箱 | 从文案到封面全搞定
+3. 别再一个个试了，2026年AI创作工具选这4款就够了
+
+9图内容规划：
+图1: 封面 -- 工具图标矩阵+大字标题
+图2: 视频创作工具3款 -- 各有优缺
+图3: 图文创作工具3款 -- 真实产出对比
+图4: 文案辅助工具2款 -- 提示词技巧
+图5: 设计排版工具2款 -- 上手难度对比
+图6: 我的工作流 -- 从选题到发布的工具链
+图7: 免费vs付费 -- 不同预算的选择方案
+图8: 避坑指南 -- 3款不建议的工具及原因
+图9: 总结+互动 -- "你被哪款工具种草了？"
+
+语气：种草博主风，像闺蜜推荐好物，有真实感受和细节。
+标签：#AI创作工具 #效率神器 #博主工具箱 #AI视频制作 #小红书运营 #内容创作 #工具推荐
+</div>
+</div>
+</div>
+
+<!-- Prompt 5: AI做小红书SOP - 小红书 -->
+<div class="topic-card card">
+<div class="card-inner">
+  <h4 style="margin-bottom:8px;">选题 5: 用 AI 做小红书全流程 SOP -- 小红书图文</h4>
+<div class="prompt-block">
+<div class="prompt-label">小红书内容 Prompt（复制即用）</div>
+标题公式：
+1. 我的AI小红书SOP：从选题到发布只要30分钟
+2. 日更博主的秘密武器 | AI小红书全流程SOP大公开
+3. 用AI做小红书半年，这份SOP让我效率翻3倍
+
+正文结构：
+【开头】为什么需要SOP？-- 没有流程的创作就是碰运气
+【中间】6个环节逐个拆解，每环节标注AI工具+人工决策点+耗时
+【结尾】持续优化的方法论 + 互动引导
+
+9图内容规划：
+图1: 封面 -- 流程图总览+SOP标题
+图2: 环节1 选题 -- AI找选题+人工判断标准
+图3: 环节2 初稿 -- AI写作的提示词模板
+图4: 环节3 微调 -- 人工必须修改的5个点
+图5: 环节4 配图 -- AI设计+封面模板
+图6: 环节5 标题 -- A/B测试标题公式
+图7: 环节6 发布+复盘 -- 最佳时间+数据分析
+图8: 效率时间表 -- 各环节耗时分布
+图9: 总结+互动作业 -- "试试这个SOP，评论区交作业"
+
+语气：干货向，像付费课程的第一节免费试听课。信息密度高但不枯燥。
+标签：#小红书运营 #AI写作 #内容创作SOP #效率提升 #博主成长 #AI工具 #小红书干货
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<!-- ====== 4. CASE STUDY ====== -->
+<div class="section" id="cases">
+<div class="section-bg">
+<div class="section-header"><div class="s-icon">4</div><h2 class="section-title">案例拆解</h2></div>
+
+<!-- Case 1 -->
+<div class="case-card card">
+<div class="card-inner">
+  <h4>案例 1: UPDream 内测引发的"工具焦虑"</h4>
+  <div class="case-meta">来源：B站多个科技UP主 | 时间：2026年3月-6月 | 现象级讨论</div>
+  <div class="evidence">
+    参考来源：<a href="https://ai.zol.com.cn/1157/11576550.html" target="_blank">中关村在线报道</a> / <a href="https://post.smzdm.com/p/aww9wmlp/" target="_blank">什么值得买实测</a>
+  </div>
+  <div class="case-takeaway" style="margin-top:12px;">
+    <strong>方法论提炼：</strong>新工具出现时，第一波"功能介绍"类内容窗口期极短（3-5天）。真正有价值的是第二波"实操测评+翻车实录"——它帮助后来者节省试错成本，自然获得长尾搜索。不要抢第一波，要抢"第一个说实话"的那一波。
+  </div>
+</div>
+</div>
+
+<!-- Case 2 -->
+<div class="case-card card">
+<div class="card-inner">
+  <h4>案例 2: "吊打付费"系列 AI 漫剧教程的爆款逻辑</h4>
+  <div class="case-meta">来源：B站多UP主 | 时间：2026年3月-6月 | 播放量均超百万</div>
+  <div class="evidence">
+    参考来源：<a href="https://www.bilibili.com/video/BV16Ujc6jEny/" target="_blank">B站原视频</a> / <a href="https://post.smzdm.com/p/am9nne2v/" target="_blank">什么值得买转载</a>
+  </div>
+  <div class="case-takeaway" style="margin-top:12px;">
+    <strong>方法论提炼：</strong>"吊打付费"这个标题公式在教程类内容中几乎无敌——它同时激活了"性价比敏感"和"信息差焦虑"两个传播杠杆。核心是：你必须真的比付费课程讲得好或讲得全。这类内容一旦做透，就是搜索资产的积累——6个月后依然有人搜"AI漫剧教程"找到你。
+  </div>
+</div>
+</div>
+
+<!-- Case 3 -->
+<div class="case-card card">
+<div class="card-inner">
+  <h4>案例 3: 小红书 AI 创作工具测评的竞争红海</h4>
+  <div class="case-meta">来源：小红书+微信公众号+掘金 | 时间：2026年1月-6月 | 多篇10w+</div>
+  <div class="evidence">
+    参考来源：<a href="https://juejin.cn/post/7595911076014030884" target="_blank">掘金 6款工具测评</a> / <a href="https://post.smzdm.com/p/awwgv7w4/" target="_blank">什么值得买 10款实测</a>
+  </div>
+  <div class="case-takeaway" style="margin-top:12px;">
+    <strong>方法论提炼：</strong>AI工具测评赛道已经拥挤，但仍有缝隙："纵向深度测评"（一款工具用到极致）比"横向堆砌罗列"更有壁垒。当一个赛道大家都在做横评时，纵评就是蓝海。选择一款你真正高频使用的工具，做"我用XX工具的一年"这类时间维度的内容。
+  </div>
+</div>
+</div>
+
+<!-- Case 4 -->
+<div class="case-card card">
+<div class="card-inner">
+  <h4>案例 4: 小红书"点点"AI搜索的产品策略启示</h4>
+  <div class="case-meta">来源：百家号/人人都是产品经理 | 时间：2025年3月-2026年6月 | 产品迭代追踪</div>
+  <div class="evidence">
+    参考来源：<a href="https://www.woshipm.com/ai/6385726.html" target="_blank">人人都是产品经理 深度分析</a>
+  </div>
+  <div class="case-takeaway" style="margin-top:12px;">
+    <strong>方法论提炼：</strong>平台自建AI工具是2026年的大趋势。B站做UPDream，小红书做"点点"，本质都是"用AI重构内容分发和创作"。对创作者意味着：平台的AI工具自带数据优势和分发加成，用平台原生工具的内容可能获得更多流量扶持。这是需要关注的平台策略信号。
+  </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<!-- ====== 5. SHOOTING GUIDE ====== -->
+<div class="section" id="guide">
+<div class="section-bg">
+<div class="section-header"><div class="s-icon">5</div><h2 class="section-title">拍摄指南</h2></div>
+
+<div class="card" style="margin-bottom:20px;">
+<div class="card-inner">
+<div class="card-title">B站横屏视频制作 6 步流程</div>
+<ol class="guide-steps">
+  <li><strong>选题定调</strong> -- 确定选题方向、目标受众、核心卖点。参考日报选题列表的"热度信号"判断竞争密度。</li>
+  <li><strong>脚本撰写</strong> -- 按上文提示词生成初稿，人工调整节奏和语气。检查：开场3秒是否有钩子？每2分钟是否有信息增量？</li>
+  <li><strong>素材准备</strong> -- 录屏、截图、资料画面。AI内容优先用屏录展示，增加可信度。</li>
+  <li><strong>录音/拍摄</strong> -- 选安静环境，麦克风收音。可分段录制，每段不超过5分钟。语气自然，允许磕巴（后期可剪）。</li>
+  <li><strong>剪辑包装</strong> -- 剪映/CapCut即可。节奏紧凑，每15秒一个画面切换。标题字幕打在视频上方，加关键词高亮。</li>
+  <li><strong>封面+标题</strong> -- 封面大字突出核心信息，标题包含搜索关键词。B站标题20字以内最佳。</li>
+</ol>
+</div>
+</div>
+
+<div class="card" style="margin-bottom:20px;">
+<div class="card-inner">
+<div class="card-title">小红书图文制作 6 步流程</div>
+<ol class="guide-steps">
+  <li><strong>选题确认</strong> -- 搜索小红书同主题笔记，确认竞争热度和差异化空间。</li>
+  <li><strong>标题打磨</strong> -- 用标题公式生成5个候选，选最有悬念或最有信息量的那个。</li>
+  <li><strong>正文撰写</strong> -- 按提示词生成，控制每段3-4行，大量空行和分段。用"你"而非"大家"。</li>
+  <li><strong>9图设计</strong> -- Canva/醒图设计。统一视觉风格，每图一个核心信息点。字体不小于18px。</li>
+  <li><strong>话题标签</strong> -- 3个大标签+2个中标签+1个小标签。大标签竞争激烈但流量大，小标签精准但量少。</li>
+  <li><strong>发布时间</strong> -- 早8-9点、中午12点、晚7-9点为黄金时段。周末可尝试晚上10点。</li>
+</ol>
+</div>
+</div>
+
+<div class="card">
+<div class="card-inner">
+<div class="card-title">设备推荐（按难度分级）</div>
+<table class="priority-table">
+  <tr><th>级别</th><th>设备清单</th><th>预算参考</th><th>适用场景</th></tr>
+  <tr><td>入门</td><td>手机+领夹麦克风+自然光+剪映</td><td>0-500元</td><td>小红书图文、简单口播</td></tr>
+  <tr><td>进阶</td><td>电脑+USB麦克风+OBS录屏+环形灯+CapCut</td><td>500-3000元</td><td>B站横屏、工具测评、教程</td></tr>
+  <tr><td>专业</td><td>相机+指向性麦克风+三灯布光+DaVinci Resolve/PR</td><td>5000元+</td><td>深度访谈、外景拍摄、高质量短剧</td></tr>
+</table>
+</div>
+</div>
+
+</div>
+</div>
+
+<!-- ====== 6. SEO STRATEGY ====== -->
+<div class="section" id="seo">
+<div class="section-bg">
+<div class="section-header"><div class="s-icon">6</div><h2 class="section-title">SEO 策略</h2></div>
+
+<div class="card" style="margin-bottom:16px;">
+<div class="card-inner">
+<div class="card-title">B站搜索优化要点</div>
+<div class="card-desc">
+  <p style="margin-bottom:8px;"><strong>标题关键词布局：</strong>核心词放前15个字内。如"UPDream测评 | B站AI视频工具实测"而非"今天来测一下这个新工具"。</p>
+  <p style="margin-bottom:8px;"><strong>标签策略：</strong>填满10个标签位。前3个放核心词（如"AI创作""UPDream""视频工具"），后7个放相关词和长尾词。</p>
+  <p style="margin-bottom:8px;"><strong>简介优化：</strong>前3行放核心信息+关键词，时间戳格式增加点击。如"[00:00] UPDream是什么 [02:00] 实测剧本生成"。</p>
+  <p><strong>长尾关键词建议：</strong>"AI视频制作工具推荐2026""UPDream教程""B站AI工具怎么用""AI创作入门"。</p>
+</div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-inner">
+<div class="card-title">小红书搜索优化要点</div>
+<div class="card-desc">
+  <p style="margin-bottom:8px;"><strong>标题关键词布局：</strong>前12字放搜索词。标题即搜索词，如"2026年AI创作工具推荐 | 小红书博主必备"。</p>
+  <p style="margin-bottom:8px;"><strong>正文SEO：</strong>在正文中自然重复核心关键词2-3次。第一段必须包含核心词。</p>
+  <p style="margin-bottom:8px;"><strong>话题标签策略：</strong>大标签（100w+内容）+中标签（10w-100w）+小标签（1w-10w）组合。小标签竞争低但能获得更高的搜索排名。</p>
+  <p><strong>长尾关键词建议：</strong>"AI工具推荐2026""小红书运营AI""AI写作工具哪个好""零基础学AI"。</p>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<!-- ====== 7. CROSS-PLATFORM ====== -->
+<div class="section" id="cross">
+<div class="section-bg">
+<div class="section-header"><div class="s-icon">7</div><h2 class="section-title">跨平台方案</h2></div>
+
+<div class="card" style="margin-bottom:16px;">
+<div class="card-inner">
+<div class="card-title">一鱼多吃：一条内容吃透两个平台</div>
+<div class="card-desc">
+  <p style="margin-bottom:8px;"><strong>核心思路：</strong>B站做深度版本（15-20分钟横屏视频），小红书做精华版本（9图卡片+核心金句）。不是简单裁剪，而是针对平台用户习惯重新组织信息。</p>
+  <p style="margin-bottom:8px;"><strong>具体方案：</strong></p>
+  <p style="margin-bottom:4px;">1. 先做B站视频：完整录制+深度讲解，素材一次拍够</p>
+  <p style="margin-bottom:4px;">2. 从小红书视角提取：B站弹幕和评论中的高频问题 -> 小红书内容方向</p>
+  <p style="margin-bottom:4px;">3. 小红书评论区引流：在笔记中提及"B站有完整版视频实操演示"</p>
+  <p>4. B站简介反向引流：在简介区放小红书同名账号</p>
+</div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-inner">
+<div class="card-title">最佳工作流建议</div>
+<div class="card-desc">
+  <p style="margin-bottom:8px;"><strong>时间分配：</strong>每周4条内容：2条B站长视频（各半天）+2条小红书笔记（各1-2小时）。周中做深度，周末做轻量。</p>
+  <p style="margin-bottom:8px;"><strong>工具链：</strong>选题(DeepSeek/Claude) -> 脚本(AI生成+人工调) -> 录制(OBS/手机) -> 剪辑(剪映/CapCut) -> 图文(Canva/火兔工具箱) -> 发布(定时)。</p>
+  <p><strong>关键提醒：</strong>不追求每条都爆。保证每周至少1条有长尾搜索价值的内容（教程/盘点/SOP类），这类内容的播放量在发布后3-6个月才真正释放。</p>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<!-- ====== 8. WEEKLY ACTION PLAN ====== -->
+<div class="section" id="plan">
+<div class="section-bg">
+<div class="section-header"><div class="s-icon">8</div><h2 class="section-title">本周行动建议</h2></div>
+
+<table class="priority-table">
+  <tr><th>优先级</th><th>选题</th><th>平台</th><th>难度</th><th>预计耗时</th><th>窗口期</th><th>长尾价值</th></tr>
+  <tr>
+    <td><strong>1 紧急</strong></td>
+    <td>UPDream 深度测评</td>
+    <td>B站</td>
+    <td>中等</td>
+    <td>4-6h</td>
+    <td>3-5天</td>
+    <td>中</td>
+  </tr>
+  <tr>
+    <td><strong>2 紧急</strong></td>
+    <td>GLM-5.2 vs Claude 推理对比</td>
+    <td>B站</td>
+    <td>中等</td>
+    <td>4-5h</td>
+    <td>5-7天</td>
+    <td>低</td>
+  </tr>
+  <tr>
+    <td><strong>3 稳定</strong></td>
+    <td>小红书 AI 全流程 SOP</td>
+    <td>小红书</td>
+    <td>简单</td>
+    <td>3-4h</td>
+    <td>不限</td>
+    <td>高</td>
+  </tr>
+  <tr>
+    <td><strong>4 稳定</strong></td>
+    <td>AI 创作工具 2026 年中盘点</td>
+    <td>双平台</td>
+    <td>简单</td>
+    <td>3-4h</td>
+    <td>不限</td>
+    <td>高</td>
+  </tr>
+  <tr>
+    <td><strong>5 稳定</strong></td>
+    <td>2026年AI入门学习路线</td>
+    <td>双平台</td>
+    <td>简单</td>
+    <td>4-5h</td>
+    <td>不限</td>
+    <td>极高</td>
+  </tr>
+  <tr>
+    <td><strong>6 深度</strong></td>
+    <td>AI 漫剧全流程实操</td>
+    <td>B站</td>
+    <td>较高</td>
+    <td>1-2天</td>
+    <td>不限</td>
+    <td>极高</td>
+  </tr>
+  <tr>
+    <td><strong>7 深度</strong></td>
+    <td>小红书 AI 治理政策解读</td>
+    <td>小红书</td>
+    <td>简单</td>
+    <td>3-4h</td>
+    <td>不限</td>
+    <td>高</td>
+  </tr>
+  <tr>
+    <td><strong>C 创意</strong></td>
+    <td>逆向选题: 不用AI的创作者</td>
+    <td>双平台</td>
+    <td>较高</td>
+    <td>2-3天</td>
+    <td>不限</td>
+    <td>中</td>
+  </tr>
+  <tr>
+    <td><strong>C 创意</strong></td>
+    <td>AI 复原城市记忆</td>
+    <td>双平台</td>
+    <td>较高</td>
+    <td>2-3天</td>
+    <td>不限</td>
+    <td>极高</td>
+  </tr>
+</table>
+
+<div style="margin-top:24px; padding:16px 20px; background:#f5f3ff; border-radius:8px; border-left:3px solid var(--indigo);">
+  <strong style="font-size:16px; color:var(--indigo-dark);">一句话策略</strong>
+  <p style="margin-top:6px; font-size:14px; color:var(--text-secondary);">本周优先吃掉 UPDream 测评和 GLM-5.2 对比两个窗口期选题（各半天），同时启动 AI 入门学习路线这条长尾资产（周末集中做）。剩下时间填充小红书 SOP 和年中盘点两条稳定流量内容。不贪多，一周做透 4 条就够。</p>
+</div>
+
+</div>
+</div>
+
+</main>
+
+<script>
+// Sidebar scroll spy
+const sections = document.querySelectorAll('.section');
+const navLinks = document.querySelectorAll('.sidebar-nav a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    const top = s.offsetTop - 100;
+    if (window.scrollY >= top) current = s.getAttribute('id');
+  });
+  navLinks.forEach(a => {
+    a.classList.remove('active');
+    if (a.getAttribute('href') === '#' + current) a.classList.add('active');
+  });
+});
+
+// Copy button for prompt blocks
+document.querySelectorAll('.prompt-block').forEach(block => {
+  const btn = document.createElement('button');
+  btn.className = 'copy-btn';
+  btn.textContent = '复制';
+  btn.style.cssText = 'position:absolute;top:8px;right:8px;background:#3730a3;color:#fff;border:none;padding:4px 12px;border-radius:4px;font-size:12px;cursor:pointer;z-index:10;';
+  btn.onclick = () => {
+    navigator.clipboard.writeText(block.textContent.replace('复制','').trim()).then(() => {
+      btn.textContent = '已复制';
+      setTimeout(() => btn.textContent = '复制', 1500);
+    });
+  };
+  block.style.position = 'relative';
+  block.appendChild(btn);
+});
+</script>
+
+</body>
+</html>
