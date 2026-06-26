@@ -5,18 +5,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI 创意雷达 · 06-24 · 赛道拆解特辑</title>
 <style>
+
 :root {
   --text: #1a1a1a;
   --text-secondary: #6b6b6b;
   --text-tertiary: #999;
   --accent: #1a8917;
   --accent-hover: #156912;
-  --bg: #fff;
+  --bg: #f7f7f7;
+  --card-bg: #fff;
   --border: #e6e6e6;
   --highlight-bg: #fafafa;
-  --serif: "Source Serif 4", "Noto Serif SC", "Songti SC", Georgia, serif;
+  --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-hover: 0 4px 16px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.04);
+  --radius: 10px;
   --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", "Helvetica Neue", sans-serif;
   --mono: "SF Mono", "Fira Code", "Cascadia Code", Menlo, monospace;
+  --nav-width: 240px;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -25,307 +30,570 @@ body {
   font-family: var(--sans);
   background: var(--bg);
   color: var(--text);
-  line-height: 1.8;
-  font-size: 18px;
+  line-height: 1.7;
+  font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   letter-spacing: -0.003em;
 }
 
-/* ========== TOP NAV ========== */
-.site-nav {
-  position: sticky; top: 0; z-index: 100;
-  background: rgba(255,255,255,0.92);
-  backdrop-filter: saturate(180%) blur(20px);
-  -webkit-backdrop-filter: saturate(180%) blur(20px);
-  border-bottom: 1px solid var(--border);
-  padding: 0 24px;
-}
-.nav-inner {
-  max-width: 680px; margin: 0 auto;
-  display: flex; align-items: center; justify-content: space-between;
-  height: 56px;
-}
-.nav-logo {
-  font-family: var(--sans); font-size: 18px; font-weight: 700;
-  color: var(--text); text-decoration: none;
-  letter-spacing: -0.5px;
-}
-.nav-back {
-  font-family: var(--sans); font-size: 13px; color: var(--text-secondary);
-  text-decoration: none; transition: color 0.2s;
-}
-.nav-back:hover { color: var(--text); }
+/* ═══ Layout: Left Sidebar + Right Content ═══ */
+.app { display: flex; min-height: 100vh; }
 
-/* ========== ARTICLE ========== */
-.article {
-  max-width: 680px; margin: 0 auto;
-  padding: 60px 24px 80px;
+/* ── Left Sidebar ── */
+.sidebar {
+  position: fixed; top: 0; left: 0; bottom: 0;
+  width: var(--nav-width);
+  background: #fff;
+  border-right: 1px solid var(--border);
+  display: flex; flex-direction: column;
+  padding: 32px 24px;
+  z-index: 100;
+  overflow-y: auto;
+}
+.sidebar-logo {
+  font-size: 18px; font-weight: 700;
+  letter-spacing: -0.3px; margin-bottom: 4px;
+}
+.sidebar-version {
+  font-size: 11px; color: var(--text-tertiary);
+  background: var(--bg); padding: 2px 8px;
+  border-radius: 8px; display: inline-block; margin-bottom: 36px;
+}
+.sidebar-section {
+  font-size: 10px; color: var(--text-tertiary);
+  text-transform: uppercase; letter-spacing: 1.2px;
+  margin-bottom: 12px; font-weight: 500;
+}
+.sidebar-nav { list-style: none; margin-bottom: 32px; }
+.sidebar-nav li { margin-bottom: 4px; }
+.sidebar-nav a {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 12px; border-radius: 6px;
+  text-decoration: none; color: var(--text-secondary);
+  font-size: 14px; transition: all 0.15s;
+}
+.sidebar-nav a:hover { background: var(--bg); color: var(--text); }
+.sidebar-nav a.active {
+  background: var(--bg); color: var(--accent); font-weight: 600;
+}
+.nav-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--border); flex-shrink: 0;
+}
+.sidebar-nav a.active .nav-dot { background: var(--accent); }
+.sidebar-footer {
+  margin-top: auto; padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+.sidebar-footer p { font-size: 11px; color: var(--text-tertiary); line-height: 1.7; }
+
+/* ── Main Content (right side) ── */
+.main {
+  margin-left: var(--nav-width);
+  flex: 1; padding: 48px 40px 80px;
+  max-width: 920px;
 }
 
-/* ========== ARTICLE HEADER ========== */
-.article-header { margin-bottom: 56px; }
+/* ── Edition Theme Bar ── */
+.edition-theme {
+  display: inline-block;
+  font-size: 12px; color: var(--accent);
+  background: #f0faf0; padding: 4px 14px;
+  border-radius: 12px; font-weight: 500;
+  margin-bottom: 20px;
+}
+
+/* ── Article Header ── */
+.article-header { margin-bottom: 40px; }
 .article-date {
-  font-family: var(--sans); font-size: 13px; color: var(--text-tertiary);
-  letter-spacing: 1px; text-transform: uppercase; margin-bottom: 16px;
+  font-size: 12px; color: var(--text-tertiary);
+  letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px;
 }
 .article-title {
-  font-family: var(--sans); font-size: 40px; font-weight: 700;
-  line-height: 1.15; letter-spacing: -1px; margin-bottom: 20px;
-  color: var(--text);
+  font-size: 32px; font-weight: 700;
+  line-height: 1.2; letter-spacing: -0.8px;
+  margin-bottom: 16px; color: var(--text);
 }
 .article-subtitle {
-  font-family: var(--sans); font-size: 20px; color: var(--text-secondary);
-  line-height: 1.5; font-weight: 400;
+  font-size: 17px; color: var(--text-secondary);
+  line-height: 1.6; font-weight: 400;
+  margin-bottom: 16px;
 }
 .article-meta {
-  display: flex; gap: 20px; margin-top: 24px;
-  font-family: var(--sans); font-size: 13px; color: var(--text-tertiary);
+  display: flex; gap: 16px; flex-wrap: wrap;
+  font-size: 12px; color: var(--text-tertiary);
 }
 
-/* ========== INDEX NAV ========== */
-.edition-nav {
-  margin-bottom: 60px;
-  padding: 20px 0;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-}
-.edition-nav-label {
-  font-family: var(--sans); font-size: 11px; color: var(--text-tertiary);
-  text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;
-}
-.edition-nav-links { display: flex; gap: 16px; flex-wrap: wrap; }
-.edition-nav-links a {
-  font-family: var(--sans); font-size: 13px; color: var(--text-secondary);
-  text-decoration: none; padding: 4px 0;
-  border-bottom: 1px solid transparent; transition: all 0.2s;
-}
-.edition-nav-links a:hover { color: var(--text); border-bottom-color: var(--text); }
-.edition-nav-links a.current { color: var(--text); font-weight: 600; border-bottom-color: var(--text); }
-
-/* ========== SECTION HEADINGS ========== */
+/* ── Section Headings ── */
 .section-heading {
-  font-family: var(--sans); font-size: 24px; font-weight: 700;
-  color: var(--text); margin: 56px 0 24px;
-  padding-bottom: 12px; border-bottom: 1px solid var(--border);
+  font-size: 22px; font-weight: 700;
+  color: var(--text); margin: 48px 0 20px;
   letter-spacing: -0.5px;
+  display: flex; align-items: center; gap: 10px;
+}
+.section-heading::before {
+  content: ''; width: 3px; height: 20px;
+  background: var(--accent); border-radius: 2px;
 }
 
-/* ========== SIGNAL CARD ========== */
-.signal {
-  margin-bottom: 48px; padding-bottom: 36px;
-  border-bottom: 1px solid var(--border);
+/* ── Card (generic) ── */
+.card-box {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  padding: 24px 28px;
+  margin-bottom: 16px;
+  transition: box-shadow 0.2s;
 }
-.signal:last-child { border-bottom: none; }
+.card-box:hover { box-shadow: var(--shadow-hover); }
+
+/* ── Signal Card ── */
+.signal {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  padding: 24px 28px;
+  margin-bottom: 16px;
+  transition: box-shadow 0.2s;
+}
+.signal:hover { box-shadow: var(--shadow-hover); }
 .sig-head {
   display: flex; align-items: center; gap: 10px; margin-bottom: 14px;
   flex-wrap: wrap;
 }
 .sig-num {
-  font-family: var(--sans); font-size: 11px; color: var(--text-tertiary);
+  font-size: 11px; color: var(--text-tertiary);
   font-weight: 600; letter-spacing: 0.5px;
 }
 .sig-type {
-  font-family: var(--sans); font-size: 11px; padding: 2px 8px;
+  font-size: 11px; padding: 2px 8px;
   background: var(--highlight-bg); color: var(--accent);
   border-radius: 4px; font-weight: 500;
 }
-.sig-source {
-  font-family: var(--sans); font-size: 13px; color: var(--text-secondary);
-}
+.sig-source { font-size: 13px; color: var(--text-secondary); }
 .sig-source a {
   color: var(--accent); text-decoration: none;
   border-bottom: 1px dotted var(--accent);
 }
 .sig-source a:hover { border-bottom-style: solid; }
 .sig-timestamp {
-  font-family: var(--sans); font-size: 12px; color: var(--text-tertiary);
+  font-size: 12px; color: var(--text-tertiary);
   font-feature-settings: "tnum";
 }
 .sig-views {
-  font-family: var(--sans); font-size: 12px; color: var(--accent);
+  font-size: 12px; color: var(--accent);
   font-weight: 600; font-feature-settings: "tnum";
 }
 .sig-title {
-  font-family: var(--sans); font-size: 22px; font-weight: 700;
+  font-size: 20px; font-weight: 700;
   color: var(--text); margin-bottom: 12px; line-height: 1.4;
-  letter-spacing: -0.5px;
+  letter-spacing: -0.3px;
 }
 .sig-body {
-  color: var(--text); line-height: 1.8; font-size: 17px;
+  color: var(--text); line-height: 1.75; font-size: 15px;
   margin-bottom: 14px;
 }
-.sig-body p { margin-bottom: 12px; }
+.sig-body p { margin-bottom: 10px; }
 .sig-voice {
   background: var(--highlight-bg);
-  border-left: 3px solid var(--text-secondary);
-  padding: 16px 20px; border-radius: 0 4px 4px 0;
-  margin-top: 16px; font-size: 16px; line-height: 1.75;
+  border-left: 3px solid var(--accent);
+  padding: 14px 18px; border-radius: 0 6px 6px 0;
+  margin-top: 14px; font-size: 14px; line-height: 1.7;
   color: var(--text-secondary); font-style: italic;
 }
 .sig-voice-label {
-  font-family: var(--sans); font-size: 11px; color: var(--text-tertiary);
+  font-size: 11px; color: var(--text-tertiary);
   font-weight: 600; margin-bottom: 6px; font-style: normal;
   letter-spacing: 0.5px;
 }
 
-/* ========== RANKINGS ========== */
+/* ── Rankings ── */
 .rank-section {
-  margin-bottom: 48px; padding-bottom: 36px;
-  border-bottom: 1px solid var(--border);
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  padding: 24px 28px;
+  margin-bottom: 16px;
 }
 .rank-section h2 {
-  font-family: var(--sans); font-size: 22px; font-weight: 700;
-  color: var(--text); margin-bottom: 4px; letter-spacing: -0.5px;
+  font-size: 20px; font-weight: 700;
+  color: var(--text); margin-bottom: 4px; letter-spacing: -0.3px;
 }
 .rank-sub {
-  font-family: var(--sans); font-size: 13px; color: var(--text-tertiary);
-  margin-bottom: 24px;
+  font-size: 13px; color: var(--text-tertiary);
+  margin-bottom: 20px;
 }
 .rank-list { list-style: none; }
 .rank-item {
   display: flex; align-items: flex-start; gap: 14px;
-  padding: 14px 0; border-bottom: 1px solid var(--border);
+  padding: 12px 0; border-bottom: 1px solid var(--border);
 }
 .rank-item:last-child { border-bottom: none; }
 .rank-num {
   flex-shrink: 0; width: 26px; height: 26px;
   background: var(--highlight-bg); color: var(--text-secondary);
   border-radius: 50%; display: flex; align-items: center;
-  justify-content: center; font-family: var(--sans);
-  font-size: 12px; font-weight: 700;
+  justify-content: center; font-size: 12px; font-weight: 700;
 }
 .rank-item:nth-child(1) .rank-num { background: var(--text); color: #fff; }
 .rank-item:nth-child(2) .rank-num { background: var(--text-secondary); color: #fff; }
 .rank-item:nth-child(3) .rank-num { background: var(--accent); color: #fff; }
 .rank-content { flex: 1; }
 .rank-title {
-  font-size: 15px; font-weight: 600; color: var(--text);
+  font-size: 14px; font-weight: 600; color: var(--text);
   margin-bottom: 2px;
 }
-.rank-meta {
-  font-family: var(--sans); font-size: 12px; color: var(--text-tertiary);
-}
+.rank-title a { color: var(--text); text-decoration: none; }
+.rank-title a:hover { color: var(--accent); }
+.rank-meta { font-size: 12px; color: var(--text-tertiary); }
 .rank-meta a { color: var(--accent); text-decoration: none; }
 .rank-meta a:hover { text-decoration: underline; }
 
-/* ========== SUBRANKS (per-source) ========== */
-.subranks { margin-bottom: 48px; }
-.subrank-group { margin-bottom: 32px; }
-.subrank-group h3 {
-  font-family: var(--sans); font-size: 18px; font-weight: 600;
-  color: var(--text); margin-bottom: 12px; letter-spacing: -0.3px;
-}
-
-/* ========== ACTIONS ========== */
-.action-card {
-  margin-bottom: 36px; padding: 24px 0;
-  border-bottom: 1px solid var(--border);
-}
-.action-card:last-child { border-bottom: none; }
-.action-header {
-  font-family: var(--sans); font-size: 20px; font-weight: 700;
-  color: var(--text); margin-bottom: 4px; letter-spacing: -0.5px;
-}
-.action-sub {
-  font-family: var(--sans); font-size: 13px; color: var(--text-tertiary);
+/* ── Subranks ── */
+.subranks {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  padding: 24px 28px;
   margin-bottom: 16px;
 }
-.action-body {
-  font-size: 16px; line-height: 1.8; color: var(--text);
+.subrank { margin-bottom: 28px; }
+.subrank:last-child { margin-bottom: 0; }
+.subrank h3 {
+  font-size: 16px; font-weight: 600;
+  color: var(--text); margin-bottom: 4px; letter-spacing: -0.3px;
 }
+.subrank-sub {
+  font-size: 12px; color: var(--text-tertiary); margin-bottom: 12px;
+}
+.subrank ol { list-style: none; }
+.subrank ol li {
+  padding: 8px 0; border-bottom: 1px solid var(--border);
+  font-size: 14px; line-height: 1.5;
+}
+.subrank ol li:last-child { border-bottom: none; }
+.subrank ol li a { color: var(--text); text-decoration: none; }
+.subrank ol li a:hover { color: var(--accent); }
+.subrank-views {
+  font-size: 12px; color: var(--text-tertiary);
+  margin-left: 8px; font-feature-settings: "tnum";
+}
+
+/* ── Actions ── */
+.action-card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  padding: 24px 28px;
+  margin-bottom: 16px;
+  transition: box-shadow 0.2s;
+}
+.action-card:hover { box-shadow: var(--shadow-hover); }
+.action-label {
+  font-size: 11px; color: var(--accent);
+  text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;
+}
+.action-title {
+  font-size: 18px; font-weight: 700;
+  color: var(--text); margin-bottom: 12px; letter-spacing: -0.3px;
+}
+.action-body { font-size: 15px; line-height: 1.75; color: var(--text); }
 .action-body p { margin-bottom: 10px; }
-
-/* ========== FOOTER ========== */
-.article-footer {
-  margin-top: 80px; padding-top: 32px;
-  border-top: 1px solid var(--border);
-  text-align: center;
-}
-.af-note {
-  font-family: var(--sans); font-size: 12px; color: var(--text-tertiary);
-  line-height: 1.6;
-}
-.footer-brand {
-  font-family: var(--sans); font-size: 14px; color: var(--text-secondary);
-  margin-top: 12px;
-}
-.footer-brand span {
-  font-family: var(--sans); font-size: 10px; color: var(--text-tertiary);
-  margin-left: 8px;
+.action-body code {
+  font-family: var(--mono); font-size: 13px;
+  background: var(--highlight-bg); padding: 2px 6px;
+  border-radius: 4px;
 }
 
-/* ========== ICONS ========== */
+/* ── Topic Cards (06-23/06-24) ── */
+.topic-card, .case-card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  padding: 24px 28px;
+  margin-bottom: 16px;
+  transition: box-shadow 0.2s;
+}
+.topic-card:hover, .case-card:hover { box-shadow: var(--shadow-hover); }
+.topic-header {
+  display: flex; align-items: flex-start; gap: 14px; margin-bottom: 12px;
+}
+.topic-num {
+  flex-shrink: 0; width: 28px; height: 28px;
+  background: var(--accent); color: #fff;
+  border-radius: 50%; display: flex; align-items: center;
+  justify-content: center; font-size: 13px; font-weight: 700;
+}
+.topic-num.creative { background: #6b46c1; }
+.topic-info { flex: 1; }
+.topic-info h4 {
+  font-size: 17px; font-weight: 600; margin-bottom: 6px;
+  color: var(--text); line-height: 1.4;
+}
+.topic-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.tag {
+  font-size: 11px; padding: 2px 8px; border-radius: 4px;
+  font-weight: 500;
+}
+.tag-hot { background: #fff0f0; color: #e53e3e; }
+.tag-trend { background: #f0f7ff; color: #3182ce; }
+.tag-stable { background: #f0fff0; color: #1a8917; }
+.tag-indigo { background: #f0f0ff; color: #5a67d8; }
+.topic-signal, .topic-strategy {
+  font-size: 14px; line-height: 1.7; color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+.prod-card {
+  background: var(--highlight-bg); border-radius: 6px;
+  padding: 14px 18px; margin-top: 12px;
+}
+.prod-row {
+  display: flex; gap: 20px; flex-wrap: wrap;
+  font-size: 13px; margin-bottom: 8px;
+}
+.prod-row .label { color: var(--text-tertiary); margin-right: 4px; }
+.diff-easy { color: #1a8917; }
+.diff-medium { color: #d69e2e; }
+.diff-hard { color: #e53e3e; }
+.prod-framework {
+  font-size: 13px; line-height: 1.6; color: var(--text-secondary);
+}
+.case-meta, .evidence {
+  font-size: 13px; color: var(--text-tertiary); margin-bottom: 8px;
+}
+.evidence a { color: var(--accent); text-decoration: none; }
+.case-takeaway {
+  font-size: 14px; line-height: 1.7; color: var(--text);
+}
+
+/* ── Hot Index (06-23/06-24) ── */
+.platform-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+}
+.platform-col h3 {
+  font-size: 15px; font-weight: 600; margin-bottom: 12px;
+  color: var(--text);
+}
+.hot-list, .index-list { list-style: none; }
+.hot-list li, .index-list li {
+  padding: 10px 0; border-bottom: 1px solid var(--border);
+  font-size: 14px; line-height: 1.5;
+}
+.hot-list li:last-child, .index-list li:last-child { border-bottom: none; }
+.hot-list a, .index-list a {
+  color: var(--text); text-decoration: none; font-weight: 500;
+}
+.hot-list a:hover, .index-list a:hover { color: var(--accent); }
+.hot-list .rank, .idx-rank {
+  font-size: 12px; color: var(--text-tertiary); font-weight: 700;
+  margin-right: 8px;
+}
+.hot-list .source, .idx-meta {
+  font-size: 12px; color: var(--text-tertiary); display: block; margin-top: 2px;
+}
+
+/* ── Trend Cards (06-24) ── */
+.trends-row {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+  margin-bottom: 24px;
+}
+.trend-card {
+  background: var(--highlight-bg); border-radius: 8px;
+  padding: 16px 18px; border: 1px solid var(--border);
+}
+.trend-card .num {
+  font-size: 10px; color: var(--accent); font-weight: 600;
+  text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px;
+}
+.trend-card h4 {
+  font-size: 15px; font-weight: 600; margin-bottom: 6px; color: var(--text);
+}
+.trend-card p {
+  font-size: 13px; line-height: 1.6; color: var(--text-secondary);
+}
+
+/* ── Guide & Tables ── */
+.guide-steps {
+  list-style: none; counter-reset: step;
+}
+.guide-steps li {
+  counter-increment: step; padding: 10px 0 10px 32px;
+  position: relative; font-size: 14px; line-height: 1.7;
+  color: var(--text-secondary); border-bottom: 1px solid var(--border);
+}
+.guide-steps li:last-child { border-bottom: none; }
+.guide-steps li::before {
+  content: counter(step); position: absolute; left: 0; top: 10px;
+  width: 22px; height: 22px; background: var(--accent); color: #fff;
+  border-radius: 50%; font-size: 11px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+}
+.priority-table {
+  width: 100%; border-collapse: collapse; font-size: 13px;
+}
+.priority-table th {
+  text-align: left; padding: 10px 12px; background: var(--highlight-bg);
+  font-weight: 600; color: var(--text); border-bottom: 2px solid var(--border);
+}
+.priority-table td {
+  padding: 10px 12px; border-bottom: 1px solid var(--border);
+  color: var(--text-secondary);
+}
+.priority-table tr:last-child td { border-bottom: none; }
+
+/* ── Prompt blocks ── */
+.prompt-block {
+  background: var(--highlight-bg); border-radius: 6px;
+  padding: 14px 18px; margin-top: 10px;
+  font-size: 14px; line-height: 1.7; color: var(--text);
+  white-space: pre-wrap;
+}
+.prompt-label {
+  font-size: 11px; color: var(--accent); font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;
+}
+
+/* ── Report head (06-24 old) ── */
+.report-head { display: none; }
+.head-stats { display: none; }
+
+/* ── Section/Section-bg wrappers (06-23/06-24 old) ── */
+.section { margin-bottom: 24px; }
+.section-bg { }
+.section-header { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+.s-icon {
+  width: 28px; height: 28px; background: var(--accent); color: #fff;
+  border-radius: 50%; display: flex; align-items: center;
+  justify-content: center; font-size: 12px; font-weight: 700;
+  flex-shrink: 0;
+}
+.section-title {
+  font-size: 20px; font-weight: 700; color: var(--text);
+  letter-spacing: -0.3px;
+}
+.section-sub {
+  font-size: 13px; color: var(--text-tertiary); margin-bottom: 16px;
+}
+.platform-head {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 12px;
+}
+.num-tag {
+  font-size: 11px; color: var(--text-tertiary);
+  background: var(--highlight-bg); padding: 2px 8px;
+  border-radius: 4px;
+}
+.heat { color: var(--accent); font-weight: 600; margin-right: 4px; }
+.platform-tag {
+  font-size: 11px; color: var(--text-tertiary);
+  background: var(--highlight-bg); padding: 1px 6px;
+  border-radius: 3px; margin: 0 4px;
+}
+.idx-content { flex: 1; }
+.idx-title { font-weight: 500; color: var(--text); }
+
+/* ── Edition nav (old, hidden) ── */
+.edition-nav { display: none; }
+
+/* ── Footer note ── */
+.footer-note {
+  font-size: 12px; color: var(--text-tertiary);
+  line-height: 1.6; padding: 16px 0;
+}
+.footer {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  padding: 20px 24px; margin-bottom: 16px;
+}
+
+/* ── Icons ── */
 .icon {
   display: inline-block; width: 14px; height: 14px;
   vertical-align: -2px; margin-right: 2px; fill: currentColor;
 }
 
-/* ========== RESPONSIVE ========== */
-@media (max-width: 720px) {
-  .article { padding: 40px 20px 60px; }
-  .article-title { font-size: 30px; }
-  .article-subtitle { font-size: 17px; }
-  .sig-title { font-size: 19px; }
-  .sig-body { font-size: 16px; }
+/* ── Article Footer ── */
+.article-footer {
+  margin-top: 40px; padding-top: 24px;
+  border-top: 1px solid var(--border);
+  text-align: center;
 }
+.af-note { font-size: 12px; color: var(--text-tertiary); line-height: 1.6; }
+.footer-brand {
+  font-size: 13px; color: var(--text-secondary); margin-top: 8px;
+}
+.footer-brand span { font-size: 10px; color: var(--text-tertiary); margin-left: 8px; }
 
-/* Hide old duplicate headers from original content */
+/* ── Hide old duplicate elements ── */
 main > div.header { display: none; }
 main > header.head { display: none; }
 main > div.report-head { display: none; }
-main > section#head { display: none; }
+main > section#head .report-head { display: none; }
 
-/* ========== EDITION THEME IDENTIFIER ========== */
-.edition-theme {
-  max-width: 680px; margin: 0 auto;
-  padding: 20px 24px;
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .sidebar { display: none; }
+  .main { margin-left: 0; padding: 32px 20px 60px; }
+  .article-title { font-size: 26px; }
+  .article-subtitle { font-size: 15px; }
+  .sig-title { font-size: 18px; }
+  .platform-grid { grid-template-columns: 1fr; }
+  .trends-row { grid-template-columns: 1fr; }
+  .card-box, .signal, .rank-section, .subranks, .action-card,
+  .topic-card, .case-card { padding: 18px 20px; }
 }
-.edition-theme-label {
-  font-family: var(--sans); font-size: 10px; color: var(--text-tertiary);
-  text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 4px;
-}
-.edition-theme-desc {
-  font-family: var(--sans); font-size: 15px; color: var(--text-secondary);
-  line-height: 1.5;
-}
+
 </style>
 </head>
 <body>
 
-<nav class="site-nav">
-  <div class="nav-inner">
-    <a href="../index.html" class="nav-logo">AI 创意雷达</a>
-    <a href="../index.html" class="nav-back">← 回到首页</a>
-  </div>
-</nav>
+<div class="app">
 
+  <aside class="sidebar">
+    <a href="../index.html" class="sidebar-logo" style="text-decoration:none;color:var(--text);">AI 创意雷达</a>
+    <span class="sidebar-version">v6.5</span>
 
-<div class="edition-theme">
-  <div class="edition-theme-label">本期主题</div>
-  <div class="edition-theme-desc">赛道拆解 · 3 大趋势 → 12 条选题 → 36 条 Prompt → 双平台制作指南全链路。</div>
-</div>
+    <div class="sidebar-section">导航</div>
+    <ul class="sidebar-nav">
+      <li><a href="../index.html" class=""><span class="nav-dot"></span>首页</a></li>
+      <li><a href="2026-06-25.html" class=""><span class="nav-dot"></span>06 · 25</a></li>
+      <li><a href="2026-06-24.html" class="active"><span class="nav-dot"></span>06 · 24</a></li>
+      <li><a href="2026-06-23.html" class=""><span class="nav-dot"></span>06 · 23</a></li>
+    </ul>
 
-<article class="article">
+    <div class="sidebar-section">主题</div>
+    <ul class="sidebar-nav">
+      <li><a href="2026-06-25.html" class=""><span class="nav-dot"></span>产品猎奇特辑</a></li>
+      <li><a href="2026-06-24.html" class="active"><span class="nav-dot"></span>赛道拆解特辑</a></li>
+      <li><a href="2026-06-23.html" class=""><span class="nav-dot"></span>创刊号</a></li>
+    </ul>
 
-  <header class="article-header">
-    <div class="article-date">2026年6月24日</div>
-    <h1 class="article-title">Agent 进入深水区，漫剧把成本打到 500 元/分钟</h1>
-    <p class="article-subtitle">今天信号非常集中：B 站漫剧分成 90% 倒逼创作者涌入，AI 工具测评在小红书严重内卷，平台开始批量处置 60 万篇低质 AI 笔记——这意味着「靠 AI 批量灌水」的红利期在收尾，而「能讲清楚 Agent 落地逻辑」的人正在拿到新一波流量。</p>
-    <div class="article-meta"><span>赛道拆解特辑</span> · <span>来源: 10 轮搜索 · 8 个信息源</span><span>版本 v6.5</span></div>
-  </header>
-
-  <nav class="edition-nav">
-    <div class="edition-nav-label">往期浏览</div>
-    <div class="edition-nav-links">
-      <a href="2026-06-23.html">06-23 · 创刊号</a>
-      <a href="2026-06-24.html" class="current">06-24 · 信号源重构</a>
-      <a href="2026-06-25.html">06-25 · v6.5</a>
+    <div class="sidebar-footer">
+      <p>Created by <strong>MU Labs</strong><br>AI 创意雷达 · Daily</p>
     </div>
-  </nav>
+  </aside>
 
-<main>
-    <!-- 头部 -->
+  <main class="main">
+
+    <div class="edition-theme">赛道拆解 · 3 大趋势 → 12 条选题 → 36 条 Prompt</div>
+
+    <header class="article-header">
+      <div class="article-date">2026年6月24日</div>
+      <h1 class="article-title">Agent 进入深水区，漫剧把成本打到 500 元/分钟</h1>
+      <p class="article-subtitle">今天信号非常集中：B 站漫剧分成 90% 倒逼创作者涌入，AI 工具测评在小红书严重内卷，平台开始批量处置 60 万篇低质 AI 笔记——这意味着「靠 AI 批量灌水」的红利期在收尾，而「能讲清楚 Agent 落地逻辑」的人正在拿到新一波流量。</p>
+      <div class="article-meta"><span>赛道拆解特辑</span> · <span>来源: 10 轮搜索 · 8 个信息源</span><span>版本 v6.5</span></div>
+    </header>
+
+    <div style="display:flex;flex-direction:column;gap:0;">
+<!-- 头部 -->
     <section id="head" style="padding-top:0">
       <div class="report-head">
         <div class="meta">REPORT · VOL.0624 · BY SOLO</div>
@@ -1603,14 +1871,16 @@ main > section#head { display: none; }
       8 轮搜索 · B 站 + 小红书 · 数据基于飞瓜数据 / videoseek / 平台公开数据 / 36 氪 / 搜狐财经 / 知乎<br>
       提示词独立可运行 · 复制粘贴即可开始创作
     </footer>
+    </div>
+
+    <footer class="article-footer">
+      <p class="af-note">Created by <strong>MU Labs</strong></p>
+      <div class="footer-brand">AI 创意雷达 <span>v6.5</span></div>
+    </footer>
+
   </main>
 
-  <footer class="article-footer">
-    <p class="af-note">Created by <strong>MU Labs</strong></p>
-    <div class="footer-brand">AI 创意雷达 <span>v6.5</span></div>
-  </footer>
-
-</article>
+</div>
 
 </body>
 </html>

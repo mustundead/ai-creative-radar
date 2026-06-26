@@ -7,7 +7,7 @@
 <style>
 /* ═══════════════════════════════════════
    AI Creative Radar · Daily Edition
-   Design: Medium-style — clean, editorial, minimal
+   Layout: Left Nav + Right Cards
    ═══════════════════════════════════════ */
 
 :root {
@@ -16,11 +16,14 @@
   --text-tertiary: #999;
   --accent: #1a8917;
   --accent-hover: #156912;
-  --bg: #fff;
+  --bg: #f7f7f7;
+  --card-bg: #fff;
   --border: #e6e6e6;
-  --highlight-bg: #fafafa;
-  --serif: "Source Serif 4", "Noto Serif SC", "Songti SC", Georgia, serif;
+  --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-hover: 0 4px 16px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.04);
+  --radius: 10px;
   --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+  --nav-width: 240px;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -33,236 +36,305 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* ── Top Nav ── */
-.site-nav {
-  position: sticky; top: 0; z-index: 100;
-  background: rgba(255,255,255,0.92);
-  backdrop-filter: saturate(180%) blur(20px);
-  -webkit-backdrop-filter: saturate(180%) blur(20px);
-  border-bottom: 1px solid var(--border);
-  padding: 0 24px;
+/* ═══ Layout ═══ */
+.app {
+  display: flex;
+  min-height: 100vh;
 }
-.nav-inner {
-  max-width: 680px; margin: 0 auto;
-  display: flex; align-items: center; justify-content: space-between;
-  height: 56px;
+
+/* ── Left Sidebar ── */
+.sidebar {
+  position: fixed; top: 0; left: 0; bottom: 0;
+  width: var(--nav-width);
+  background: #fff;
+  border-right: 1px solid var(--border);
+  display: flex; flex-direction: column;
+  padding: 32px 24px;
+  z-index: 100;
 }
-.nav-logo {
-  font-family: var(--sans); font-size: 20px; font-weight: 700;
-  color: var(--text); text-decoration: none;
-  letter-spacing: -0.5px;
+
+.sidebar-logo {
+  font-size: 18px; font-weight: 700;
+  letter-spacing: -0.3px; margin-bottom: 4px;
 }
-.nav-version {
-  font-family: var(--sans); font-size: 11px; color: var(--text-tertiary);
-  background: var(--highlight-bg); padding: 3px 10px;
-  border-radius: 12px;
+.sidebar-version {
+  font-size: 11px; color: var(--text-tertiary);
+  background: var(--bg); padding: 2px 8px;
+  border-radius: 8px; display: inline-block; margin-bottom: 36px;
+}
+
+.sidebar-section {
+  font-size: 10px; color: var(--text-tertiary);
+  text-transform: uppercase; letter-spacing: 1.2px;
+  margin-bottom: 12px; font-weight: 500;
+}
+
+.sidebar-nav {
+  list-style: none; margin-bottom: 32px;
+}
+.sidebar-nav li { margin-bottom: 4px; }
+.sidebar-nav a {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 12px; border-radius: 6px;
+  text-decoration: none; color: var(--text-secondary);
+  font-size: 14px; transition: all 0.15s;
+}
+.sidebar-nav a:hover { background: var(--bg); color: var(--text); }
+.sidebar-nav a.active {
+  background: var(--bg); color: var(--accent); font-weight: 600;
+}
+.nav-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--border); flex-shrink: 0;
+}
+.sidebar-nav a.active .nav-dot { background: var(--accent); }
+
+.sidebar-footer {
+  margin-top: auto; padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+.sidebar-footer p {
+  font-size: 11px; color: var(--text-tertiary); line-height: 1.7;
+}
+
+/* ── Main Content ── */
+.main {
+  margin-left: var(--nav-width);
+  flex: 1; padding: 48px 40px;
+  max-width: calc(880px + 80px);
 }
 
 /* ── Hero ── */
-.hero {
-  max-width: 680px; margin: 0 auto;
-  padding: 72px 24px 48px;
-}
+.hero { margin-bottom: 48px; }
 .hero-tag {
-  font-family: var(--sans); font-size: 11px; color: var(--accent);
-  text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px;
+  font-size: 11px; color: var(--accent);
+  text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;
 }
 .hero-title {
-  font-family: var(--sans); font-size: 42px; font-weight: 700;
-  line-height: 1.12; letter-spacing: -1px; margin-bottom: 16px;
+  font-size: 36px; font-weight: 700; line-height: 1.15;
+  letter-spacing: -0.8px; margin-bottom: 12px;
 }
 .hero-desc {
-  font-family: var(--sans); font-size: 18px; color: var(--text-secondary);
-  line-height: 1.6; max-width: 520px; margin-bottom: 32px;
+  font-size: 16px; color: var(--text-secondary);
+  line-height: 1.6; max-width: 520px; margin-bottom: 24px;
 }
-.hero-stats {
-  display: flex; gap: 32px;
-  font-family: var(--sans);
-}
-.hero-stat-label {
-  font-size: 11px; color: var(--text-tertiary);
-  text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;
-}
+.hero-stats { display: flex; gap: 28px; }
+.hero-stat { text-align: center; }
 .hero-stat-value {
-  font-size: 24px; font-weight: 700; color: var(--text);
+  font-size: 28px; font-weight: 700;
   font-feature-settings: "tnum";
 }
-
-/* ── Divider ── */
-.divider {
-  max-width: 680px; margin: 0 auto;
-  border: none; border-top: 1px solid var(--border);
-  padding: 0 24px;
+.hero-stat-label {
+  font-size: 11px; color: var(--text-tertiary); margin-top: 2px;
 }
 
-/* ── Feed ── */
-.feed {
-  max-width: 680px; margin: 0 auto;
-  padding: 48px 24px 24px;
-}
-.feed-label {
-  font-family: var(--sans); font-size: 11px; color: var(--text-tertiary);
-  text-transform: uppercase; letter-spacing: 1px; margin-bottom: 32px;
+/* ── Card Grid ── */
+.card-grid {
+  display: grid;
+  gap: 20px;
 }
 
-/* ── Story Card ── */
-.story {
-  display: block; text-decoration: none; color: inherit;
-  padding: 28px 0; border-bottom: 1px solid var(--border);
-  transition: background 0.2s;
+/* ── Edition Card ── */
+.card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  padding: 28px 32px;
+  text-decoration: none; color: inherit;
+  display: block;
+  transition: box-shadow 0.2s, transform 0.15s;
 }
-.story:first-of-type { padding-top: 0; }
-.story:hover { background: var(--highlight-bg); margin: 0 -12px; padding-left: 12px; padding-right: 12px; border-radius: 4px; }
-.story-featured {
-  padding-bottom: 32px; border-bottom: 2px solid var(--text);
-}
-.story-date {
-  font-family: var(--sans); font-size: 12px; color: var(--text-tertiary);
-  letter-spacing: 0.5px; margin-bottom: 8px;
-}
-.story-title {
-  font-family: var(--sans); font-size: 22px; font-weight: 700;
-  line-height: 1.3; letter-spacing: -0.5px; margin-bottom: 8px;
-}
-.story-subtitle {
-  font-family: var(--sans); font-size: 15px; color: var(--text-secondary);
-  line-height: 1.55;
-}
-.story-meta {
-  display: flex; gap: 16px; margin-top: 12px;
-  font-family: var(--sans); font-size: 12px; color: var(--text-tertiary);
-}
-.story-tag {
-  display: inline-block; font-family: var(--sans); font-size: 10px;
-  color: var(--accent); background: var(--highlight-bg);
-  padding: 2px 8px; border-radius: 10px;
-  font-weight: 500;
-}
-.story-read {
-  font-family: var(--sans); font-size: 12px; color: var(--accent);
-  opacity: 0; transition: opacity 0.2s;
-}
-.story:hover .story-read { opacity: 1; }
-
-/* ── Footer ── */
-.site-footer {
-  max-width: 680px; margin: 0 auto;
-  padding: 48px 24px 40px; text-align: center;
-}
-.site-footer p {
-  font-family: var(--sans); font-size: 12px; color: var(--text-tertiary);
-  line-height: 1.8;
-}
-.footer-version {
-  font-family: var(--sans); font-size: 14px; color: var(--text-secondary);
-  margin-top: 16px;
-}
-.footer-version span {
-  font-family: var(--sans); font-size: 10px; color: var(--text-tertiary);
-  margin-left: 8px;
+.card:hover {
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-2px);
 }
 
-/* ── Loading ── */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(16px); }
-  to { opacity: 1; transform: translateY(0); }
+/* Featured card */
+.card-featured {
+  border-left: 3px solid var(--accent);
 }
-.story { animation: fadeUp 0.5s ease-out both; }
-.story:nth-child(1) { animation-delay: 0.05s; }
-.story:nth-child(2) { animation-delay: 0.1s; }
-.story:nth-child(3) { animation-delay: 0.15s; }
-.story:nth-child(4) { animation-delay: 0.2s; }
-.story:nth-child(5) { animation-delay: 0.25s; }
+.card-featured .card-date { color: var(--accent); }
+
+.card-header {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 12px;
+}
+.card-date {
+  font-size: 12px; color: var(--text-tertiary);
+  letter-spacing: 0.3px;
+}
+.card-badge {
+  font-size: 10px; color: var(--accent);
+  background: #f0faf0; padding: 2px 10px;
+  border-radius: 10px; font-weight: 500;
+}
+
+.card-title {
+  font-size: 20px; font-weight: 700;
+  line-height: 1.35; letter-spacing: -0.3px;
+  margin-bottom: 8px;
+}
+.card-desc {
+  font-size: 14px; color: var(--text-secondary);
+  line-height: 1.6; margin-bottom: 14px;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.card-meta {
+  display: flex; align-items: center; gap: 16px;
+  font-size: 12px; color: var(--text-tertiary);
+}
+.card-meta-divider {
+  width: 3px; height: 3px; border-radius: 50%;
+  background: var(--border);
+}
+.card-arrow {
+  margin-left: auto; font-size: 14px; color: var(--text-tertiary);
+  transition: color 0.15s, transform 0.15s;
+}
+.card:hover .card-arrow {
+  color: var(--accent); transform: translateX(3px);
+}
+
+/* ── Section label ── */
+.section-label {
+  font-size: 12px; color: var(--text-tertiary);
+  text-transform: uppercase; letter-spacing: 1px;
+  margin-bottom: 20px; font-weight: 500;
+}
 
 /* ── Responsive ── */
-@media (max-width: 720px) {
-  .hero { padding: 48px 20px 36px; }
-  .hero-title { font-size: 32px; }
-  .hero-desc { font-size: 16px; }
-  .hero-stats { gap: 20px; }
-  .hero-stat-value { font-size: 20px; }
-  .feed { padding: 36px 20px 16px; }
-  .story-title { font-size: 19px; }
+@media (max-width: 768px) {
+  .sidebar { display: none; }
+  .main { margin-left: 0; padding: 32px 20px; }
+  .hero-title { font-size: 28px; }
+  .hero-stats { gap: 16px; flex-wrap: wrap; }
+  .hero-stat-value { font-size: 22px; }
+  .card { padding: 20px 24px; }
+  .card-title { font-size: 18px; }
 }
 </style>
 </head>
 <body>
 
-<nav class="site-nav">
-  <div class="nav-inner">
-    <span class="nav-logo">AI 创意雷达</span>
-    <span class="nav-version">v6.5</span>
-  </div>
-</nav>
+<div class="app">
 
-<section class="hero">
-  <div class="hero-tag">Daily Edition</div>
-  <h1 class="hero-title">有品位的<br>AI 创意信号</h1>
-  <p class="hero-desc">
-    每天从自媒体生态中捕捉真正好玩的 AI 创意——不是评测、不是教程、不追热点。
-    只找那些「卧槽，还能这么玩」的东西。
-  </p>
-  <div class="hero-stats">
-    <div>
-      <div class="hero-stat-label">已出刊</div>
-      <div class="hero-stat-value">3</div>
-    </div>
-    <div>
-      <div class="hero-stat-label">信号采集</div>
-      <div class="hero-stat-value">24</div>
-    </div>
-    <div>
-      <div class="hero-stat-label">信息源</div>
-      <div class="hero-stat-value">8</div>
-    </div>
-    <div>
-      <div class="hero-stat-label">来源平台</div>
-      <div class="hero-stat-value">8</div>
-    </div>
-  </div>
-</section>
+  <!-- ═══ Left Sidebar ═══ -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">AI 创意雷达</div>
+    <span class="sidebar-version">v6.5</span>
 
-<hr class="divider">
+    <div class="sidebar-section">导航</div>
+    <ul class="sidebar-nav">
+      <li><a href="index.html" class="active"><span class="nav-dot"></span>首页</a></li>
+      <li><a href="daily/2026-06-25.html"><span class="nav-dot"></span>06 · 25</a></li>
+      <li><a href="daily/2026-06-24.html"><span class="nav-dot"></span>06 · 24</a></li>
+      <li><a href="daily/2026-06-23.html"><span class="nav-dot"></span>06 · 23</a></li>
+    </ul>
 
-<section class="feed">
-  <div class="feed-label">最新出刊</div>
+    <div class="sidebar-section">主题</div>
+    <ul class="sidebar-nav">
+      <li><a href="daily/2026-06-25.html"><span class="nav-dot"></span>产品猎奇特辑</a></li>
+      <li><a href="daily/2026-06-24.html"><span class="nav-dot"></span>赛道拆解特辑</a></li>
+      <li><a href="daily/2026-06-23.html"><span class="nav-dot"></span>创刊号</a></li>
+    </ul>
 
-  <a href="daily/2026-06-25.html" class="story story-featured">
-    <div class="story-date">2026 · 06 · 25</div>
-    <div class="story-tag" style="margin-bottom:8px;">v6.5</div>
-    <h2 class="story-title">产品猎奇 · 一个人写 12 条 pipeline 把 Claude Code 变成视频工作室</h2>
-    <p class="story-subtitle">8 条信号全部来自 GitHub / 个人博客 / B 站 UP 主等独立创作者，带阅读量。全源 Top 10 战力榜 + 8 个信息源各自分榜。从 OpenMontage 到 Agent-Reach，从复旦哲学系到张江黑客松——这一期没有教程，只有眼前一亮的独立项目和反直觉发现。</p>
-    <div class="story-meta">
-      <span>8 条信号 · 全源 Top 10 · 各源分榜 Top 10</span>
-      <span class="story-read">阅读 →</span>
+    <div class="sidebar-footer">
+      <p>Created by <strong>MU Labs</strong><br>AI 创意雷达 · Daily</p>
     </div>
-  </a>
+  </aside>
 
-  <a href="daily/2026-06-24.html" class="story">
-    <div class="story-date">2026 · 06 · 24</div>
-    <h2 class="story-title">赛道拆解 · Agent 落地的三道坎 + 漫剧成本打穿到 500 元/分钟</h2>
-    <p class="story-subtitle">不是讲产品，是讲赛道。3 个趋势信号拆成 12 条可执行的选题，每条配了完整的制作提示词和双平台分发策略。拍摄指南、设备推荐、SEO 方案全链路——如果你要做 AI 内容创作，这期是工具箱。</p>
-    <div class="story-meta">
-      <span>3 大趋势 · 12 条选题 · 36 条 Prompt · 双平台制作指南</span>
-      <span class="story-read">阅读 →</span>
+  <!-- ═══ Right Content ═══ -->
+  <main class="main">
+
+    <section class="hero">
+      <div class="hero-tag">Daily Edition</div>
+      <h1 class="hero-title">有品位的<br>AI 创意信号</h1>
+      <p class="hero-desc">
+        每天从自媒体生态中捕捉真正好玩的 AI 创意——不是评测、不是教程、不追热点。
+        只找那些「卧槽，还能这么玩」的东西。
+      </p>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-value">3</div>
+          <div class="hero-stat-label">已出刊</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-value">24</div>
+          <div class="hero-stat-label">信号采集</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-value">8</div>
+          <div class="hero-stat-label">信息源</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-value">8</div>
+          <div class="hero-stat-label">来源平台</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-label">最新出刊</div>
+
+    <div class="card-grid">
+
+      <!-- 06-25 Featured -->
+      <a href="daily/2026-06-25.html" class="card card-featured">
+        <div class="card-header">
+          <span class="card-date">2026 · 06 · 25</span>
+          <span class="card-badge">v6.5</span>
+        </div>
+        <h2 class="card-title">产品猎奇 · 一个人写 12 条 pipeline 把 Claude Code 变成视频工作室</h2>
+        <p class="card-desc">8 条信号全部来自 GitHub / 个人博客 / B 站 UP 主等独立创作者，带阅读量。全源 Top 10 战力榜 + 8 个信息源各自分榜。从 OpenMontage 到 Agent-Reach，从复旦哲学系到张江黑客松——这一期没有教程，只有眼前一亮的独立项目和反直觉发现。</p>
+        <div class="card-meta">
+          <span>8 条信号</span>
+          <span class="card-meta-divider"></span>
+          <span>全源 Top 10</span>
+          <span class="card-meta-divider"></span>
+          <span>各源分榜 Top 10</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+
+      <!-- 06-24 -->
+      <a href="daily/2026-06-24.html" class="card">
+        <div class="card-header">
+          <span class="card-date">2026 · 06 · 24</span>
+        </div>
+        <h2 class="card-title">赛道拆解 · Agent 落地的三道坎 + 漫剧成本打穿到 500 元/分钟</h2>
+        <p class="card-desc">不是讲产品，是讲赛道。3 个趋势信号拆成 12 条可执行的选题，每条配了完整的制作提示词和双平台分发策略。拍摄指南、设备推荐、SEO 方案全链路——如果你要做 AI 内容创作，这期是工具箱。</p>
+        <div class="card-meta">
+          <span>3 大趋势</span>
+          <span class="card-meta-divider"></span>
+          <span>12 条选题</span>
+          <span class="card-meta-divider"></span>
+          <span>36 条 Prompt</span>
+          <span class="card-meta-divider"></span>
+          <span>双平台制作指南</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+
+      <!-- 06-23 -->
+      <a href="daily/2026-06-23.html" class="card">
+        <div class="card-header">
+          <span class="card-date">2026 · 06 · 23</span>
+        </div>
+        <h2 class="card-title">创刊号 · B 站 + 小红书 AI 生态双源扫描</h2>
+        <p class="card-desc">第一期。从两个平台抓取的数据告诉你：B 站创作者在焦虑什么、小红书 AI 运营卷到了什么程度。热门索引 + 选题列表 + 制作提示词库 + 案例拆解——首期把「怎么从信号到内容」这条链路完整跑了一遍。</p>
+        <div class="card-meta">
+          <span>B站 Top 7 + 小红书 Top 7</span>
+          <span class="card-meta-divider"></span>
+          <span>10 条选题 + 2 条创意选题</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+
     </div>
-  </a>
+  </main>
 
-  <a href="daily/2026-06-23.html" class="story">
-    <div class="story-date">2026 · 06 · 23</div>
-    <h2 class="story-title">创刊号 · B 站 + 小红书 AI 生态双源扫描</h2>
-    <p class="story-subtitle">第一期。从两个平台抓取的数据告诉你：B 站创作者在焦虑什么、小红书 AI 运营卷到了什么程度。热门索引 + 选题列表 + 制作提示词库 + 案例拆解——首期把「怎么从信号到内容」这条链路完整跑了一遍。</p>
-    <div class="story-meta">
-      <span>B站 Top 7 + 小红书 Top 7 · 10 条选题 + 2 条创意选题</span>
-      <span class="story-read">阅读 →</span>
-    </div>
-  </a>
-</section>
-
-<footer class="site-footer">
-  <p>Created by <strong>MU Labs</strong></p>
-  <div class="footer-version">AI 创意雷达 <span>v6.5</span></div>
-</footer>
+</div>
 
 </body>
 </html>
